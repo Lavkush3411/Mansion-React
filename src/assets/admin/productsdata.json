@@ -1,0 +1,221 @@
+{
+  "products": {
+    "cargo": [
+      {
+        "_id": 1,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKoSURBVDjLdVNdSJNRGD4RRJfdJP2ReBH9eGMQGWVXwoggoosIKooMf0jQG2/EJFOstB+VcpvObX6ub7TNWTIW4Wxtc3PR3GTKVAyd4mA6xT6VgbWtp3MOKTL1wAOH95z3eZ73fc8hAEg6XC7XM4vFEunq6vrLwPYsttPdbQGz2ZxhMBj+IG2xmF6vP7IjwX/FMFVLUaC3txdjY2NIpVJIJpMYHR3lMXbG7rC7G444AWVf36o2MzOD7u5uBINBDpPJxGNpjtY5QU9Pj5YCoVCIKzJ4vV5YrVbodDoOtmcx5iaRSGBkZAQsR61W6wlVSkxMTMDv9yMQCHBFpp6+NhwNDQ3B6XTCbrdDpVIlCLUnra2tYWFhAVNTU5iengatD5OTk5uO2H5gYADj4+Ow2Wwcw8PDaG9vl4jRaOQEKysrWF5exuzsLLfr8/k2e8BUy97noVB7Fl+/2eBwOLjbtrY2iTWQE0iShKWlJcRiMUQiEa7KSnO73VyxuDMXTy23cUt5Cv32Pi6gVColQmf7Ox6PY3V1FdFolCeHw2GUi5dRpruAEuEcCtQ5ePzxJoy+FlSYrkPWdAiuQQdaW1vXiSiKNtaQubk5XgYjYb0o1eXiU0AOs/8dT/zga0ZzfwUEbyNKRBnOP9+PV28bPISOaR99HIWCIPxk3Z2fn8fi4iIe0npZ8pu+cjR8KUX95yLUWB6g1loMpasOdzvzcOIJSW4+Sa1Wm6HRaOrpbH95PB7cUZ2G4UczxO+vIQw2QuN5QUkeQeGqRZF4BVnVJHa0kuRs+wsdHR3ZdL7iDUUWrrYcQ35TBi69PIB72ouQO2tQoJMhs5pED1eSMzt+pg3QDssUCoVdLpe7abOuZdftid8X8pFZRSI0+eSuv3E3UMvx41V7cbCSZG2N/wO9JP1FmMH3ngAAAABJRU5ErkJggg==",
+        "product": "Crackers - Graham",
+        "amount": "₹8.59",
+        "manage": "ridiculus",
+        "type": "cargo",
+        "stock": 1
+      },
+      {
+        "_id": 2,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLjZM7aFNRGMdTA+Jg8UFx0qGDi4PgoERE6qCIUJxEwcFOdhPEdhB0FVQsmRRbaM1mhdIhtUVBwzU2mPf71bzfuTEUb9repiVNrr8rNsQaJcOf795zz//xffccjaIoml3IsrwP9KnPlUrlWOe3f0GzR0Cr1mq1eqhcLk8Xi8X5fD5/ricB1bnD/Qnkl7lc7mEmk9lIpVKWeDx+o6vA79gqtGotlUoHIOcQuZnNZvWQX4HxaDSaDIfDbwKBwP69An2dgHyH2JtASCaTfoSGVlZWPodCoXuQjV6v1+d2u093nUGhUNAS20b/C7huETsM2RiJRCZIdtHn8y27XK5vDodjuasAkS+DFCk+pdNpN2QRZxmBEZxtfr//fiKRuG61WtcsFsuDvwQgzeO8GovF1MFZqRHaMHo8nh0wS/RxyF6VbDabi4IgDLTJEE6hnqDGcZQZ2A9amsJVJMlHu92+ZbPZRNYvITAKOWsymUbaAvT7mknXgcSmPANbJfYGKT7gXGRNUAUgrzmdzq/sG263gPFxXDI41yA2+ehiYGUGtslmiRROyOr7AjM5/8dvbL57q9teWvwiLr6vBYPBdZJ42NjEVaKW6LlGnWUGg10P0s7MtKE1N6c0nj5TKhN6kdg1XOv0vA5xivrfO6HZfvRYak1OKi29Xqnfuq3Enr9oEHOJI3yyp8skXxs2NO6OKq2xMaV+5aoiXhgSOJH9vZB/CUhnzuq+nxg0FI4MSLmDhw35/qO63cvVi8BP3IoJNAAt5FMAAAAASUVORK5CYII=",
+        "product": "Laundry - Bag Cloth",
+        "amount": "₹0.47",
+        "manage": "orci",
+        "type": "cargo",
+        "stock": 9
+      }
+    ],
+    "sweatpant": [
+      {
+        "_id": 1,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKoSURBVDjLdVNdSJNRGD4RRJfdJP2ReBH9eGMQGWVXwoggoosIKooMf0jQG2/EJFOstB+VcpvObX6ub7TNWTIW4Wxtc3PR3GTKVAyd4mA6xT6VgbWtp3MOKTL1wAOH95z3eZ73fc8hAEg6XC7XM4vFEunq6vrLwPYsttPdbQGz2ZxhMBj+IG2xmF6vP7IjwX/FMFVLUaC3txdjY2NIpVJIJpMYHR3lMXbG7rC7G444AWVf36o2MzOD7u5uBINBDpPJxGNpjtY5QU9Pj5YCoVCIKzJ4vV5YrVbodDoOtmcx5iaRSGBkZAQsR61W6wlVSkxMTMDv9yMQCHBFpp6+NhwNDQ3B6XTCbrdDpVIlCLUnra2tYWFhAVNTU5iengatD5OTk5uO2H5gYADj4+Ow2Wwcw8PDaG9vl4jRaOQEKysrWF5exuzsLLfr8/k2e8BUy97noVB7Fl+/2eBwOLjbtrY2iTWQE0iShKWlJcRiMUQiEa7KSnO73VyxuDMXTy23cUt5Cv32Pi6gVColQmf7Ox6PY3V1FdFolCeHw2GUi5dRpruAEuEcCtQ5ePzxJoy+FlSYrkPWdAiuQQdaW1vXiSiKNtaQubk5XgYjYb0o1eXiU0AOs/8dT/zga0ZzfwUEbyNKRBnOP9+PV28bPISOaR99HIWCIPxk3Z2fn8fi4iIe0npZ8pu+cjR8KUX95yLUWB6g1loMpasOdzvzcOIJSW4+Sa1Wm6HRaOrpbH95PB7cUZ2G4UczxO+vIQw2QuN5QUkeQeGqRZF4BVnVJHa0kuRs+wsdHR3ZdL7iDUUWrrYcQ35TBi69PIB72ouQO2tQoJMhs5pED1eSMzt+pg3QDssUCoVdLpe7abOuZdftid8X8pFZRSI0+eSuv3E3UMvx41V7cbCSZG2N/wO9JP1FmMH3ngAAAABJRU5ErkJggg==",
+        "product": "Crackers - Graham",
+        "amount": "₹8.59",
+        "manage": "ridiculus",
+        "type": "sweatpant",
+        "stock": 1
+      },
+      {
+        "_id": 2,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLjZM7aFNRGMdTA+Jg8UFx0qGDi4PgoERE6qCIUJxEwcFOdhPEdhB0FVQsmRRbaM1mhdIhtUVBwzU2mPf71bzfuTEUb9repiVNrr8rNsQaJcOf795zz//xffccjaIoml3IsrwP9KnPlUrlWOe3f0GzR0Cr1mq1eqhcLk8Xi8X5fD5/ricB1bnD/Qnkl7lc7mEmk9lIpVKWeDx+o6vA79gqtGotlUoHIOcQuZnNZvWQX4HxaDSaDIfDbwKBwP69An2dgHyH2JtASCaTfoSGVlZWPodCoXuQjV6v1+d2u093nUGhUNAS20b/C7huETsM2RiJRCZIdtHn8y27XK5vDodjuasAkS+DFCk+pdNpN2QRZxmBEZxtfr//fiKRuG61WtcsFsuDvwQgzeO8GovF1MFZqRHaMHo8nh0wS/RxyF6VbDabi4IgDLTJEE6hnqDGcZQZ2A9amsJVJMlHu92+ZbPZRNYvITAKOWsymUbaAvT7mknXgcSmPANbJfYGKT7gXGRNUAUgrzmdzq/sG263gPFxXDI41yA2+ehiYGUGtslmiRROyOr7AjM5/8dvbL57q9teWvwiLr6vBYPBdZJ42NjEVaKW6LlGnWUGg10P0s7MtKE1N6c0nj5TKhN6kdg1XOv0vA5xivrfO6HZfvRYak1OKi29Xqnfuq3Enr9oEHOJI3yyp8skXxs2NO6OKq2xMaV+5aoiXhgSOJH9vZB/CUhnzuq+nxg0FI4MSLmDhw35/qO63cvVi8BP3IoJNAAt5FMAAAAASUVORK5CYII=",
+        "product": "Laundry - Bag Cloth",
+        "amount": "₹0.47",
+        "manage": "orci",
+        "type": "sweatpant",
+        "stock": 0
+      }
+    ],
+    "tshirts": [
+      {
+        "_id": 1,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKoSURBVDjLdVNdSJNRGD4RRJfdJP2ReBH9eGMQGWVXwoggoosIKooMf0jQG2/EJFOstB+VcpvObX6ub7TNWTIW4Wxtc3PR3GTKVAyd4mA6xT6VgbWtp3MOKTL1wAOH95z3eZ73fc8hAEg6XC7XM4vFEunq6vrLwPYsttPdbQGz2ZxhMBj+IG2xmF6vP7IjwX/FMFVLUaC3txdjY2NIpVJIJpMYHR3lMXbG7rC7G444AWVf36o2MzOD7u5uBINBDpPJxGNpjtY5QU9Pj5YCoVCIKzJ4vV5YrVbodDoOtmcx5iaRSGBkZAQsR61W6wlVSkxMTMDv9yMQCHBFpp6+NhwNDQ3B6XTCbrdDpVIlCLUnra2tYWFhAVNTU5iengatD5OTk5uO2H5gYADj4+Ow2Wwcw8PDaG9vl4jRaOQEKysrWF5exuzsLLfr8/k2e8BUy97noVB7Fl+/2eBwOLjbtrY2iTWQE0iShKWlJcRiMUQiEa7KSnO73VyxuDMXTy23cUt5Cv32Pi6gVColQmf7Ox6PY3V1FdFolCeHw2GUi5dRpruAEuEcCtQ5ePzxJoy+FlSYrkPWdAiuQQdaW1vXiSiKNtaQubk5XgYjYb0o1eXiU0AOs/8dT/zga0ZzfwUEbyNKRBnOP9+PV28bPISOaR99HIWCIPxk3Z2fn8fi4iIe0npZ8pu+cjR8KUX95yLUWB6g1loMpasOdzvzcOIJSW4+Sa1Wm6HRaOrpbH95PB7cUZ2G4UczxO+vIQw2QuN5QUkeQeGqRZF4BVnVJHa0kuRs+wsdHR3ZdL7iDUUWrrYcQ35TBi69PIB72ouQO2tQoJMhs5pED1eSMzt+pg3QDssUCoVdLpe7abOuZdftid8X8pFZRSI0+eSuv3E3UMvx41V7cbCSZG2N/wO9JP1FmMH3ngAAAABJRU5ErkJggg==",
+        "product": "Crackers - Graham",
+        "amount": "₹8.59",
+        "manage": "ridiculus",
+        "type": "tshirts",
+        "stock": 0
+      },
+      {
+        "_id": 2,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLjZM7aFNRGMdTA+Jg8UFx0qGDi4PgoERE6qCIUJxEwcFOdhPEdhB0FVQsmRRbaM1mhdIhtUVBwzU2mPf71bzfuTEUb9repiVNrr8rNsQaJcOf795zz//xffccjaIoml3IsrwP9KnPlUrlWOe3f0GzR0Cr1mq1eqhcLk8Xi8X5fD5/ricB1bnD/Qnkl7lc7mEmk9lIpVKWeDx+o6vA79gqtGotlUoHIOcQuZnNZvWQX4HxaDSaDIfDbwKBwP69An2dgHyH2JtASCaTfoSGVlZWPodCoXuQjV6v1+d2u093nUGhUNAS20b/C7huETsM2RiJRCZIdtHn8y27XK5vDodjuasAkS+DFCk+pdNpN2QRZxmBEZxtfr//fiKRuG61WtcsFsuDvwQgzeO8GovF1MFZqRHaMHo8nh0wS/RxyF6VbDabi4IgDLTJEE6hnqDGcZQZ2A9amsJVJMlHu92+ZbPZRNYvITAKOWsymUbaAvT7mknXgcSmPANbJfYGKT7gXGRNUAUgrzmdzq/sG263gPFxXDI41yA2+ehiYGUGtslmiRROyOr7AjM5/8dvbL57q9teWvwiLr6vBYPBdZJ42NjEVaKW6LlGnWUGg10P0s7MtKE1N6c0nj5TKhN6kdg1XOv0vA5xivrfO6HZfvRYak1OKi29Xqnfuq3Enr9oEHOJI3yyp8skXxs2NO6OKq2xMaV+5aoiXhgSOJH9vZB/CUhnzuq+nxg0FI4MSLmDhw35/qO63cvVi8BP3IoJNAAt5FMAAAAASUVORK5CYII=",
+        "product": "Laundry - Bag Cloth",
+        "amount": "₹0.47",
+        "manage": "orci",
+        "type": "tshirts",
+        "stock": 5
+      }
+    ],
+    "shirts": [
+      {
+        "_id": 1,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKoSURBVDjLdVNdSJNRGD4RRJfdJP2ReBH9eGMQGWVXwoggoosIKooMf0jQG2/EJFOstB+VcpvObX6ub7TNWTIW4Wxtc3PR3GTKVAyd4mA6xT6VgbWtp3MOKTL1wAOH95z3eZ73fc8hAEg6XC7XM4vFEunq6vrLwPYsttPdbQGz2ZxhMBj+IG2xmF6vP7IjwX/FMFVLUaC3txdjY2NIpVJIJpMYHR3lMXbG7rC7G444AWVf36o2MzOD7u5uBINBDpPJxGNpjtY5QU9Pj5YCoVCIKzJ4vV5YrVbodDoOtmcx5iaRSGBkZAQsR61W6wlVSkxMTMDv9yMQCHBFpp6+NhwNDQ3B6XTCbrdDpVIlCLUnra2tYWFhAVNTU5iengatD5OTk5uO2H5gYADj4+Ow2Wwcw8PDaG9vl4jRaOQEKysrWF5exuzsLLfr8/k2e8BUy97noVB7Fl+/2eBwOLjbtrY2iTWQE0iShKWlJcRiMUQiEa7KSnO73VyxuDMXTy23cUt5Cv32Pi6gVColQmf7Ox6PY3V1FdFolCeHw2GUi5dRpruAEuEcCtQ5ePzxJoy+FlSYrkPWdAiuQQdaW1vXiSiKNtaQubk5XgYjYb0o1eXiU0AOs/8dT/zga0ZzfwUEbyNKRBnOP9+PV28bPISOaR99HIWCIPxk3Z2fn8fi4iIe0npZ8pu+cjR8KUX95yLUWB6g1loMpasOdzvzcOIJSW4+Sa1Wm6HRaOrpbH95PB7cUZ2G4UczxO+vIQw2QuN5QUkeQeGqRZF4BVnVJHa0kuRs+wsdHR3ZdL7iDUUWrrYcQ35TBi69PIB72ouQO2tQoJMhs5pED1eSMzt+pg3QDssUCoVdLpe7abOuZdftid8X8pFZRSI0+eSuv3E3UMvx41V7cbCSZG2N/wO9JP1FmMH3ngAAAABJRU5ErkJggg==",
+        "product": "Crackers - Graham",
+        "amount": "₹8.59",
+        "manage": "ridiculus",
+        "type": "shirts",
+        "stock": 4
+      },
+      {
+        "_id": 2,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLjZM7aFNRGMdTA+Jg8UFx0qGDi4PgoERE6qCIUJxEwcFOdhPEdhB0FVQsmRRbaM1mhdIhtUVBwzU2mPf71bzfuTEUb9repiVNrr8rNsQaJcOf795zz//xffccjaIoml3IsrwP9KnPlUrlWOe3f0GzR0Cr1mq1eqhcLk8Xi8X5fD5/ricB1bnD/Qnkl7lc7mEmk9lIpVKWeDx+o6vA79gqtGotlUoHIOcQuZnNZvWQX4HxaDSaDIfDbwKBwP69An2dgHyH2JtASCaTfoSGVlZWPodCoXuQjV6v1+d2u093nUGhUNAS20b/C7huETsM2RiJRCZIdtHn8y27XK5vDodjuasAkS+DFCk+pdNpN2QRZxmBEZxtfr//fiKRuG61WtcsFsuDvwQgzeO8GovF1MFZqRHaMHo8nh0wS/RxyF6VbDabi4IgDLTJEE6hnqDGcZQZ2A9amsJVJMlHu92+ZbPZRNYvITAKOWsymUbaAvT7mknXgcSmPANbJfYGKT7gXGRNUAUgrzmdzq/sG263gPFxXDI41yA2+ehiYGUGtslmiRROyOr7AjM5/8dvbL57q9teWvwiLr6vBYPBdZJ42NjEVaKW6LlGnWUGg10P0s7MtKE1N6c0nj5TKhN6kdg1XOv0vA5xivrfO6HZfvRYak1OKi29Xqnfuq3Enr9oEHOJI3yyp8skXxs2NO6OKq2xMaV+5aoiXhgSOJH9vZB/CUhnzuq+nxg0FI4MSLmDhw35/qO63cvVi8BP3IoJNAAt5FMAAAAASUVORK5CYII=",
+        "product": "Laundry - Bag Cloth",
+        "amount": "₹0.47",
+        "manage": "orci",
+        "type": "shirts",
+        "stock": 8
+      },
+      {
+        "_id": 3,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKZSURBVDjLpVPdS5NRGP+97tVpw9nm5tpShiSsFhMMImiCQlAOk+im7Ma6UKK86g+oCMKwgi66CLuQ7rqqBRVRQS2aFIFeCA7xQjC3qbkcus/345zTc5aNoqALX3h4znPO+X085z1HEUJgJ18Ndvip84+uJBljezlnYMykMGCaMvRqNgw51t+cvBk78ReBBLeEIxCCQTAOwU1IMkFkgsh4JZuYeT55/J8OpAonkLaZrmzkspZAmUldhtXuxUTjbTy48Z62kFOTvBrm5fjd/oeqtOgJDvy3VxZ7h2vnDoFxgeR63nL/yfQtmv5JcPXlIubTOTCdw9RJgcLUWLXe77OBFKGbAgf9DnS1O3Dv8WdnpQXD0HDRHUexZmnbskEW9ap9We9q9mMkeRj2BgVLq1kEWh0wdANVAk6nzPTSNtCoAmUW2+chAYbJkUjmUSJXVQJdL1eAdY2eyomXS2UklvJIFRvhavFiNb2II5YSFL2A2LNJeFua8WVmA62qhp6eHps6Gf8G8XGC/gQHFxyszoFj/WcwdOEsCoUCksl9eP3qBbpqp3FqYBgN9fVYWVlBvXUab7/bryvyKgeDwcVwONxeLBbhdrvF+eFh5c7YGLa2toTP51NCoVAFlMlkkE6nYbfbMTo6img0uvnrKg9NTU19mpub++p0Ok05MTs7+yGfz5cGBwfR3d2NSCSCvr4+5HI5JtfknqamJqsqB4lEIk7paGdn5yVSGKPx7kAgoGWz2drx8XHYbLaKimzJYrFwuSbrVCpVVn5/jdTKgY6Ojqe9vb172trauKqqzrW1NSwsLMBqtcLv98Pj8dC7MDeWl5drYrHY6h8ExGzxer0hUoxS724CWeSLpd5HpKDL5YpSrtU0jZHTdXJ0+gdZxaA90+h/PAAAAABJRU5ErkJggg==",
+        "product": "Milk - 1%",
+        "amount": "₹0.38",
+        "manage": "luctus",
+        "type": "shirts",
+        "stock": 9
+      },
+      {
+        "_id": 4,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJaSURBVDjLpZNPSFVREIe/c9/r+tD36vW/IA2rTUYlZbp0FQTRQqmgXFW7loIra+NWCFxFENQmgsyEQnGlSIFUVIsURKuHBZmlWWnee985Z6aNaWa0qFkOwzczv/mNUVX+J9K/J9yAyarSrMIxEWpVQYUnIvSpcCV3Qud/rTe/TuAGTL0KN0xFS6XJ16LhBlCPRtP42Rck4+0FEc6tb9DBVQDXbxo0X38v2NaElq7DL4wiyQzqYjAZgswejA1I3naSTA02bj6t3UsA2282qDKR2n87K8E3fFwAO4e4BPUx32YWePk84kBdJfktNXwdOj8vws7tTfo5AFChOdjZmtUQJCnQdfUZXdfH6L45Ab7I2MgCmRLP8ONxfPKa0r2tWfE0L4kowvHU+jp8PIy6iMYLu1EXoz5BbcyhGhBfRG2M+/KMcOsZxHMcuPQTUEXJWiT6gorlzcgmTDqHQUEVWNTJOXbk7wMJ3lO5NIEKkbo4xDvwRcqPnAUTrjiviqc0v525x12gigip5RU8BWxUDSEqlmy+jCBTsco06mNMUIr4NDbhFUCwuEKPnX6BCStQAff1EahbBbAzg6TXHiSansAW6VkGeDoWRtrmcTmCsJzixwckk7eR4qfFzhHFqV6S991oyUEmH7bN24SOFUb6dMecTG8+2pmpaITUHG72KT56j7oYk86RylXj2cXsaC+zY32nDrXq3VVWnrxljornWllVS2W4cR/BmgDE4RLP98kxPgy1F5zl4uFL2vfHXwB4d9NkxdMiwjHvqXVFcJYnztLnLO01l//yTP8SPwD79F9Uvnnx1AAAAABJRU5ErkJggg==",
+        "product": "Pepper - Chilli Seeds Mild",
+        "amount": "₹3.84",
+        "manage": "pharetra",
+        "type": "shirts",
+        "stock": 0
+      }
+    ],
+    "hoodie": [
+      {
+        "_id": 1,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKoSURBVDjLdVNdSJNRGD4RRJfdJP2ReBH9eGMQGWVXwoggoosIKooMf0jQG2/EJFOstB+VcpvObX6ub7TNWTIW4Wxtc3PR3GTKVAyd4mA6xT6VgbWtp3MOKTL1wAOH95z3eZ73fc8hAEg6XC7XM4vFEunq6vrLwPYsttPdbQGz2ZxhMBj+IG2xmF6vP7IjwX/FMFVLUaC3txdjY2NIpVJIJpMYHR3lMXbG7rC7G444AWVf36o2MzOD7u5uBINBDpPJxGNpjtY5QU9Pj5YCoVCIKzJ4vV5YrVbodDoOtmcx5iaRSGBkZAQsR61W6wlVSkxMTMDv9yMQCHBFpp6+NhwNDQ3B6XTCbrdDpVIlCLUnra2tYWFhAVNTU5iengatD5OTk5uO2H5gYADj4+Ow2Wwcw8PDaG9vl4jRaOQEKysrWF5exuzsLLfr8/k2e8BUy97noVB7Fl+/2eBwOLjbtrY2iTWQE0iShKWlJcRiMUQiEa7KSnO73VyxuDMXTy23cUt5Cv32Pi6gVColQmf7Ox6PY3V1FdFolCeHw2GUi5dRpruAEuEcCtQ5ePzxJoy+FlSYrkPWdAiuQQdaW1vXiSiKNtaQubk5XgYjYb0o1eXiU0AOs/8dT/zga0ZzfwUEbyNKRBnOP9+PV28bPISOaR99HIWCIPxk3Z2fn8fi4iIe0npZ8pu+cjR8KUX95yLUWB6g1loMpasOdzvzcOIJSW4+Sa1Wm6HRaOrpbH95PB7cUZ2G4UczxO+vIQw2QuN5QUkeQeGqRZF4BVnVJHa0kuRs+wsdHR3ZdL7iDUUWrrYcQ35TBi69PIB72ouQO2tQoJMhs5pED1eSMzt+pg3QDssUCoVdLpe7abOuZdftid8X8pFZRSI0+eSuv3E3UMvx41V7cbCSZG2N/wO9JP1FmMH3ngAAAABJRU5ErkJggg==",
+        "product": "Crackers - Graham",
+        "amount": "₹8.59",
+        "manage": "ridiculus",
+        "type": "hoodie",
+        "stock": 6
+      },
+      {
+        "_id": 2,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLjZM7aFNRGMdTA+Jg8UFx0qGDi4PgoERE6qCIUJxEwcFOdhPEdhB0FVQsmRRbaM1mhdIhtUVBwzU2mPf71bzfuTEUb9repiVNrr8rNsQaJcOf795zz//xffccjaIoml3IsrwP9KnPlUrlWOe3f0GzR0Cr1mq1eqhcLk8Xi8X5fD5/ricB1bnD/Qnkl7lc7mEmk9lIpVKWeDx+o6vA79gqtGotlUoHIOcQuZnNZvWQX4HxaDSaDIfDbwKBwP69An2dgHyH2JtASCaTfoSGVlZWPodCoXuQjV6v1+d2u093nUGhUNAS20b/C7huETsM2RiJRCZIdtHn8y27XK5vDodjuasAkS+DFCk+pdNpN2QRZxmBEZxtfr//fiKRuG61WtcsFsuDvwQgzeO8GovF1MFZqRHaMHo8nh0wS/RxyF6VbDabi4IgDLTJEE6hnqDGcZQZ2A9amsJVJMlHu92+ZbPZRNYvITAKOWsymUbaAvT7mknXgcSmPANbJfYGKT7gXGRNUAUgrzmdzq/sG263gPFxXDI41yA2+ehiYGUGtslmiRROyOr7AjM5/8dvbL57q9teWvwiLr6vBYPBdZJ42NjEVaKW6LlGnWUGg10P0s7MtKE1N6c0nj5TKhN6kdg1XOv0vA5xivrfO6HZfvRYak1OKi29Xqnfuq3Enr9oEHOJI3yyp8skXxs2NO6OKq2xMaV+5aoiXhgSOJH9vZB/CUhnzuq+nxg0FI4MSLmDhw35/qO63cvVi8BP3IoJNAAt5FMAAAAASUVORK5CYII=",
+        "product": "Laundry - Bag Cloth",
+        "amount": "₹0.47",
+        "manage": "orci",
+        "type": "hoodie",
+        "stock": 4
+      },
+      {
+        "_id": 3,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKZSURBVDjLpVPdS5NRGP+97tVpw9nm5tpShiSsFhMMImiCQlAOk+im7Ma6UKK86g+oCMKwgi66CLuQ7rqqBRVRQS2aFIFeCA7xQjC3qbkcus/345zTc5aNoqALX3h4znPO+X085z1HEUJgJ18Ndvip84+uJBljezlnYMykMGCaMvRqNgw51t+cvBk78ReBBLeEIxCCQTAOwU1IMkFkgsh4JZuYeT55/J8OpAonkLaZrmzkspZAmUldhtXuxUTjbTy48Z62kFOTvBrm5fjd/oeqtOgJDvy3VxZ7h2vnDoFxgeR63nL/yfQtmv5JcPXlIubTOTCdw9RJgcLUWLXe77OBFKGbAgf9DnS1O3Dv8WdnpQXD0HDRHUexZmnbskEW9ap9We9q9mMkeRj2BgVLq1kEWh0wdANVAk6nzPTSNtCoAmUW2+chAYbJkUjmUSJXVQJdL1eAdY2eyomXS2UklvJIFRvhavFiNb2II5YSFL2A2LNJeFua8WVmA62qhp6eHps6Gf8G8XGC/gQHFxyszoFj/WcwdOEsCoUCksl9eP3qBbpqp3FqYBgN9fVYWVlBvXUab7/bryvyKgeDwcVwONxeLBbhdrvF+eFh5c7YGLa2toTP51NCoVAFlMlkkE6nYbfbMTo6img0uvnrKg9NTU19mpub++p0Ok05MTs7+yGfz5cGBwfR3d2NSCSCvr4+5HI5JtfknqamJqsqB4lEIk7paGdn5yVSGKPx7kAgoGWz2drx8XHYbLaKimzJYrFwuSbrVCpVVn5/jdTKgY6Ojqe9vb172trauKqqzrW1NSwsLMBqtcLv98Pj8dC7MDeWl5drYrHY6h8ExGzxer0hUoxS724CWeSLpd5HpKDL5YpSrtU0jZHTdXJ0+gdZxaA90+h/PAAAAABJRU5ErkJggg==",
+        "product": "Milk - 1%",
+        "amount": "₹0.38",
+        "manage": "luctus",
+        "type": "hoodie",
+        "stock": 8
+      },
+      {
+        "_id": 4,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJaSURBVDjLpZNPSFVREIe/c9/r+tD36vW/IA2rTUYlZbp0FQTRQqmgXFW7loIra+NWCFxFENQmgsyEQnGlSIFUVIsURKuHBZmlWWnee985Z6aNaWa0qFkOwzczv/mNUVX+J9K/J9yAyarSrMIxEWpVQYUnIvSpcCV3Qud/rTe/TuAGTL0KN0xFS6XJ16LhBlCPRtP42Rck4+0FEc6tb9DBVQDXbxo0X38v2NaElq7DL4wiyQzqYjAZgswejA1I3naSTA02bj6t3UsA2282qDKR2n87K8E3fFwAO4e4BPUx32YWePk84kBdJfktNXwdOj8vws7tTfo5AFChOdjZmtUQJCnQdfUZXdfH6L45Ab7I2MgCmRLP8ONxfPKa0r2tWfE0L4kowvHU+jp8PIy6iMYLu1EXoz5BbcyhGhBfRG2M+/KMcOsZxHMcuPQTUEXJWiT6gorlzcgmTDqHQUEVWNTJOXbk7wMJ3lO5NIEKkbo4xDvwRcqPnAUTrjiviqc0v525x12gigip5RU8BWxUDSEqlmy+jCBTsco06mNMUIr4NDbhFUCwuEKPnX6BCStQAff1EahbBbAzg6TXHiSansAW6VkGeDoWRtrmcTmCsJzixwckk7eR4qfFzhHFqV6S991oyUEmH7bN24SOFUb6dMecTG8+2pmpaITUHG72KT56j7oYk86RylXj2cXsaC+zY32nDrXq3VVWnrxljornWllVS2W4cR/BmgDE4RLP98kxPgy1F5zl4uFL2vfHXwB4d9NkxdMiwjHvqXVFcJYnztLnLO01l//yTP8SPwD79F9Uvnnx1AAAAABJRU5ErkJggg==",
+        "product": "Pepper - Chilli Seeds Mild",
+        "amount": "₹3.84",
+        "manage": "pharetra",
+        "type": "hoodie",
+        "stock": 0
+      },
+      {
+        "_id": 5,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIiSURBVDjLpdNdSFNhGAdw6baL7qUuuonA6Cojoiw6qwth0VUsDIxKggohIXGtpA+1DxQhwoltsXKjNpbruC9q5jypMwf2sdlqbc120ixzfqzV8Lhz/r3vWRw0yAt38eeF857nx/McnlMEoKiQ/Pei5ayluP2YnzUdeZd8XpMWzef4hRtV24zXNRtA4iQpXxGwMvPSgFbEzHsJU6+BoTrgUVUIi9lZ+Bq2y4gM3DplWePdK3R59giCu0yAk4TdLeCjXUI6CWRTQJoH5hJAn8sEvqcJ5pqtFDguAy0nrGtd+3L9Yy5gzAt8Iue3IJCKAJMvSWEc+BoAvvgBfXUpxrlWtFZupECxDNyp9GxyqMQQBQIXgUEdEDHlsR9hYJpkYpA8M4uwa0sRc1TTYigf0aAJHGLV4BNuMmc9yRXy8n0g6QNmoqSLYQL0A7GeDPqaGQJfWg48PBhrjNowP2oEgg0kTQTozLecmQS+j+S7eOVNImy8gKHbBygwqgDdqp/dCSdytHWuFggbAL4XmHpDxnBLIqfL/uZqc4v+q7N429aJJ/U7KXBNATxMbjj+GPj8jOQpaXcA8J0UYVNlJPZ8fCRqFTVcY+peyfrNCLVr0XG6hAJlCtBx9MVdm5r/5WAyUheTlizlEwv6Ci6wdCdIAWM4swWRB4eXzb/iIv0D3GQv7yoI+BDUqwsC5OLe5v3KCq8KsOt2UKBuNUDb37+QnuuW3v0BGUzmBpilPwcAAAAASUVORK5CYII=",
+        "product": "Butter - Unsalted",
+        "amount": "₹1.11",
+        "manage": "sed",
+        "type": "hoodie",
+        "stock": 5
+      },
+      {
+        "_id": 6,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHtSURBVDjLjZM9T9tQFIYpQ5eOMBKlW6eWIQipa8RfQKQghEAKqZgKFQgmFn5AWyVDCipVQZC2EqBWlEqdO2RCpAssQBRsx1+1ndix8wFvfW6wcUhQsfTI0j33PD7n+N4uAF2E+/S5RFwG/8Njl24/LyCIOI6j1+v1y0ajgU64cSSTybdBSVAwSMmmacKyLB/DMKBpGkRRZBJBEJBKpXyJl/yABLTBtm1Uq1X2JsrlMnRdhyRJTFCpVEAfSafTTUlQoFs1luxBAkoolUqQZbmtJTYTT/AoHInOfpcwtVtkwcSBgrkDGYph+60oisIq4Xm+VfB0+U/P0Lvj3NwPGfHPTcHMvoyFXwpe7UmQtAqTUCU0D1VVbwTPVk5jY19Fe3ZfQny7CE51WJDXqpjeEUHr45ki9rIqa4dmQiJfMLItGEs/FcQ2ucbRmdnSYy5vYWyLx/w3EaMfLmBaDpMQvuDJ65PY8Dpnz3wpYmLtApzcrIAqmfrEgdZH1grY/a36w6Xz0DKD8ES25/niYS6+wWE8mWfByY8cXmYEJFYLkHUHtVqNQcltAvoLD3v7o/FUHsNvzlnwxfsCEukC/ho3yUHaBN5Buo17Ojtyl+DqrnvQgUtfcC0ZcAdkUeA+ye7eMru9AUGIJPe4zh509UP/AAfNypi8oj/mAAAAAElFTkSuQmCC",
+        "product": "Coffee - French Vanilla Frothy",
+        "amount": "₹8.56",
+        "manage": "ante",
+        "type": "hoodie",
+        "stock": 0
+      },
+      {
+        "_id": 7,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI7SURBVDjLpVPPaxNREP7e7uaHhmxD09AaDzYgGCIBoeBFpJCAKIoXT54Cgh6EXL0U/C/EmyD2ZHMTTBSN6akXoWiIJU1qTU3L4kZjk+xms5vNurN1Q1rtqQMf895jZr5vZneYZVk4iXE4oQnuoVqtvjdNM2UDw+EQhmGMoev6GIPBgHwxk8mkKY9RC3byotfrLUUiESfoqE226fF4UCqV0Gg00tlstugosBkfh0IhSJIEn883TppMpHOz2YQoiojFYkS6ZD8XWblcdtjD4TA6nc4hudQKJTLGwPO8wx4MBhEIBFAoFFCv19MCsZN06pWC/H6/A5d9rMTGqL4MfrcJVbyMZHIBlUplSSAmRVEgy7IzIAoejUagYZJ372J7FfHzGqYS9yGtPUG/daCSCqSIiS6UZLfkSOY4bqzgLNvAQrKLqQvXoDTyOBWcx5y8isjQSHHESr0SqIAL940w65MRSt6Cqdbgn4lCOA1Er17E7cQ+BCrgJpHUeDzueFc+vVu9rzDa38DxLTBOgVdsAZoKVRocFKAv4AT+HZjbN7MTxfZreObsgsMKuNFv+98NwjJ0VFe2kduahqBpWiGfz1+f+MscH+W3kBC/48zNO7D0t2BmF59fdWF2ZPD2jHK1GexhusCOW6ad3I312St3L+mtpxCEKWwUe+rHNSl7Tuuv+AM8Fp/vdA/twj9bxkNn/C54XwRf3vzsfVr/8fDBcv3Fsct01Pa2W+86+x/m1V9Kf3NTfnTvWe3l/+L+ANeBhMdSVgxaAAAAAElFTkSuQmCC",
+        "product": "Soup - Campbells, Minestrone",
+        "amount": "₹2.71",
+        "manage": "curae",
+        "type": "hoodie",
+        "stock": 6
+      },
+      {
+        "_id": 8,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJrSURBVDjLdVNLaxNRFJ6VP6GgG7eCuBAEN65LFwUXLlyIEsUqKLgQdwXBhaal1YiYNK8mNCXBPBqIMYJJE/IqWeRlkyYpDc2DBJMmpU4TSqNJ+nnPpS06qRc+5s6Zc77vu+fcEQAIUoTD4Tdut7tuMpmOCLSn2Fm5I4GVlZUxq9X6G5JFMYvFcuFMgmPFMlMbMsDlciGfz2M4HGIwGCCbzfIYfaMcyj1xxAkYe+9vtUqlAofDgfX1dQ673c5jEkc9TuB0Oo0MyOVyXJEQi8Xg8XiwvLzMQXuKkZt+v49MJgOqWVxctAhMqb+5uYlkMolUKsUVSV26ThwlEgmEQiEEAgHodLq+wOyJ3W4XOzs72N7eRqlUAjsftra2Th3RPhKJoFAowOfzcaTTaWi1WlGw2WycYH9/H3t7e6hWq9xuPB4/7QGpUhOpMBgMcpBbjUYjUgM5gSiK2N3dRavVQr1e56p0tGg0ygvJMjkjJ0RAAmq1WhTYbH8dHByg0+mg0Wjw4nK5jGKxyEdJyVSodSjwXHUXj97dxD35OOZML6FUKnuC2Wz2EXutVuPHIBLqBTkgAvr28dMsXtnv48uGEt9/eKHwPcFtxRXcmZ6oCWxM59jlmFpaWipSd5vNJtrtNm8mEZB92ewEXNn3cOU/8InMr05BsfoY15+ePzy9kkajccxgMLxms/25trbGSYiMGjg5fRVfN/T/jPVzRkkEoz+HXq+/zOZrZiM6orvh9/tx49lFzHkfQO6V8WL5N9moAylYh8cXFhYCKpUqOvnimvXW/CW89T7kyvSkd0Yw/18CKVjyDEOHbB8/Zyj+B1XaG3VPBqIRAAAAAElFTkSuQmCC",
+        "product": "Chevere Logs",
+        "amount": "₹6.37",
+        "manage": "pellentesque",
+        "type": "hoodie",
+        "stock": 4
+      },
+      {
+        "_id": 9,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH2SURBVDjLjZNLTxNRGIaJv6ZNWeBwkZFLQtGAC4l/wKULV+7YILeSYukEUhJoSASVuCI0hpAYDSUQCJBSoAaC0wbBUi4aWphpO52Zlpa+nnOqCAptJ3k3M3me73LOlAAoyZfDqQdOEvyO89/vRcGZ5HeWmySFYdWHVOQN0vE58jrLJMFJ82hewVU4+bMfqdPxP9VBn+A4D88wP59PwFqmsH7UgeTJEMlsTuIyI5uRsDfCMcmtAtoyhVmOu5kkHZuFsiNA3XuEi+QCdhxluL0D/SvpoO+vhIksiItNiPqqyXgfIL403gjfoTsIL70gQBdim3VQvz2FFnwOxf8E8kYF0rIVYqcRM70Vgf/Pe/ohwsutOJdcpBpP4Mek+jPEfbWQVzkG+7tNcNsqt68tkcLZTIzM6YZ21IbolgHq9j1o+z04nKhHRnlH2p6A32LCvFD55fIYr960VHgSSqCFVDJBEeugh+zw2jnpc0/5rthuRMBaioWBqrVrFylXOUpankIi0AjJY0DC3wD9oA9rAnc2bat+n++2UkH8XHaTZfGQlg3QdlsIbIVX4KSPAv+60L+SO/PECmJiI1lYM9SQBR7b3einfn6kEMwEIZd5Q48sQQt1Qv/xFqt2Tp5x3B8sBmYC71h926az6njdUR6hMy8O17wqFqb5Bd2o/0SFzIZrAAAAAElFTkSuQmCC",
+        "product": "Amaretto",
+        "amount": "₹0.59",
+        "manage": "nisl",
+        "type": "hoodie",
+        "stock": 2
+      },
+      {
+        "_id": 10,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI9SURBVDjLpZPNS5VBFIef+77X4lYayfVqpQY3XPiRGogp9rEpa2NRQpAELaJl5LKVJGSrFm36A6RMCpSilu5StETLaGcophTeNMyv+/rOmTMtrp87o4FhOOdwnvObHzMR5xz/s6IAz98vtDnHHeu0UFWxCqKKtYpVh1jdti1WHFZ1uONmSW0UQJ2721ybHf+XyQ9efqvcVGBV4wBvJjoRFcQKRgVjzdZpZbN2v74DY+zebYCMDy1lt3c1fSUQjNgtD6xVALr7U7sCXK7JJdwOkHUAwI3TCV4NzHK9IX8z1zM0S3PdVjy3GOxUYKyizhH1oWcwhe979A6liHjgrTfd6zpH2izRVP6aiqJDhCYD8Dau4ICoH6G5PkHUg2t1Ca7WJrhSmwDAOENhvJSu0YsEJkBEdypwClEP3o38wveh9cVZnBpCFUIRjuSWUFpwiqVghdbeKrJ5tg0ginOOLB8uncyjb2wO0ZAL5bewTrFqURw//kxzorCB5TDNyPcmKh8GBzMmakaO70XoG5sDIJAQ65Sp+XGMCqIGYw2La0tUF51h2azyYbJ/3gMQkYwHHpyvihP1IZAAsUJ+TjEFOcc4fDBJlh8jL/soo9MDfJz4ympIzZYHzlFRfICfv9Mcz4+RljU6Bx8TakggIcl4GXXJRoan+hmdGaMi9lR72ls+rz8kN9DePV4dWt1vxGLEEpNuolYRK+QAn2YaiXgxBsa/ULLnCQsribcAkd1+52RbZMWqvy+tNpl65CY38n8B/ZBP7EKNHesAAAAASUVORK5CYII=",
+        "product": "Salmon Steak - Cohoe 6 Oz",
+        "amount": "₹9.14",
+        "manage": "vel",
+        "type": "hoodie",
+        "stock": 1
+      },
+      {
+        "_id": 11,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHMSURBVDjL3VK9S0JxFBWChvoHinap4UG6RIsihYMfiTboUFGhPVIbxAJFG5TEKM1U1CWENjEUigiyHBRnicrCwaIlXPqggldRnd6VkNqMti4cfvede875Xd57AgCCv0DwjwIkEkmn2Wxe8Pl8t8lkEm63+8pqtQ7w6OL7GnE0Iw1pfwSIxeJ2lUq1Eg6HUa/XUavVUCgU4PF4LlwuV7FarT4TVyqVQBrSkqcZIBKJRux2+32lUrk1GAx7SqXyzWQyIRKJwOl0gnriaJZKpa5IS57vG6x4vV4uGo2yGo2mQyqVPubzeZTLZRSLRWQyGRBHM9KQljzNAIZhZlmWvYvH4/M6nW5fJpO9yuVyaLXaBqgnjmakIS15mgF9fKnV6vNgMHiXTqdvstksEokEbDYbHA5How9t+mCLjX3MrGlg8Mreh+eYcDNAKBS28Sv2KxSKS6PR+GSxWDgeL3q9foLH0OzixItnawq7pzEcXecQOjBDH2IwYOkOtPStx/3D3PbJOrbPIqAKHJoQOmQpgGspQOUSYe90A99r5zhGAa39bYPWHm41Nw1/brJh9u9P/m4DXrg0GuhFMGds3EwnPbf8Dr5Clnk80Npf5zLxn1E7ljyteCJyAAAAAElFTkSuQmCC",
+        "product": "Lettuce Romaine Chopped",
+        "amount": "₹8.02",
+        "manage": "cras",
+        "type": "hoodie",
+        "stock": 0
+      },
+      {
+        "_id": 12,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALBSURBVDjLnZPfT1JhHMa56h9o66KrVqtZrWV60U0Xtf6DtjY3a6u7wi1TWIYusQKhBDIWwiY0S2IKOtCFS5DfsaGSTVZrhCAsROX3DzlgJE/vOY3WqivP9pyzc/Y+n+/7Pt/vYanVaplKpWoDwNqPWEqlskkul9ulUumZfQHo29DQEHdwcNA/MDBwaF8AgUBwgM/nL/B4PDuHwzlIf/P5fCKPx1N3OBx1i8VSNZvNDpPJdOG/AFpOp7Oju7t7SyaThVwul5eYKXKBVs7pwPqMCZOTk1WtVsv7BxAIBOZXVlZ+LC0tVb1eL1KpFEqlErYyRYTnXYi0NjNKWi3QaDR1Evqr34DV1VVJLBZjKvXP8RhjsVjEZrqAGxN1XHsDLOsUiJpvIZuIMOtsNhskEomIAZCXMm3K5/MMoKFcLoeNZB7RjW1EPV3IhAxIBDQMnF4rFAr3SOhXWCScOg3429xQZFmN1BctajtrCExfxXb0A7PLYDCI3t7eNZbRaNyjqQ1DA5DJZGB/N4HPxjZUU29RTciQDZthHW1HeaeESqUCLpcLll6vLyUSCWZbtLFQKCCdTmNx0QffdBfSwSlUvz2CW9yK75kpfHx5GVaDlDlKZ2cnWDqdzkonTxtpAG0eGRmJPxfcptZtfdhNvga1dhNu0TlUYj3IR+bgGL60w7nbkWWz2c9Y4+Pj92dnZ0F3ggbQZJVSUSKV/DkSXCXKRflr2y+FrpOjDCPmksP7tKWf6cLY2NgR0teS3+9HPB5HuVyG/sWdeswtw+6WkqleDrWTI7QwTyrCBrU5A/fjM9uuh6dPMcOgUChGyZiCDBPIUME9fLFOpcPYzdpQTZIMkoY/NI1a6RPiPi3sfScMDID8jYfJYITFYnGN9LfmenK+9l7UTHmEZylSiSKVKCf/JOV40EQRE2XjHadsPceohXtHPT8Bse8J0M1mZB4AAAAASUVORK5CYII=",
+        "product": "Soupfoamcont12oz 112con",
+        "amount": "₹3.73",
+        "manage": "duis",
+        "type": "hoodie",
+        "stock": 9
+      },
+      {
+        "_id": 13,
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAMxSURBVDjLTZNdaBxlFIafmd3tTmYnJU26TYgNbZoQ7GIMBH9iNQj1QimIFCL+EVEQQa+VXBQKBfVGIlL0QtDeBFEwFSlN0EaqgkaQ2tYG89OYxiaN2d1ssplNZmfONzv7ebEx9sC5fB/e874cQ2uNN26YwGngJCBAf+qEFu4ab9xoBi4BAfBy6oSeAzCKX5MA3k20vfTinvbX7vEXP8vPrrrzX9nnK0D3jn5qoPycmWlrycSTTYbMvvMXMNBwUi8buS84ZR0ZfNM69HxraXF08/byXPz71guOk4yoS1QB8EMT5Xsczw6UDx99hlhU8sozw8tAn6kE07AOWcX50c35hTlnsu1Lp71e0ej7yK0NvPkNnJJHS/0erjYP26uLk1asqa9R1x11lHDEWPiE/tCwP103Ow/+0vGN3WbHSZYj7u9spGGvicZgw434bXaNsC5GauM893qjktienk7q0guG1pq3z118P9Zw+K2OZocG0Tx7vJ2i61LwfNpaWwCoaPh8fIGqo8nmVyl48fc+fuWRUybAaqX1waqG6pbivq4myhVNIpFg4rtvKbkuoQiXJn4g07UfN+/jm/twVfJRgDiA+F53RRm4UqWpqQ6JNCnb5s7SEhOXf2Lqj+s88eRT7Dtgs1bw0Q0JxPe6dwHK9/DKSfyYgUS13vLuFinHYXstR+fBVm7duEZ2ZYW0FIndWWd/GDaeOXP5d3MHMFXaKmPEqyxmy0SGCaZF7wN9xEyDTCZDV1cXxWwWQpdMJkNPTw8i0mvunPBjyXXZCIRfr+VIJCFlJXis/xhhGFKpVAjDEK/sI0pQSiEiiAg1B4F30V3/Z3pmaZ1cMce50Tlur2xiSIhSandFBN8PdsUiUsvg57NvXHn49eGzHanND6YWK/b6lpDN5YlVTQ7cJQ5EiELRSilDa/0/AODDV4/drK+vt/OFYnR69GZsxrAxYxZPp2uAMAwxq4qqjgyR2p8ppWqAsbGxNHAhnU7jbbvudvHvj6Kqfhzolr1mo4gQBAFBEGittRGGIVprlFIYWmtGRkYc4ArQDvQODg7++Z+zoaGhG0qp7p0wJy3LeqhQKMR3gr36LzexzEk6GOJQAAAAAElFTkSuQmCC",
+        "product": "Rice - 7 Grain Blend",
+        "amount": "₹5.55",
+        "manage": "in",
+        "type": "hoodie",
+        "stock": 4
+      }
+    ]
+  }
+}

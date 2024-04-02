@@ -1,0 +1,11 @@
+.cargo-list-container {
+  display: flex;
+  justify-content: center;
+  .cargo-list {
+    display: inline-flex;
+    padding: 2%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}

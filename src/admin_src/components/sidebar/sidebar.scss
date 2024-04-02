@@ -1,0 +1,33 @@
+@import "../../mixin";
+.sidebar {
+  width: 30%;
+  height: 100vh;
+  .sidebar-logo {
+    width: 50%;
+  }
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    .sidebar-dashboard-title,
+    .sidebar-chart-title {
+      margin: 0 1rem;
+      opacity: 0.5;
+    }
+    .sidebar-dashboard-items,
+    .sidebar-chart-items {
+      padding: 5%;
+      display: flex;
+      flex-direction: column;
+      .sidebar-dashboard-item,
+      .sidebar-chart-item {
+        padding: 2% 3%;
+        @include flex($justify: unset);
+        &:hover,
+        &.active {
+          box-shadow: 10px 10px 15px -3px rgba(0, 0, 0, 0.1) inset;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import "../../mixin";
+
+.widgetbox {
+  max-width: fit-content;
+  margin: 2%;
+  padding: 2%;
+  box-shadow: 2px 0px 8px 0px gray;
+  border-radius: 4px;
+
+  @include flex;
+  .left {
+    @include flex($dir: column, $gap: 0.5rem, $align: unset);
+    .name {
+      font-size: x-small;
+      font-weight: bolder;
+    }
+  }
+  .right {
+    @include square(5rem);
+    @include flex;
+    border-radius: 50%;
+    .percentage {
+      @include square(4rem);
+      @include flex;
+      border-radius: 50%;
+      background-color: white;
+    }
+  }
+
+  .green {
+    color: green;
+    font-size: x-small;
+    font-weight: bolder;
+  }
+
+  .red {
+    color: red;
+    font-size: x-small;
+    font-weight: bolder;
+  }
+}

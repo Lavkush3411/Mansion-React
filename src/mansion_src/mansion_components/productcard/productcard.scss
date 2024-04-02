@@ -1,0 +1,20 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  font-family: "Courier New", Courier, monospace;
+  .product-img {
+    height: 400px;
+    width: 400px;
+  }
+  .product-name {
+    font-weight: 600;
+    font-size: small;
+    padding: 5px 5px 0 5px;
+  }
+  .product-price {
+    font-weight: 700;
+    font-size: smaller;
+    color: gray;
+    padding: 0px 5px 2px 5px;
+  }
+}

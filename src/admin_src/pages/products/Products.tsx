@@ -28,6 +28,17 @@ function Products() {
     currentPathRef.current = location.pathname;
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (
+      location.pathname.includes("new") ||
+      location.pathname.includes("manage")
+    ) {
+      dispatch({
+        type: "hide",
+      });
+    }
+  }, []);
+
   return (
     <div className="products">
       <section className="products-list">

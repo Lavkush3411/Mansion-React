@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 import "./newproduct.scss";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { ButtonContext, LoaderContext } from "../../../ContextProvider";
+import { v4 as uuid } from "uuid";
 const env = import.meta.env;
+
+interface sizeListItem {
+  id: string;
+  size: string;
+  quantity: number;
+}
 
 function NewProduct() {
   const navigate = useNavigate();
@@ -11,14 +18,54 @@ function NewProduct() {
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
-  const [stock, setStock] = useState<number | undefined>(undefined);
+  // const [stock, setStock] = useState<number | undefined>(undefined);
   const [type, setType] = useState<string>("");
   const [src, setSrc] = useState<string[]>([]);
   const { state, dispatch } = useContext(ButtonContext);
+  const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
 
   const { loaderDispatch } = useContext(LoaderContext);
 
   // function executed when images are selected
+  const addSize = () => {
+    setSizeList((prev) => {
+      return [...prev, { id: uuid(), size: "", quantity: 0 }];
+    });
+  };
+
+  const removeSize = (removeSizeID: string): void => {
+    // const sizeList = sizeList.filter((size) => size !== randomID);
+    setSizeList(sizeList.filter((size) => size.id !== removeSizeID));
+  };
+
+  const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string): void => {
+    console.log(sizeList);
+
+    setSizeList((prev): sizeListItem[] => {
+      const newSizeList = prev.map((item) => {
+        if (item.id === id) {
+          item.size = e.target.value;
+        }
+        return item;
+      });
+      return newSizeList;
+    });
+  };
+  const updateQuantity = (
+    e: ChangeEvent<HTMLInputElement>,
+    id: string
+  ): void => {
+    console.log(sizeList);
+    setSizeList((prev): sizeListItem[] => {
+      const newSizeList = prev.map((item) => {
+        if (item.id === id) {
+          item.quantity = Number(e.target.value);
+        }
+        return item;
+      });
+      return newSizeList;
+    });
+  };
   const selectImage = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       // we are creating array even if there is one file is selected
@@ -65,7 +112,7 @@ function NewProduct() {
     }
     formdata.append("productName", String(productName));
     formdata.append("productPrice", String(productPrice));
-    formdata.append("stock", String(stock));
+    sizeList.forEach((item) => formdata.append("stock", JSON.stringify(item)));
     formdata.append("type", String(type));
 
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
@@ -82,12 +129,12 @@ function NewProduct() {
       <article>
         <form onSubmit={(e) => submitForm(e)}>
           <select
+            value={type}
             required
-            defaultValue={"type"}
             className="product-type"
             onChange={(e) => setType(e.target.value)}
           >
-            <option value="type" disabled hidden>
+            <option value="" hidden>
               Type
             </option>
             {state.productItems.map((product: string) => (
@@ -113,13 +160,41 @@ function NewProduct() {
             placeholder="Price"
           />
           <label>Stock</label>
-          <input
-            type="number"
-            min={0}
-            max={100}
-            value={stock ? stock : ""}
-            onChange={(e) => setStock(Number(e.target.value))}
-          />
+          {sizeList.map((size) => (
+            <div className="size-quantity" key={size.id}>
+              <select
+                required
+                className="size"
+                onChange={(e) => updateSize(e, size.id)}
+              >
+                <option value="" hidden>
+                  Size
+                </option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+              <input
+                required
+                type="number"
+                className="quantity"
+                onChange={(e) => updateQuantity(e, size.id)}
+              />
+              {sizeList.length > 1 && (
+                <button type="button" onClick={() => removeSize(size.id)}>
+                  X
+                </button>
+              )}
+            </div>
+          ))}
+          {sizeList.length < 5 && (
+            <button type="button" className="new-size" onClick={addSize}>
+              Add New Size
+            </button>
+          )}
+
           <label>Image</label>
           <input
             type="file"

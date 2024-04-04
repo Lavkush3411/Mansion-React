@@ -53,6 +53,15 @@
         gap: 5px;
 
         justify-content: space-between;
+        > .close-button {
+          padding: 1px 10px;
+          &:hover {
+            background-color: transparent;
+            color: black;
+            border: 1px solid black;
+          }
+        }
+
         .size,
         .quantity {
           background-color: transparent;
@@ -63,6 +72,7 @@
         .quantity {
           border: 1px solid black;
           border-radius: 2px;
+          padding: 5px;
         }
       }
       button.new-size {

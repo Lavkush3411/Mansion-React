@@ -183,7 +183,11 @@ function NewProduct() {
                 onChange={(e) => updateQuantity(e, size.id)}
               />
               {sizeList.length > 1 && (
-                <button type="button" onClick={() => removeSize(size.id)}>
+                <button
+                  type="button"
+                  className="close-button"
+                  onClick={() => removeSize(size.id)}
+                >
                   X
                 </button>
               )}

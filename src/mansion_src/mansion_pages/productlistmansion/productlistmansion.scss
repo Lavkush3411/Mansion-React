@@ -1,0 +1,12 @@
+.product-list-container {
+    display: flex;
+    justify-content: center;
+    .product-list {
+      display: inline-flex;
+      padding: 2%;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+  }
+  

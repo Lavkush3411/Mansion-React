@@ -21,7 +21,7 @@ import MansionHomePage from "./mansion_src/mansion_pages/mansionhomepage/Mansion
 import MansionLogInPage from "./mansion_src/mansion_pages/mansionlogin/MansionLogInPage";
 import MansionSignUPPage from "./mansion_src/mansion_pages/mansionsignuppage/MansionSignUPPage";
 import { LoaderContext } from "./ContextProvider";
-import CargosList from "./mansion_src/mansion_pages/Cargos/CargosList";
+import ProductListMansion from "./mansion_src/mansion_pages/productlistmansion/ProductListMansion";
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
 // const Line = lazy(() => import("./pages/charts/line/Line"));
@@ -53,8 +53,36 @@ function App() {
               </div>
             }
           />
-          <Route path="cargos" element={createLazyRoute(<CargosList />)} />
-          <Route path="hoodies" element={createLazyRoute(<CargosList />)} />
+          <Route
+            path="cargos"
+            element={createLazyRoute(
+              <ProductListMansion productName={"cargos"} />
+            )}
+          />
+          <Route
+            path="hoodies"
+            element={createLazyRoute(
+              <ProductListMansion productName="hoodies" />
+            )}
+          />
+          <Route
+            path="sweatpants"
+            element={createLazyRoute(
+              <ProductListMansion productName="sweatpants" />
+            )}
+          />
+          <Route
+            path="tshirts"
+            element={createLazyRoute(
+              <ProductListMansion productName="tshirts" />
+            )}
+          ></Route>
+          <Route
+            path="shirts"
+            element={createLazyRoute(
+              <ProductListMansion productName="shirts" />
+            )}
+          ></Route>
         </Route>
         <Route path="/login" element={createLazyRoute(<MansionLogInPage />)} />
         <Route path="/loading" element={<Loader />} />

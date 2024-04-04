@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../../mansion_components/productcard/ProductCard";
 
-import "./cargoslist.scss";
+import "./productlistmansion.scss";
 const env = import.meta.env;
 interface data {
   _id: string;
@@ -10,20 +10,22 @@ interface data {
   productPrice: string;
   stock: number;
 }
-function CargosList() {
+interface productListProps {
+  productName: string;
+}
+function ProductListMansion({ productName }: productListProps) {
   const [cargoList, setCarogList] = useState<data[]>([]);
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "get/cargos")
+    fetch(env.VITE_BASE_URL + "get/" + productName)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         return setCarogList(data);
       });
-  }, []);
+  }, [productName]);
 
   return (
-    <div className="cargo-list-container">
-      <div className="cargo-list">
+    <div className="product-list-container">
+      <div className="product-list">
         {cargoList &&
           cargoList.map((productItem) => (
             <ProductCard key={productItem._id} productItem={productItem} />
@@ -33,4 +35,4 @@ function CargosList() {
   );
 }
 
-export default CargosList;
+export default ProductListMansion;

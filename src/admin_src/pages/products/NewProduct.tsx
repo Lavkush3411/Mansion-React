@@ -112,7 +112,7 @@ function NewProduct() {
     }
     formdata.append("productName", String(productName));
     formdata.append("productPrice", String(productPrice));
-    sizeList.forEach((item) => formdata.append("stock", JSON.stringify(item)));
+    formdata.append("stock", JSON.stringify(sizeList));
     formdata.append("type", String(type));
 
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {

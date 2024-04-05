@@ -100,6 +100,10 @@ function NewProduct() {
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sizeList.length === 0) {
+      alert("Add Size and Quantity by clicking on Add new Size Button");
+      return;
+    }
     loaderDispatch({ type: "show-product-loader" });
     navigate("/admin/products/" + `${type}-list`);
 

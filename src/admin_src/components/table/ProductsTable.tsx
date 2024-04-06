@@ -6,14 +6,20 @@ import { useEffect, useState } from "react";
 
 const env = import.meta.env;
 
+interface Stock {
+  id: string;
+  quantity: number;
+  size: string;
+}
+
 interface DataType {
-  _id?: number;
-  image: string;
+  _id: string;
+  image: string[];
   productName: string;
   productPrice: string;
   manage?: string;
   type: string;
-  stock: number;
+  stock: Stock[];
 }
 
 const columns: Column<DataType>[] = [
@@ -29,7 +35,7 @@ const columns: Column<DataType>[] = [
     Cell: ({ value }) =>
       value ? (
         <img
-          src={value}
+          src={value[0]}
           alt="Product Image"
           style={{ width: 20, height: 20 }}
         />
@@ -43,6 +49,14 @@ const columns: Column<DataType>[] = [
     Cell: ({ row }) => (
       <Link
         to={`/admin/products/manage/${row.original.type}_${row.original._id}`}
+        state={{
+          name: row.original.productName,
+          type: row.original.type,
+          image: row.original.image,
+          stock: row.original.stock,
+          _id: row.original._id,
+          price: row.original.productPrice,
+        }}
       >
         <CiSettings />
       </Link>
@@ -60,12 +74,9 @@ function Cargo() {
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "admin/get/cargos")
       .then((res) => res.json())
-      .then((d) => {
-        if (d) {
-          let arryData: DataType[] = d.map((item: DataType) => {
-            return { ...item, image: item.image[0] };
-          });
-          setresData(arryData);
+      .then((data) => {
+        if (data) {
+          setresData(data);
         } else {
           setresData([]);
         }
@@ -86,12 +97,11 @@ function Sweatpant() {
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "admin/get/sweatpants")
       .then((res) => res.json())
-      .then((d) => {
-        if (d) {
-          let data: DataType[] = d.map((item: DataType) => {
-            return { ...item, image: item.image[0] };
-          });
+      .then((data) => {
+        if (data) {
           setresData(data);
+        } else {
+          setresData([]);
         }
       })
       .catch((e) => console.log(e));
@@ -116,12 +126,11 @@ function Shirts() {
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "admin/get/shirts")
       .then((res) => res.json())
-      .then((d) => {
-        if (d) {
-          let data: DataType[] = d.map((item: DataType) => {
-            return { ...item, image: item.image[0] };
-          });
+      .then((data) => {
+        if (data) {
           setresData(data);
+        } else {
+          setresData([]);
         }
       })
       .catch((e) => console.log(e));
@@ -139,12 +148,11 @@ function Tshirts() {
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "admin/get/tshirts")
       .then((res) => res.json())
-      .then((d) => {
-        if (d) {
-          let data: DataType[] = d.map((item: DataType) => {
-            return { ...item, image: item.image[0] };
-          });
+      .then((data) => {
+        if (data) {
           setresData(data);
+        } else {
+          setresData([]);
         }
       })
       .catch((e) => console.log(e));
@@ -168,12 +176,11 @@ function Hoodie() {
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "admin/get/hoodies")
       .then((res) => res.json())
-      .then((d) => {
-        if (d) {
-          let data: DataType[] = d.map((item: DataType) => {
-            return { ...item, image: item.image[0] };
-          });
+      .then((data) => {
+        if (data) {
           setresData(data);
+        } else {
+          setresData([]);
         }
       })
       .catch((e) => console.log(e));

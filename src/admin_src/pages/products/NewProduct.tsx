@@ -18,11 +18,10 @@ function NewProduct() {
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
-  // const [stock, setStock] = useState<number | undefined>(undefined);
   const [type, setType] = useState<string>("");
+  const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
   const [src, setSrc] = useState<string[]>([]);
   const { state, dispatch } = useContext(ButtonContext);
-  const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
 
   const { loaderDispatch } = useContext(LoaderContext);
 
@@ -34,7 +33,6 @@ function NewProduct() {
   };
 
   const removeSize = (removeSizeID: string): void => {
-    // const sizeList = sizeList.filter((size) => size !== randomID);
     setSizeList(sizeList.filter((size) => size.id !== removeSizeID));
   };
 
@@ -207,6 +205,7 @@ function NewProduct() {
           <input
             type="file"
             required
+            value={productPrice ? productPrice : ""}
             onChange={(e) => selectImage(e)}
             accept="image/*"
             multiple

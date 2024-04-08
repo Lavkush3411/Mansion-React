@@ -22,6 +22,8 @@ import MansionLogInPage from "./mansion_src/mansion_pages/mansionlogin/MansionLo
 import MansionSignUPPage from "./mansion_src/mansion_pages/mansionsignuppage/MansionSignUPPage";
 import { LoaderContext } from "./ContextProvider";
 import ProductListMansion from "./mansion_src/mansion_pages/productlistmansion/ProductListMansion";
+import ProductItem from "./mansion_src/mansion_components/productitem/ProductItem";
+import ProtectedRoute from "./ProtectedRoute";
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
 // const Line = lazy(() => import("./pages/charts/line/Line"));
@@ -83,6 +85,10 @@ function App() {
               <ProductListMansion productName="shirts" />
             )}
           ></Route>
+          <Route
+            path="product/:card"
+            element={createLazyRoute(<ProductItem />)}
+          />
         </Route>
         <Route path="/login" element={createLazyRoute(<MansionLogInPage />)} />
         <Route path="/loading" element={<Loader />} />
@@ -92,7 +98,14 @@ function App() {
         />
 
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminHomePage />}>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminHomePage />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={createLazyRoute(<Dashboard />)} />
           <Route
             path="/admin/dashboard"

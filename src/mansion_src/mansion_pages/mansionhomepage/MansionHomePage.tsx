@@ -14,7 +14,7 @@ function MansionHomePage() {
       <div className="container">
         {!showSearch && (
           <div className="logo">
-            <img src="mansion.svg" alt="" />
+            <img src="/mansion.svg" alt="logo" />
           </div>
         )}
 

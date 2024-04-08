@@ -3,18 +3,24 @@ import ProductCard from "../../mansion_components/productcard/ProductCard";
 
 import "./productlistmansion.scss";
 const env = import.meta.env;
-interface data {
+interface Stock {
+  _id: string;
+  size: string;
+  quantity: number;
+}
+
+interface Data {
   _id: string;
   productName: string;
   image: string[];
   productPrice: string;
-  stock: number;
+  stock: Stock;
 }
 interface productListProps {
   productName: string;
 }
 function ProductListMansion({ productName }: productListProps) {
-  const [cargoList, setCarogList] = useState<data[]>([]);
+  const [cargoList, setCarogList] = useState<Data[]>([]);
   useEffect(() => {
     fetch(env.VITE_BASE_URL + "get/" + productName)
       .then((res) => res.json())

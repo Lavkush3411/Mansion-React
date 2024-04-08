@@ -24,7 +24,7 @@
     .logo {
       > img {
         width: 200px;
-        margin: -15px 0 -30px -55px;
+        // margin: -15px 0 -30px -55px;
         cursor: pointer;
       }
     }
@@ -36,15 +36,18 @@
       border: none;
       outline: none;
       padding: 5px;
+      padding-bottom: 10px;
       caret-color: black;
       color: black;
       transition: all 0.1s ease-in;
+      border-bottom: 1px solid rgb(186, 185, 185);
       &::placeholder {
         text-decoration: none;
         color: black;
       }
       &:focus {
         font-size: larger;
+        border: none;
         &::placeholder {
           visibility: hidden;
         }

@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "./productitem.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
+import { CheckOutContext } from "../../../CheckOutContextProvider";
 interface Stock {
   _id: string;
   size: string;
@@ -34,6 +35,7 @@ function ProductItem() {
     stock,
     moreinfo,
   }: DataReceivedFromParentLink = location.state.productItem;
+  const { setCheckoutState } = useContext(CheckOutContext);
 
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
@@ -54,6 +56,18 @@ function ProductItem() {
       alert("select Size first");
     }
     console.log(cartList);
+  }
+  function onCheckout(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    productItem: AddToCartData
+  ) {
+    e.preventDefault();
+    if (size !== "") {
+      setCheckoutState(true);
+      console.log(productItem);
+    } else {
+      alert("select Size first");
+    }
   }
 
   function onDescriptionSelect() {
@@ -76,7 +90,7 @@ function ProductItem() {
   }
 
   return (
-    <div className="product" id={_id}> 
+    <div className="product" id={_id}>
       <div className="product-left-section">
         <div className="product-details">
           <div className="product-name">{productName}</div>
@@ -135,7 +149,9 @@ function ProductItem() {
           <button onClick={(e) => onAddToCart(e, { ...productItem, size })}>
             Add to cart
           </button>
-          <button>Buy Now</button>
+          <button onClick={(e) => onCheckout(e, { ...productItem, size })}>
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

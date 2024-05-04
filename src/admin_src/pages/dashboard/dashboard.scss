@@ -1,0 +1,74 @@
+@import "../../mixin";
+
+.dashboard {
+  @include main;
+
+  .topbar {
+    @include flex($align: center, $justify: none);
+    margin: 0% 2%;
+    padding: 1% 2%;
+    font-size: 1.5rem;
+    color: rgb(110, 110, 110);
+    border-bottom: 1px solid rgb(110, 110, 110);
+    border-radius: 2px;
+
+    input {
+      color: black;
+      outline: none;
+      background-color: inherit;
+      width: 100%;
+      margin: 0 auto;
+      border: none;
+      &:focus::placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  .widgetbox-container {
+    width: 100%;
+    @include flex($justify: space-between);
+  }
+
+  .graph-container {
+    font-weight: bolder;
+    margin: 2%;
+    @include flex;
+    align-items: stretch;
+    .left {
+      padding: 1% 2%;
+      background-color: rgb(230, 232, 233);
+
+      @include flex(column);
+      width: 70%;
+      .revenue {
+        @include flex(column);
+        width: 100%;
+        > h5 {
+          @include heading;
+        }
+      }
+    }
+    .right {
+      @include flex(column, $gap: 4rem);
+      min-height: 100%;
+      width: 30%;
+      background-color: rgb(230, 232, 233);
+
+      .inventory {
+        @include flex(column);
+        > h5 {
+          @include heading;
+        }
+      }
+      .gender-chart-container {
+        .gender-chart {
+          > p {
+            text-align: center;
+            @include heading;
+          }
+        }
+      }
+    }
+  }
+}

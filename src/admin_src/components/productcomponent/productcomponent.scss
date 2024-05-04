@@ -1,0 +1,16 @@
+@import "../../mixin";
+.productcomponent {
+  @include flex($justify: space-between);
+  margin: 10px 0;
+
+  width: 100%;
+  .outer-layer {
+    width: 10rem;
+    height: 10px;
+    background-color: rgb(197, 197, 197);
+    .inner-layer {
+      width: 10rem;
+      height: 10px;
+    }
+  }
+}

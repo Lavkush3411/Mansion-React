@@ -1,0 +1,85 @@
+.mansionloginpage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .loginform {
+    > span.error {
+      color: red;
+    }
+    h1 {
+      text-align: center;
+    }
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    gap: 5px;
+    > * {
+      width: 100%;
+      padding: 5px 0px;
+      background-color: transparent;
+    }
+    > label {
+      cursor: pointer;
+    }
+    > input {
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      padding: 5px;
+      color: black;
+    }
+    > button {
+      margin-top: 15px;
+      color: white;
+      padding: 8px 0px;
+      border: 1px solid black;
+      background-color: black;
+    }
+    > a:first-of-type {
+      font-size: 0.8rem;
+    }
+    > a:last-of-type {
+      text-align: center;
+    }
+  }
+}
+
+@media (width<400px) {
+  .mansionloginpage {
+    .loginform {
+      margin-top: 15%;
+      width: 90%;
+    }
+  }
+}
+
+@media (400px<=width<=600px) {
+  .mansionloginpage {
+    .loginform {
+      margin-top: 12%;
+      width: 60%;
+    }
+  }
+}
+
+@media (600px<=width<=800px) {
+  .mansionloginpage {
+    .loginform {
+      margin-top: 8%;
+      width: 50%;
+    }
+  }
+}
+
+@media (800px<width<=1200px) {
+  .mansionloginpage {
+    .loginform {
+      margin-top: 5%;
+      width: 40%;
+    }
+  }
+}

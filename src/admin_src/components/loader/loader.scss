@@ -1,0 +1,44 @@
+@import "../../mixin";
+
+.loader {
+  @include main;
+  @include flex;
+  background-color: transparent;
+  z-index: 100;
+  top: 0;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotation-back {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-720deg);
+    }
+  }
+  .outer-circle {
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    border: 5px solid black;
+    border-left: 5px dotted gray;
+    animation: rotation 1s linear infinite;
+    @include flex;
+    .inner-circle {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      border: 5px solid gray;
+      border-radius: 100%;
+      border-left: 5px dotted black;
+      animation: rotation-back 1s linear infinite;
+    }
+  }
+}

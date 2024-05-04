@@ -1,0 +1,206 @@
+.mansionhomepage {
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: 100;
+
+  @keyframes topbarrotation {
+    0% {
+      transform: translateY(200%);
+    }
+    25% {
+      transform: translateY(100%);
+    }
+    75% {
+      transform: translateY(-130%);
+    }
+    100% {
+      transform: translateY(-240%);
+    }
+  }
+
+  .header-section {
+    position: fixed;
+    width: 100%;
+    height: 205px;
+    left: 0;
+    top: 0;
+    background-color: white;
+    .topbar {
+      padding: 0 2%;
+      width: 100%;
+      height: 2rem;
+      background-color: black;
+      color: white;
+      font-weight: 400;
+      font-size: 0.8rem;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      > span {
+        animation: topbarrotation 7s infinite 0s ease-in-out;
+      }
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      color: black;
+      padding: 0 2%;
+      height: max-content;
+      // margin-bottom: -10px;
+      .logo {
+        > img {
+          width: 200px;
+          cursor: pointer;
+        }
+      }
+      .search {
+        width: 100%;
+        cursor: pointer;
+        margin-right: auto;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 5px;
+        padding-bottom: 10px;
+        caret-color: black;
+        color: black;
+        transition: all 0.1s ease-in;
+        border-bottom: 1px solid rgb(186, 185, 185);
+        &::placeholder {
+          text-decoration: none;
+          color: black;
+        }
+        &:focus {
+          font-size: larger;
+          border: none;
+          &::placeholder {
+            visibility: hidden;
+          }
+        }
+      }
+      > .login {
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      > .cart {
+        margin: 0 10px;
+        cursor: pointer;
+      }
+    }
+
+    //   styling bit differently for searchbar when its clicked.
+    .search-section {
+      display: flex;
+      flex-direction: column;
+      height: 70px;
+      width: 100%;
+      position: relative;
+
+      > div {
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-left: 5px;
+      }
+      .close-button {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+    }
+  }
+  > .product-container {
+    margin-top: 205px;
+  }
+}
+// media querries
+
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 0px;
+}
+
+@media (width<400px) {
+  .mansionhomepage {
+    > .header-section {
+      height: 80px;
+      .navbar {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        transform: translate(-100%, -100%);
+        transition: transform 0.3s ease;
+        &.show {
+          display: block;
+          height: 100vh;
+          transform: translate(0, 0);
+          &::before {
+            content: "Mansion";
+            color: gray;
+            font-weight: 500;
+            font-size: 1.5rem;
+          }
+        }
+        .navbar-items {
+          width: 100%;
+          background-color: white;
+          z-index: 10;
+          flex-direction: column;
+          padding: 10px;
+        }
+      }
+      > .container {
+        // max-height: max-content;
+        height: max-content;
+
+        > a.logo {
+          > img {
+            width: 80px;
+            margin-left: -20px;
+          }
+        }
+      }
+    }
+    > .product-container {
+      margin-top: 100px;
+    }
+  }
+
+  .menu-btn {
+    display: block;
+    z-index: 100;
+  }
+}
+
+@media (400px<=width<=605px) {
+  .mansionhomepage {
+    .loginform {
+      margin-top: 12%;
+      width: 60%;
+    }
+    > .header-section {
+      height: max-content;
+
+      > .container {
+        height: max-content;
+        > a.logo {
+          > img {
+            width: 80px;
+            margin-left: -20px;
+          }
+        }
+      }
+    }
+    > .product-container {
+      margin-top: 130px;
+    }
+  }
+}

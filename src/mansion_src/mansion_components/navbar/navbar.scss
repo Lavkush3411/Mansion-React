@@ -1,0 +1,14 @@
+.navbar {
+  padding: 0.5% 2%;
+  border-top: 1px solid rgb(55, 54, 54);
+  border-bottom: 1px solid rgb(55, 54, 54);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  .navbar-items {
+    display: flex;
+    gap: 20px;
+    font-size: medium;
+  }
+}

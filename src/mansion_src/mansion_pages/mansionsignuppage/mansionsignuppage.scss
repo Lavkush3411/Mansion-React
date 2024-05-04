@@ -1,0 +1,85 @@
+.mansionsignuppage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .signupform {
+    > span.error {
+      color: red;
+    }
+    h1 {
+      text-align: center;
+    }
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    gap: 5px;
+    > * {
+      width: 100%;
+      padding: 5px 0px;
+      background-color: transparent;
+    }
+    > label {
+      cursor: pointer;
+    }
+    > input {
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      padding: 5px;
+      color: black;
+    }
+    > button {
+      margin-top: 15px;
+      padding: 8px 0px;
+      color: white;
+      border: 1px solid black;
+      background-color: black;
+    }
+    > a:first-of-type {
+      font-size: 0.8rem;
+    }
+    > a:last-of-type {
+      text-align: center;
+    }
+  }
+}
+
+@media (width<400px) {
+  .mansionsignuppage {
+    .signupform {
+      margin-top: 12%;
+      width: 80%;
+    }
+  }
+}
+
+@media (400px<=width<=600px) {
+  .mansionsignuppage {
+    .signupform {
+      margin-top: 12%;
+      width: 60%;
+    }
+  }
+}
+
+@media (600px<=width<=800px) {
+  .mansionsignuppage {
+    .signupform {
+      margin-top: 8%;
+      width: 50%;
+    }
+  }
+}
+
+@media (800px<width<=1200px) {
+  .mansionsignuppage {
+    .signupform {
+      margin-top: 5%;
+      width: 40%;
+    }
+  }
+}

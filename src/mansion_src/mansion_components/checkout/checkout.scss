@@ -1,0 +1,45 @@
+.checkout {
+  position: fixed;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(43, 42, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > .checkout-box {
+    height: 80%;
+    width: 370px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    align-items: center;
+    border-radius: 15px;
+    > .title {
+      margin: 0 auto;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+    > .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 0px;
+      font-weight: 500;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (width<400px) {
+  .checkout {
+    > .checkout-box {
+      width: 90vw;
+      height: 75vh;
+    }
+  }
+}

@@ -124,7 +124,7 @@ function MansionSignUpPage() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            name="password"
+            id="password"
             required
             value={userData.password}
             onChange={(e) => onDetailsChange(e)}

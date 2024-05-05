@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Navbar from "../../mansion_components/navbar/Navbar";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import Footer from "../../mansion_components/footer/Footer";
 
 function MansionHomePage() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
@@ -40,7 +41,7 @@ function MansionHomePage() {
   }
 
   return (
-    <>
+    <div className="homepage-wrapper">
       <div
         className="menu-btn"
         onClick={() => setShowMobileNavbar(!showMobileNavbar)}
@@ -139,7 +140,7 @@ function MansionHomePage() {
               </div>
             )}
           </div>
-          {/* only relavent in movbile screens */}
+          {/* Navbar */}
           <Navbar
             showMobileNavbar={showMobileNavbar}
             setShowMobileNavbar={setShowMobileNavbar}
@@ -152,8 +153,10 @@ function MansionHomePage() {
         </main>
       </div>
 
-      {<Cart showCart={showCart} />}
-    </>
+      <Cart showCart={showCart} />
+
+      <Footer />
+    </div>
   );
 }
 

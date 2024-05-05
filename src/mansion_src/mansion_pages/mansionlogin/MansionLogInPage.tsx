@@ -63,6 +63,7 @@ function MansionLogInPage() {
           <h1>Login</h1>
           <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             value={email}
             required
@@ -72,6 +73,7 @@ function MansionLogInPage() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

@@ -149,7 +149,10 @@ function ProductItem() {
           <button onClick={(e) => onAddToCart(e, { ...productItem, size })}>
             Add to cart
           </button>
-          <button onClick={(e) => onCheckout(e, { ...productItem, size })}>
+          <button
+            className="buy-btn"
+            onClick={(e) => onCheckout(e, { ...productItem, size })}
+          >
             Buy Now
           </button>
         </div>

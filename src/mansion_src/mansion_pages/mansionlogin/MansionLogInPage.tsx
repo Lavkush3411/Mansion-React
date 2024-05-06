@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./mansionlginpage.scss";
 import { FormEvent, useContext, useState } from "react";
-import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../UserContextProvider";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
 
@@ -25,12 +24,11 @@ function MansionLogInPage() {
       const res = await fetch(env.VITE_BASE_URL + "user/login", {
         method: "POST",
         body: formdata,
+        credentials: "include",
       });
       if (res.status === 200) {
         const data = await res.json();
-        const jsontoken = data.Token;
-        const user = jwtDecode(jsontoken);
-        localStorage.setItem("Token", jsontoken);
+        const user = data.user;
         userDispatch({ type: "login", payload: user });
         // We will modify this to go to the page originally requested.
         // const redirectTo = location.state?.path || "/";

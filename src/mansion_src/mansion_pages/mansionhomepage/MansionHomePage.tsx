@@ -9,6 +9,9 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Navbar from "../../mansion_components/navbar/Navbar";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import Footer from "../../mansion_components/footer/Footer";
+import axios from "axios";
+
+const env = import.meta.env;
 
 function MansionHomePage() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
@@ -21,9 +24,10 @@ function MansionHomePage() {
   const navigate = useNavigate();
   //this effect is used to check authentication status of user
   useEffect(() => {
-    useAuth()
+    useAuth("user/verify")
       .then((res) => {
         setAuthenticated(res as boolean);
+        console.log(res);
         setLoad(false);
       })
       .catch(() => {
@@ -32,14 +36,18 @@ function MansionHomePage() {
       });
   }, [loggedinuser]);
 
-  function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+  async function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
-    localStorage.removeItem("Token");
     userDispatch({ type: "logout" });
-    setAuthenticated(false);
-    navigate("/home/login");
+    try {
+      await axios.get(env.VITE_BASE_URL + "user/logout", {
+        withCredentials: true,
+      });
+      console.log("logout");
+      setAuthenticated(false);
+      navigate("/home/login");
+    } catch (e) {}
   }
-
   return (
     <div className="homepage-wrapper">
       <div

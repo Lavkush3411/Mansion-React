@@ -72,7 +72,10 @@ function Cargo() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/cargos")
+    fetch(env.VITE_BASE_URL + "admin/get/cargos", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -95,7 +98,10 @@ function Sweatpant() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/sweatpants")
+    fetch(env.VITE_BASE_URL + "admin/get/sweatpants", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -124,7 +130,10 @@ function Shirts() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/shirts")
+    fetch(env.VITE_BASE_URL + "admin/get/shirts", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -146,7 +155,10 @@ function Tshirts() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/tshirts")
+    fetch(env.VITE_BASE_URL + "admin/get/tshirts", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -174,7 +186,10 @@ function Hoodie() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/hoodies")
+    fetch(env.VITE_BASE_URL + "admin/get/hoodies", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data) {

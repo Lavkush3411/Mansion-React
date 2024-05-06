@@ -8,7 +8,7 @@ function CheckOutPage() {
   const [authorised, setAuthorised] = useState<boolean | null>(null);
 
   useEffect(() => {
-    useAuth()
+    useAuth("user/verify")
       .then((res) => {
         setAuthorised(res as boolean);
       })

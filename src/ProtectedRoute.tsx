@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useFetch from "./mansion_src/hooks/useFetch";
 import UnAuthorised from "./mansion_src/mansion_pages/unauthorisedpage/UnAuthorised";
 import Loader from "./admin_src/components/loader/Loader";
+import useAuth from "./mansion_src/hooks/useAuth";
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
@@ -11,20 +11,9 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function verfiyUser() {
       try {
-        const token = localStorage.getItem("Token");
-        if (!token) {
-          setAuthenticated(false);
-          return;
-        }
-        const res: any = await useFetch("user/verify-admin", {
-          Token: token,
-        });
-        if (res.status === 200) {
-          setAuthenticated(true);
-          navigate(location.pathname);
-        } else {
-          setAuthenticated(false);
-        }
+        const res: any = await useAuth("user/verify-admin");
+        setAuthenticated(res);
+        navigate(location.pathname);
       } catch (err) {
         setAuthenticated(false);
       }

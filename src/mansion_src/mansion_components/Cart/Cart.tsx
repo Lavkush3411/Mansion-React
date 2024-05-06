@@ -28,7 +28,7 @@ function Cart({ showCart }: { showCart: boolean }) {
     //we are checking for user authorisation when user clicks on checkout so if user is authorised checkout will be shown.
     //otherwise login will be prompted.
 
-    useAuth()
+    useAuth("user/verify")
       .then((res) => {
         setShowCart(res as boolean);
         setCheckoutState(res as boolean);

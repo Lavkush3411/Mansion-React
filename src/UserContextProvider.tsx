@@ -1,4 +1,3 @@
-import { jwtDecode } from "jwt-decode";
 import { ReactNode, createContext, useReducer } from "react";
 
 interface UserType {
@@ -25,7 +24,6 @@ const UserContext = createContext<initialContextValueType>({
 const reducer = (state: UserType | {}, action: actionType): UserType | {} => {
   switch (action.type) {
     case "login":
-      //   console.log({ context: { ...action.payload } });
       return { ...action.payload };
     case "logout":
       return {};
@@ -34,9 +32,7 @@ const reducer = (state: UserType | {}, action: actionType): UserType | {} => {
   }
 };
 
-const initialValue: UserType | {} = localStorage.getItem("Token")
-  ? jwtDecode(localStorage.getItem("Token") || "")
-  : {};
+const initialValue: UserType | {} = {};
 
 function UserContexProvider({ children }: { children: ReactNode }) {
   const [user, userDispatch] = useReducer(reducer, initialValue);

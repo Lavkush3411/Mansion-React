@@ -1,22 +1,15 @@
-import useFetch from "./useFetch";
+import axios from "axios";
 
-async function useAuth() {
+const env = import.meta.env;
+
+async function useAuth(path: string) {
   return new Promise(async (resolve) => {
-    const token = localStorage.getItem("Token");
-    if (!token) {
-      resolve(false);
-      return;
-    }
     try {
-      const res: any = await useFetch("user/verify", {
-        Token: token,
+      await axios.get(env.VITE_BASE_URL + path, {
+        withCredentials: true,
       });
-      if (res.status === 200) {
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    } catch (err) {
+      resolve(true);
+    } catch (e) {
       resolve(false);
     }
   });

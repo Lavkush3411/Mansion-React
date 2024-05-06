@@ -40,9 +40,10 @@ function MansionHomePage() {
     e.preventDefault();
     userDispatch({ type: "logout" });
     try {
-      await axios.get(env.VITE_BASE_URL + "user/logout", {
+      const res = await axios.get(env.VITE_BASE_URL + "user/logout", {
         withCredentials: true,
       });
+      console.log(res);
       console.log("logout");
       setAuthenticated(false);
       navigate("/home/login");

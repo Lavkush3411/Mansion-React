@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../../../admin_src/components/loader/Loader";
 import useAuth from "../../hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Checkout from "../../mansion_components/checkout/Checkout";
+import { CartContext } from "../../../CartContextProvider";
+import { CheckOutContext } from "../../../CheckOutContextProvider";
 
 function CheckOutPage() {
   const [authorised, setAuthorised] = useState<boolean | null>(null);
+  const { setShowCart } = useContext(CartContext);
+  const { setCheckoutState } = useContext(CheckOutContext);
 
+  const navigate = useNavigate();
   useEffect(() => {
-    useAuth()
+    useAuth("user/verify")
       .then((res) => {
-        setAuthorised(res as boolean);
+        setAuthorised(res as boolean); //this will hide checkout component
+        setCheckoutState(res); //this will hide the current component that makes request to check authorised state
+        if (!res) {
+          setShowCart(false);
+          navigate("/home/login");
+        }
       })
       .catch(() => setAuthorised(false));
   }, []);
@@ -23,9 +33,7 @@ function CheckOutPage() {
     <Loader bgc="rgb(49, 48, 48, 0.4)" pos="absolute" />
   ) : authorised ? (
     <Checkout /> //shows checkout component
-  ) : (
-    <Navigate to={"/home/login"} />
-  );
+  ) : null;
 }
 
 export default CheckOutPage;

@@ -15,6 +15,7 @@ function MansionLogInPage() {
   const { userDispatch } = useContext(UserContext);
   const [err, setErr] = useState<string>("");
   async function onSubmitHandler(e: FormEvent<HTMLFormElement>) {
+    console.log("login is called");
     e.preventDefault();
     setIsLoading(true);
     const formdata = new FormData();

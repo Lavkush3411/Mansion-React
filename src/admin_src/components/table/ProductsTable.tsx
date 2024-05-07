@@ -3,6 +3,7 @@ import TableHOC from "./Table";
 import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const env = import.meta.env;
 
@@ -68,20 +69,29 @@ const filteredColumns: Column<DataType>[] = columns.filter(
   (column) => column.accessor !== "type"
 );
 
+async function fetchData(item: string) {
+  const token = localStorage.getItem("Token");
+  if (!token) return [];
+  try {
+    const res = await axios.post(env.VITE_BASE_URL + "admin/post/" + item, {
+      Token: token,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
 function Cargo() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/cargos")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setresData(data);
-        } else {
-          setresData([]);
-        }
+    fetchData("cargo")
+      .then((data: DataType[]) => {
+        setresData(data);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setresData([]));
   }, []);
 
   return (
@@ -95,16 +105,11 @@ function Sweatpant() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/sweatpants")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setresData(data);
-        } else {
-          setresData([]);
-        }
+    fetchData("sweatpant")
+      .then((data: DataType[]) => {
+        setresData(data);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setresData([]));
   }, []);
 
   return (
@@ -124,16 +129,11 @@ function Shirts() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/shirts")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setresData(data);
-        } else {
-          setresData([]);
-        }
+    fetchData("shirt")
+      .then((data: DataType[]) => {
+        setresData(data);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setresData([]));
   }, []);
   return (
     <div className="shirts">
@@ -146,16 +146,11 @@ function Tshirts() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/tshirts")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setresData(data);
-        } else {
-          setresData([]);
-        }
+    fetchData("tshirt")
+      .then((data: DataType[]) => {
+        setresData(data);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setresData([]));
   }, []);
   return (
     <div className="tshirts">
@@ -174,16 +169,11 @@ function Hoodie() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
   useEffect(() => {
-    fetch(env.VITE_BASE_URL + "admin/get/hoodies")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setresData(data);
-        } else {
-          setresData([]);
-        }
+    fetchData("hoodie")
+      .then((data: DataType[]) => {
+        setresData(data);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setresData([]));
   }, []);
   return (
     <div className="hoodies">

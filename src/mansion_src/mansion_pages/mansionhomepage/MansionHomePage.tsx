@@ -21,7 +21,7 @@ function MansionHomePage() {
   const navigate = useNavigate();
   //this effect is used to check authentication status of user
   useEffect(() => {
-    useAuth()
+    useAuth("user/verify")
       .then((res) => {
         setAuthenticated(res as boolean);
         setLoad(false);

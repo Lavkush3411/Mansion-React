@@ -4,8 +4,6 @@ import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
 import CheckOutPage from "../../mansion_pages/checkoutpage/CheckOutPage";
-import useAuth from "../../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
 interface CartItemType {
   _id: string;
   productName: string;
@@ -16,32 +14,13 @@ interface CartItemType {
 }
 function Cart({ showCart }: { showCart: boolean }) {
   const { cartList, setShowCart } = useContext(CartContext);
-  const { setCheckoutState } = useContext(CheckOutContext);
-  const { checkoutState } = useContext(CheckOutContext);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
 
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-    //we are checking for user authorisation when user clicks on checkout so if user is authorised checkout will be shown.
-    //otherwise login will be prompted.
-
-    useAuth()
-      .then((res) => {
-        setShowCart(res as boolean);
-        setCheckoutState(res as boolean);
-        if (!res) {
-          navigate("/home/login", { state: { path: location.pathname } });
-        }
-      })
-      .catch(() => {
-        setShowCart(false);
-        setCheckoutState(false);
-        navigate("/home/login", { state: { path: location.pathname } });
-      });
-
+    setShowCart(true);
     setCheckoutState(true);
   }
 

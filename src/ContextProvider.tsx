@@ -17,7 +17,7 @@ interface ContextValue {
 
 const initialState: State = {
   showButton: true,
-  productItems: ["cargos", "sweatpants", "tshirts", "shirts", "hoodies"],
+  productItems: ["all", "cargos", "sweatpants", "tshirts", "shirts", "hoodies"],
 };
 
 const ButtonContext = createContext<ContextValue>({

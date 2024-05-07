@@ -125,6 +125,24 @@ function Sweatpant() {
   );
 }
 
+function All() {
+  const [resdata, setresData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    fetchData("all")
+      .then((data: DataType[]) => {
+        setresData(data);
+      })
+      .catch(() => setresData([]));
+  }, []);
+
+  return (
+    <div className="products-list-class">
+      {TableHOC<DataType>(filteredColumns, resdata, "All", "All", true)()}
+    </div>
+  );
+}
+
 function Shirts() {
   const [resdata, setresData] = useState<DataType[]>([]);
 
@@ -188,4 +206,4 @@ function Hoodie() {
   );
 }
 
-export { Cargo, Sweatpant, Shirts, Tshirts, Hoodie };
+export { Cargo, Sweatpant, Shirts, Tshirts, Hoodie, All };

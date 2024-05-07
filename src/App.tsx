@@ -9,6 +9,7 @@ import {
 import Loader from "./admin_src/components/loader/Loader";
 import AdminHomePage from "./admin_src/pages/adminhomepage/AdminHomePage";
 import {
+  All,
   Cargo,
   Hoodie,
   Shirts,
@@ -36,7 +37,7 @@ const ProductItem = lazy(
   () => import("./mansion_src/mansion_components/productitem/ProductItem")
 );
 import ProtectedRoute from "./ProtectedRoute";
-import IndexPage from "./mansion_src/mansion_pages/indexpage/IndexPage";
+// import IndexPage from "./mansion_src/mansion_pages/indexpage/IndexPage";
 import PasswordReset from "./mansion_src/mansion_components/passwordreset/PasswordReset";
 // const Forgot = lazy(
 //   () => import("./mansion_src/mansion_pages/forgotpage/Forgot")
@@ -71,7 +72,13 @@ function App() {
             element={createLazyRoute(<MansionSignUPPage />)}
           />
 
-          <Route index element={<IndexPage />} />
+          {/* <Route index element={<IndexPage />} /> */}
+          <Route
+            index
+            element={createLazyRoute(
+              <ProductListMansion productName={"all"} />
+            )}
+          />
           <Route
             path="cargos"
             element={createLazyRoute(
@@ -164,6 +171,16 @@ function App() {
                   <Loader />
                 ) : (
                   createLazyRoute(<Shirts />)
+                )
+              }
+            />
+            <Route
+              path="/admin/products/all-list"
+              element={
+                loaderState.showLoaderInProductsPlace ? (
+                  <Loader />
+                ) : (
+                  createLazyRoute(<All />)
                 )
               }
             />

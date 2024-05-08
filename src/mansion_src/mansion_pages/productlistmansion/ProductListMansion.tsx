@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductCard from "../../mansion_components/productcard/ProductCard";
 
 import "./productlistmansion.scss";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
+import { ProductListContext } from "../../../ProductListContextProvider";
 const env = import.meta.env;
 interface Stock {
   _id: string;
@@ -23,19 +24,27 @@ interface productListProps {
 function ProductListMansion({ productName }: productListProps) {
   const [cargoList, setCarogList] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { productListState, productListDispatch } =
+    useContext(ProductListContext);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(env.VITE_BASE_URL + "get/" + productName)
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false);
-        return setCarogList(data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setIsLoading(false);
-      });
+    if (productListState[productName].length === 0) {
+      fetch(env.VITE_BASE_URL + "get/" + productName)
+        .then((res) => res.json())
+        .then((data) => {
+          setIsLoading(false);
+          productListDispatch({ type: productName, payload: data });
+          return setCarogList(data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+      setCarogList(productListState[productName]);
+    }
   }, [productName]);
 
   return (

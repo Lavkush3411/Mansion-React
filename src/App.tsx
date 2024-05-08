@@ -80,6 +80,12 @@ function App() {
             )}
           />
           <Route
+            path={"all"}
+            element={createLazyRoute(
+              <ProductListMansion productName={"all"} />
+            )}
+          />
+          <Route
             path="cargos"
             element={createLazyRoute(
               <ProductListMansion productName={"cargos"} />

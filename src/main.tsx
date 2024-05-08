@@ -5,6 +5,7 @@ import { ContextProvider } from "./ContextProvider.tsx";
 import { CartContextProvider } from "./CartContextProvider.tsx";
 import { UserContexProvider } from "./UserContextProvider.tsx";
 import { CheckOutContextProvider } from "./CheckOutContextProvider.tsx";
+import {ProductListContextProvider} from "./ProductListContextProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -12,7 +13,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ContextProvider>
         <CartContextProvider>
           <UserContexProvider>
-            <App />
+            <ProductListContextProvider>
+              <App />
+            </ProductListContextProvider>
           </UserContexProvider>
         </CartContextProvider>
       </ContextProvider>

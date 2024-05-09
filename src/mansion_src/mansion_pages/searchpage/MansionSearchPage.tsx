@@ -1,16 +1,13 @@
 import { useContext } from "react";
 import ProductCard from "../../mansion_components/productcard/ProductCard";
 
-// import "./productlistmansion.scss";
-// import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
+import "./mansionsearchpage.scss";
 import { ProductListContext } from "../../../ProductListContextProvider";
 
 function MansionSearchPage() {
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const { productListState } = useContext(ProductListContext);
 
   return (
-    // <LoadOnApiCall isLoading={isLoading}>
     <div className="product-list-container">
       <div className="product-list">
         {productListState.search.length !== 0 ? (
@@ -22,7 +19,6 @@ function MansionSearchPage() {
         )}
       </div>
     </div>
-    // </LoadOnApiCall>
   );
 }
 

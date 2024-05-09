@@ -1,0 +1,21 @@
+.product-list-container {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+
+  .product-list {
+    display: flex;
+    padding: 2%;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5%;
+    background-color: white;
+    & > * {
+      flex-grow: 1;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

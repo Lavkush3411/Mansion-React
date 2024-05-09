@@ -1,7 +1,7 @@
 import { ReactNode, useReducer, createContext } from "react";
 
 interface Stock {
-  id: string;
+  _id: string;
   quantity: number;
   size: string;
 }
@@ -22,6 +22,7 @@ interface valueType {
   tshirts: [] | DataType[];
   shirts: [] | DataType[];
   hoodies: [] | DataType[];
+  search: [] | DataType[];
 }
 interface actionType {
   type: string;
@@ -35,10 +36,13 @@ const intialValue: valueType = {
   tshirts: [],
   shirts: [],
   hoodies: [],
+  search: [],
 };
 
 function reducer(state: valueType, action: actionType) {
   switch (action.type) {
+    case "search":
+      return { ...state, search: action.payload };
     case "all":
       return { ...state, all: action.payload };
     case "cargos":
@@ -71,6 +75,7 @@ function ProductListContextProvider({ children }: { children: ReactNode }) {
     reducer,
     intialValue
   );
+
   return (
     <ProductListContext.Provider
       value={{ productListState, productListDispatch }}

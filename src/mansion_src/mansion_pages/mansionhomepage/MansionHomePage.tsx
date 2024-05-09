@@ -9,6 +9,9 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Navbar from "../../mansion_components/navbar/Navbar";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import Footer from "../../mansion_components/footer/Footer";
+import { ProductListContext } from "../../../ProductListContextProvider";
+import axios from "axios";
+const env = import.meta.env;
 
 function MansionHomePage() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
@@ -18,8 +21,18 @@ function MansionHomePage() {
   const [showMobileNavbar, setShowMobileNavbar] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoad] = useState(true);
+  const { productListState, productListDispatch } =
+    useContext(ProductListContext);
   const navigate = useNavigate();
   //this effect is used to check authentication status of user
+
+  useEffect(() => {
+    setLoad(true);
+    axios.get(env.VITE_BASE_URL + "get/all").then((res: any) => {
+      productListDispatch({ type: "all", payload: res.data });
+      setLoad(false);
+    });
+  }, []);
   useEffect(() => {
     useAuth("user/verify")
       .then((res) => {
@@ -31,6 +44,22 @@ function MansionHomePage() {
         setLoad(false);
       });
   }, [loggedinuser]);
+
+  function onSearch() {
+    const searchWorker = new Worker("/search.js");
+    searchWorker.postMessage({
+      products: productListState.all,
+      query: searchQuerry.toLowerCase(),
+    });
+
+    searchWorker.onmessage = (event) => {
+      // console.log("received message");
+      setSearchQuerry("");
+      productListDispatch({ type: "search", payload: event.data });
+      setShowSearch(false);
+      navigate("search");
+    };
+  }
 
   function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
@@ -87,7 +116,7 @@ function MansionHomePage() {
                 <div>Search</div>
                 <input
                   value={searchQuerry}
-                  type="text"
+                  type="search"
                   autoCapitalize="on"
                   autoFocus
                   className="search"
@@ -97,6 +126,11 @@ function MansionHomePage() {
                   onChange={(e) =>
                     setSearchQuerry(e.target.value.toLocaleUpperCase())
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      onSearch();
+                    }
+                  }}
                 />
                 <div
                   className="close-button"

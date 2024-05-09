@@ -39,6 +39,7 @@ const ProductItem = lazy(
 import ProtectedRoute from "./ProtectedRoute";
 // import IndexPage from "./mansion_src/mansion_pages/indexpage/IndexPage";
 import PasswordReset from "./mansion_src/mansion_components/passwordreset/PasswordReset";
+import MansionSearchPage from "./mansion_src/mansion_pages/searchpage/MansionSearchPage";
 // const Forgot = lazy(
 //   () => import("./mansion_src/mansion_pages/forgotpage/Forgot")
 // );
@@ -73,11 +74,16 @@ function App() {
           />
 
           {/* <Route index element={<IndexPage />} /> */}
+
           <Route
             index
             element={createLazyRoute(
               <ProductListMansion productName={"all"} />
             )}
+          />
+          <Route
+            path="search"
+            element={createLazyRoute(<MansionSearchPage />)}
           />
           <Route
             path={"all"}

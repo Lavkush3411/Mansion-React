@@ -1,0 +1,18 @@
+.bottom {
+  display: none;
+}
+
+@media (width<460px) {
+  .bottom {
+    background-color: black;
+    height: 50px;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .bottom-item {
+      color: white;
+    }
+  }
+}

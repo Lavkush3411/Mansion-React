@@ -11,6 +11,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import axios from "axios";
+import Bottom from "../../mansion_components/bottom/Bottom";
 const env = import.meta.env;
 
 function MansionHomePage() {
@@ -190,6 +191,7 @@ function MansionHomePage() {
       <Cart showCart={showCart} />
 
       <Footer />
+      <Bottom setShowCart={setShowCart} setShowMobileNavbar={setShowMobileNavbar} />
     </div>
   );
 }

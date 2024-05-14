@@ -134,7 +134,7 @@
   top: 0px;
 }
 
-@media (width<400px) {
+@media (width<460px) {
   .homepage-wrapper {
     .mansionhomepage {
       > .header-section {
@@ -188,7 +188,7 @@
   }
 }
 
-@media (400px<=width<=605px) {
+@media (460px<=width<=605px) {
   .homepage-wrapper {
     .mansionhomepage {
       .loginform {

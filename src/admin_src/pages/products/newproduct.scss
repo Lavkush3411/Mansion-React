@@ -90,6 +90,24 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
+        .added-images {
+          position: relative;
+          .removeX {
+            color: red;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            height: 20px;
+            width: 20px;
+            background-color: black;
+            border: 2px solid black;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+          }
+        }
 
         img {
           margin-top: 20px;

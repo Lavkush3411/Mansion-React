@@ -3,6 +3,8 @@ import "./newproduct.scss";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { ButtonContext, LoaderContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
+import resizeImage from "../../utils/resizeImage";
+import CancelIcon from "@mui/icons-material/Cancel";
 const env = import.meta.env;
 
 interface sizeListItem {
@@ -28,6 +30,7 @@ function NewProduct() {
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
+  const [key, setKey] = useState(0);
   const [type, setType] = useState<string>("");
   const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
   const [src, setSrc] = useState<SrcOfAddedImages[]>([]);
@@ -77,6 +80,11 @@ function NewProduct() {
   // this effect used to update image state when new image is added in collection
   useEffect(() => {
     (async function () {
+      // force rerender if images are empty by updating the key
+      console.log("effect ran");
+      setKey((prev) => prev + 1);
+
+      //executing function normally
       const sources: SrcOfAddedImages[] = await Promise.all(
         images.map((file) => {
           return new Promise<SrcOfAddedImages>((resolve) => {
@@ -110,7 +118,6 @@ function NewProduct() {
         file: file,
       }));
       setImages((prev) => {
-        console.log([...prev, ...files]);
         return [...prev, ...files];
       });
     }
@@ -128,25 +135,33 @@ function NewProduct() {
       alert("Add Size and Quantity by clicking on Add new Size Button");
       return;
     }
+    if (images.length === 0) {
+      alert("Add Atleast one product Image");
+      return;
+    }
     loaderDispatch({ type: "show-product-loader" });
     navigate("/admin/products/" + `${type}-list`);
 
     //form data
     const formdata = new FormData();
-    const token:string|null=localStorage.getItem("Token")
+    const token: string | null = localStorage.getItem("Token");
     if (images) {
-      images.forEach((image) => {
-        formdata.append("image", image.file);
+      // images.forEach((image) => {
+      //   formdata.append("image", image.file);
+      // });
+      const blobs = await resizeImage(images);
+      blobs.forEach((blob) => {
+        formdata.append("image", blob as Blob);
       });
     }
     formdata.append("productName", String(productName));
     formdata.append("productPrice", String(productPrice));
     formdata.append("stock", JSON.stringify(sizeList));
     formdata.append("type", String(type));
-    formdata.append("Token",String(token))
+    formdata.append("Token", String(token));
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
       method: "POST",
-      body:formdata,
+      body: formdata,
     });
     const data = await res.json();
     dispatch({ type: "show" });
@@ -230,8 +245,8 @@ function NewProduct() {
 
           <label>Image</label>
           <input
+            key={key}
             type="file"
-            required
             onChange={(e) => selectImage(e)}
             accept="image/*"
             multiple
@@ -244,7 +259,7 @@ function NewProduct() {
                     className="removeX"
                     onClick={() => removeImage(image.id)}
                   >
-                    removeX
+                    <CancelIcon />
                   </div>
                   <img src={image.source} alt="" />
                 </div>

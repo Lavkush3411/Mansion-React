@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./newproduct.scss";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { ButtonContext, LoaderContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
 const env = import.meta.env;
@@ -11,16 +11,26 @@ interface sizeListItem {
   quantity: number;
 }
 
+interface AddedImages {
+  id: string;
+  file: File;
+}
+
+interface SrcOfAddedImages {
+  id: string;
+  source: string;
+}
+
 function NewProduct() {
   const navigate = useNavigate();
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<AddedImages[]>([]);
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
   const [type, setType] = useState<string>("");
   const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
-  const [src, setSrc] = useState<string[]>([]);
+  const [src, setSrc] = useState<SrcOfAddedImages[]>([]);
   const { state, dispatch } = useContext(ButtonContext);
 
   const { loaderDispatch } = useContext(LoaderContext);
@@ -64,37 +74,53 @@ function NewProduct() {
       return newSizeList;
     });
   };
-  const selectImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      // we are creating array even if there is one file is selected
-      const files: File[] = Array.from(e.target.files);
-      setImages(files);
-
-      const sources: string[] = await Promise.all(
-        files.map((file) => {
-          return new Promise<string>((resolve) => {
+  // this effect used to update image state when new image is added in collection
+  useEffect(() => {
+    (async function () {
+      const sources: SrcOfAddedImages[] = await Promise.all(
+        images.map((file) => {
+          return new Promise<SrcOfAddedImages>((resolve) => {
             const filereader = new FileReader();
 
             filereader.onloadend = () => {
               if (typeof filereader.result === "string") {
-                resolve(filereader.result);
+                resolve({ source: filereader.result, id: file.id });
               } else {
-                resolve("");
+                resolve({ source: "", id: file.id });
               }
             };
 
-            filereader.readAsDataURL(file);
+            filereader.readAsDataURL(file.file);
           });
         })
       );
       const filteredSources = sources.filter(
-        (source) => source !== null || source !== ""
+        (src) => src.source !== null || src.source !== ""
       );
       if (filteredSources) {
         setSrc(filteredSources);
       }
+    })();
+  }, [images]);
+  const selectImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      // we are creating array even if there is one file is selected
+      const files: AddedImages[] = Array.from(e.target.files, (file) => ({
+        id: uuid(),
+        file: file,
+      }));
+      setImages((prev) => {
+        console.log([...prev, ...files]);
+        return [...prev, ...files];
+      });
     }
   };
+
+  function removeImage(id: string) {
+    // images.filter((image) => image.id !== id);
+
+    setImages((prev) => prev.filter((image) => image.id !== id));
+  }
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,19 +133,20 @@ function NewProduct() {
 
     //form data
     const formdata = new FormData();
+    const token:string|null=localStorage.getItem("Token")
     if (images) {
       images.forEach((image) => {
-        formdata.append("image", image);
+        formdata.append("image", image.file);
       });
     }
     formdata.append("productName", String(productName));
     formdata.append("productPrice", String(productPrice));
     formdata.append("stock", JSON.stringify(sizeList));
     formdata.append("type", String(type));
-
+    formdata.append("Token",String(token))
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
       method: "POST",
-      body: formdata,
+      body:formdata,
     });
     const data = await res.json();
     dispatch({ type: "show" });
@@ -210,7 +237,18 @@ function NewProduct() {
             multiple
           />
           <div className="selected-images">
-            {src && src.map((image) => <img key={image} src={image} alt="" />)}
+            {src &&
+              src.map((image) => (
+                <div key={image.id} className="added-images">
+                  <div
+                    className="removeX"
+                    onClick={() => removeImage(image.id)}
+                  >
+                    removeX
+                  </div>
+                  <img src={image.source} alt="" />
+                </div>
+              ))}
           </div>
           <button type="submit">Create</button>
         </form>

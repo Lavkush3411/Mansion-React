@@ -11,6 +11,7 @@ interface DataType {
   productName: string;
   productPrice: string;
   manage?: string;
+  delete?: string;
   type: string;
   stock: Stock[];
 }

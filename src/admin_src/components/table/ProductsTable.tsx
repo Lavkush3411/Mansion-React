@@ -1,14 +1,16 @@
 import { Column } from "react-table";
 import TableHOC from "./Table";
 import { CiSettings } from "react-icons/ci";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
+import { ProductListContext } from "../../../ProductListContextProvider";
 
 const env = import.meta.env;
 
 interface Stock {
-  id: string;
+  _id: string;
   quantity: number;
   size: string;
 }
@@ -19,9 +21,19 @@ interface DataType {
   productName: string;
   productPrice: string;
   manage?: string;
+  delete?: string;
   type: string;
   stock: Stock[];
 }
+
+const deleteProduct = async (type: string, id: string) => {
+  const token = localStorage.getItem("Token");
+  if (!token) return;
+  await axios.delete(env.VITE_BASE_URL + "admin/delete/" + type, {
+    data: { id: id, Token: token },
+  });
+  return;
+};
 
 const columns: Column<DataType>[] = [
   { Header: "Type", accessor: "type" },
@@ -63,6 +75,25 @@ const columns: Column<DataType>[] = [
       </Link>
     ),
   },
+  {
+    Header: "Delete",
+    accessor: "delete",
+    Cell: ({ row }) => {
+      const { productListDispatch } = useContext(ProductListContext);
+
+      return (
+        <div
+          onClick={async () => {
+            await deleteProduct(row.original.type, row.original._id);
+            const data = await fetchData(row.original.type.slice(0, -1));
+            productListDispatch({ type: row.original.type, payload: data });
+          }}
+        >
+          <DeleteIcon />
+        </div>
+      );
+    },
+  },
 ];
 
 const filteredColumns: Column<DataType>[] = columns.filter(
@@ -84,39 +115,49 @@ async function fetchData(item: string) {
 }
 
 function Cargo() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { cargos },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("cargo")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "cargos", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
 
   return (
     <div className="cargos">
-      {TableHOC<DataType>(filteredColumns, resdata, "cargos", "Cargos", true)()}
+      {TableHOC<DataType>(filteredColumns, cargos, "cargos", "Cargos", true)()}
     </div>
   );
 }
 
 function Sweatpant() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { sweatpants },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("sweatpant")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "sweatpants", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
 
   return (
     <div className="sweatpants">
       {TableHOC<DataType>(
         filteredColumns,
-        resdata,
+        sweatpants,
         "sweatpants",
         "SweatPants",
         true
@@ -126,55 +167,70 @@ function Sweatpant() {
 }
 
 function All() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { all },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("all")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "all", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
 
   return (
     <div className="products-list-class">
-      {TableHOC<DataType>(filteredColumns, resdata, "All", "All", true)()}
+      {TableHOC<DataType>(filteredColumns, all, "All", "All", true)()}
     </div>
   );
 }
 
 function Shirts() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { shirts },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("shirt")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "shirts", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
   return (
     <div className="shirts">
-      {TableHOC<DataType>(filteredColumns, resdata, "shirts", "Shirts", true)()}
+      {TableHOC<DataType>(filteredColumns, shirts, "shirts", "Shirts", true)()}
     </div>
   );
 }
 
 function Tshirts() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { tshirts },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("tshirt")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "tshirts", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
   return (
     <div className="tshirts">
       {TableHOC<DataType>(
         filteredColumns,
-        resdata,
+        tshirts,
         "tshirts",
         "TShirts",
         true
@@ -184,20 +240,25 @@ function Tshirts() {
 }
 
 function Hoodie() {
-  const [resdata, setresData] = useState<DataType[]>([]);
+  const {
+    productListState: { hoodies },
+    productListDispatch,
+  } = useContext(ProductListContext);
 
   useEffect(() => {
     fetchData("hoodie")
       .then((data: DataType[]) => {
-        setresData(data);
+        productListDispatch({ type: "hoodies", payload: data });
       })
-      .catch(() => setresData([]));
+      .catch(() => {
+        console.log("error");
+      });
   }, []);
   return (
     <div className="hoodies">
       {TableHOC<DataType>(
         filteredColumns,
-        resdata,
+        hoodies,
         "hoodies",
         "Hoodies",
         true

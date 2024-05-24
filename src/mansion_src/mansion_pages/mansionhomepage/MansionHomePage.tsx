@@ -1,4 +1,5 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, LoaderFunction, Outlet, useNavigate } from "react-router-dom";
+import queryClient from "../../../queryClient";
 import "./mansionhomepage.scss";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
@@ -12,7 +13,24 @@ import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import axios from "axios";
 import Bottom from "../../mansion_components/bottom/Bottom";
+import { useQuery } from "@tanstack/react-query";
 const env = import.meta.env;
+
+async function fetchData(productName: string) {
+  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
+  return res.data;
+}
+
+const loader: LoaderFunction = async (path) => {
+  const productName = path?.params?.productName;
+  const query = await queryClient.prefetchQuery({
+    queryKey: [productName],
+    queryFn: () => fetchData(productName || "all"),
+  });
+  console.log(query);
+
+  return null;
+};
 
 function MansionHomePage() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
@@ -22,18 +40,15 @@ function MansionHomePage() {
   const [showMobileNavbar, setShowMobileNavbar] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoad] = useState(true);
-  const { productListState, productListDispatch } =
-    useContext(ProductListContext);
+  const { productListDispatch } = useContext(ProductListContext);
   const navigate = useNavigate();
-  //this effect is used to check authentication status of user
 
-  useEffect(() => {
-    setLoad(true);
-    axios.get(env.VITE_BASE_URL + "get/all").then((res: any) => {
-      productListDispatch({ type: "all", payload: res.data });
-      setLoad(false);
-    });
-  }, []);
+  const { data: DataForSearch } = useQuery({
+    queryKey: ["all"],
+    queryFn: () => fetchData("all"),
+  });
+  // this effect is used to check authentication status of user
+
   useEffect(() => {
     useAuth("user/verify")
       .then((res) => {
@@ -49,7 +64,7 @@ function MansionHomePage() {
   function onSearch() {
     const searchWorker = new Worker("/search.js");
     searchWorker.postMessage({
-      products: productListState.all,
+      products: DataForSearch,
       query: searchQuerry.toLowerCase(),
     });
 
@@ -191,9 +206,13 @@ function MansionHomePage() {
       <Cart showCart={showCart} />
 
       <Footer />
-      <Bottom setShowCart={setShowCart} setShowMobileNavbar={setShowMobileNavbar} />
+      <Bottom
+        setShowCart={setShowCart}
+        setShowMobileNavbar={setShowMobileNavbar}
+      />
     </div>
   );
 }
 
 export default MansionHomePage;
+export { loader };

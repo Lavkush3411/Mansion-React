@@ -1,10 +1,9 @@
 import { ReactElement, Suspense, lazy, useContext } from "react";
 import "./index.scss";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
   Navigate,
+  createBrowserRouter,
+  RouterProvider,
 } from "react-router-dom";
 import Loader from "./admin_src/components/loader/Loader";
 import AdminHomePage from "./admin_src/pages/adminhomepage/AdminHomePage";
@@ -46,6 +45,7 @@ import MansionSearchPage from "./mansion_src/mansion_pages/searchpage/MansionSea
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
 // const Line = lazy(() => import("./pages/charts/line/Line"));
+import { loader as allProductloader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
 const Transactions = lazy(
@@ -59,189 +59,142 @@ function createLazyRoute(element: ReactElement) {
 
 function App() {
   const { loaderState } = useContext(LoaderContext);
+  const router = createBrowserRouter([
+    { path: "/", element: <Navigate to="/home" /> },
+    {
+      path: "/home",
+      element: createLazyRoute(<MansionHomePage />),
 
-  return (
-    <Router>
-      <Routes>
-        {/* homepage routes */}
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={createLazyRoute(<MansionHomePage />)}>
-          <Route path="login" element={createLazyRoute(<MansionLogInPage />)} />
-          <Route path="forgot" element={createLazyRoute(<PasswordReset />)} />
-          <Route
-            path="signup"
-            element={createLazyRoute(<MansionSignUPPage />)}
-          />
+      children: [
+        { path: "login", element: createLazyRoute(<MansionLogInPage />) },
+        {
+          path: "forgot",
+          element: createLazyRoute(<PasswordReset />),
+        },
+        { path: "signup", element: createLazyRoute(<MansionSignUPPage />) },
+        {
+          path: "",
+          element: <Navigate to={"all"} />,
+        },
+        {
+          path: ":productName",
+          element: createLazyRoute(<ProductListMansion />),
+          loader: (path) => allProductloader(path),
+        },
+        {
+          path: "search",
+          element: createLazyRoute(<MansionSearchPage />),
+        },
+        {
+          path: "product/:card",
+          element: createLazyRoute(<ProductItem />),
+        },
+      ],
+    },
+    {
+      path: "/loading",
+      element: createLazyRoute(<Loader />),
+    },
 
-          {/* <Route index element={<IndexPage />} /> */}
+    {
+      path: "/admin",
+      element: (
+        <ProtectedRoute>
+          <AdminHomePage />
+        </ProtectedRoute>
+      ),
+      children: [
+        { path: "", element: createLazyRoute(<Dashboard />) },
+        { path: "/admin/dashboard", element: createLazyRoute(<Dashboard />) },
+        {
+          path: "/admin/products",
+          element: createLazyRoute(<Products />),
+          children: [
+            { path: "", element: <Navigate to="cargos-list" /> },
+            {
+              path: "/admin/products/cargos-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<Cargo />)
+              ),
+            },
+            {
+              path: "/admin/products/sweatpants-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<Sweatpant />)
+              ),
+            },
+            {
+              path: "/admin/products/tshirts-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<Tshirts />)
+              ),
+            },
+            {
+              path: "/admin/products/shirts-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<Shirts />)
+              ),
+            },
+            {
+              path: "/admin/products/all-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<All />)
+              ),
+            },
+            {
+              path: "/admin/products/hoodies-list",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<Hoodie />)
+              ),
+            },
+            {
+              path: "/admin/products/new",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<NewProduct />)
+              ),
+            },
+            {
+              path: "/admin/products/manage/:table_row",
+              element: loaderState.showLoaderInProductsPlace ? (
+                <Loader />
+              ) : (
+                createLazyRoute(<ManageProduct />)
+              ),
+            },
+          ],
+        },
+        ///* Product route ends here*/
+        {
+          path: "/admin/transactions",
+          element: createLazyRoute(<Transactions />),
+        },
+        { path: "/admin/users", element: createLazyRoute(<Users />) },
+        { path: "/admin/bar-chart", element: createLazyRoute(<div>bar</div>) },
+        { path: "/admin/pie-chart", element: createLazyRoute(<div>Pie</div>) },
+        {
+          path: "/admin/line-chart",
+          element: createLazyRoute(<div>line</div>),
+        },
+      ],
+    },
+    { path: "*", element: <div>Page does not exist</div> },
+  ]);
 
-          <Route
-            index
-            element={createLazyRoute(
-              <ProductListMansion productName={"all"} />
-            )}
-          />
-          <Route
-            path="search"
-            element={createLazyRoute(<MansionSearchPage />)}
-          />
-          <Route
-            path={"all"}
-            element={createLazyRoute(
-              <ProductListMansion productName={"all"} />
-            )}
-          />
-          <Route
-            path="cargos"
-            element={createLazyRoute(
-              <ProductListMansion productName={"cargos"} />
-            )}
-          />
-          <Route
-            path="hoodies"
-            element={createLazyRoute(
-              <ProductListMansion productName="hoodies" />
-            )}
-          />
-          <Route
-            path="sweatpants"
-            element={createLazyRoute(
-              <ProductListMansion productName="sweatpants" />
-            )}
-          />
-          <Route
-            path="tshirts"
-            element={createLazyRoute(
-              <ProductListMansion productName="tshirts" />
-            )}
-          ></Route>
-          <Route
-            path="shirts"
-            element={createLazyRoute(
-              <ProductListMansion productName="shirts" />
-            )}
-          ></Route>
-          <Route
-            path="product/:card"
-            element={createLazyRoute(<ProductItem />)}
-          />
-        </Route>
-        <Route path="/loading" element={<Loader />} />
-
-        {/* Admin Routes */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminHomePage />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={createLazyRoute(<Dashboard />)} />
-          <Route
-            path="/admin/dashboard"
-            element={createLazyRoute(<Dashboard />)}
-          />
-          {/* Products Page route starts from here */}
-          <Route path="/admin/products" element={createLazyRoute(<Products />)}>
-            {/* Each Products lists are shown using below path */}
-            <Route index element={<Navigate to="cargos-list" />} />
-            <Route
-              path="/admin/products/cargos-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<Cargo />)
-                )
-              }
-            />
-            <Route
-              path="/admin/products/sweatpants-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<Sweatpant />)
-                )
-              }
-            />
-            <Route
-              path="/admin/products/tshirts-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<Tshirts />)
-                )
-              }
-            />
-            <Route
-              path="/admin/products/shirts-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<Shirts />)
-                )
-              }
-            />
-            <Route
-              path="/admin/products/all-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<All />)
-                )
-              }
-            />
-            <Route
-              path="/admin/products/hoodies-list"
-              element={
-                loaderState.showLoaderInProductsPlace ? (
-                  <Loader />
-                ) : (
-                  createLazyRoute(<Hoodie />)
-                )
-              }
-            />
-            {/* routes for adding new products */}
-
-            <Route
-              path="/admin/products/new"
-              element={createLazyRoute(<NewProduct />)}
-            />
-
-            {/* Route for managing any productitem  */}
-            <Route
-              path="/admin/products/manage/:table_row"
-              element={createLazyRoute(<ManageProduct />)}
-            />
-          </Route>
-          {/* Product route ends here*/}
-          <Route
-            path="/admin/transactions"
-            element={createLazyRoute(<Transactions />)}
-          />
-          <Route path="/admin/users" element={createLazyRoute(<Users />)} />
-          <Route
-            path="/admin/bar-chart"
-            element={createLazyRoute(<div>bar</div>)}
-          />
-          <Route
-            path="/admin/pie-chart"
-            element={createLazyRoute(<div>Pie</div>)}
-          />
-          <Route
-            path="/admin/line-chart"
-            element={createLazyRoute(<div>line</div>)}
-          />
-        </Route>
-        <Route path="*" element={<div>Page does not exist</div>} />
-      </Routes>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

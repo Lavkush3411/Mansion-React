@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from "react";
 import ProductCard from "../../mansion_components/productcard/ProductCard";
-
+import { useNavigation } from "react-router-dom";
 import "./productlistmansion.scss";
-import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
-import { ProductListContext } from "../../../ProductListContextProvider";
+
+import { useParams } from "react-router-dom";
+import Loader from "../../../admin_src/components/loader/Loader";
+import axios from "axios";
 const env = import.meta.env;
+import { useQuery } from "@tanstack/react-query";
 interface Stock {
   _id: string;
   size: string;
@@ -18,46 +20,29 @@ interface Data {
   productPrice: string;
   stock: Stock[];
 }
-interface productListProps {
-  productName: string;
+async function fetchData(productName: string) {
+  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
+  return res.data;
 }
-function ProductListMansion({ productName }: productListProps) {
-  const [cargoList, setCarogList] = useState<Data[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { productListState, productListDispatch } =
-    useContext(ProductListContext);
+function ProductListMansion() {
+  const parms = useParams();
+  const { state } = useNavigation(); // used to check if loader function is running
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (productListState[productName].length === 0) {
-      fetch(env.VITE_BASE_URL + "get/" + productName)
-        .then((res) => res.json())
-        .then((data) => {
-          setIsLoading(false);
-          productListDispatch({ type: productName, payload: data });
-          return setCarogList(data);
-        })
-        .catch((e) => {
-          console.log(e);
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false);
-      setCarogList(productListState[productName]);
-    }
-  }, [productName]);
+  const { data, isFetching } = useQuery({
+    queryKey: [parms.productName],
+    queryFn: () => fetchData(parms.productName || "all"),
+  });
 
+  if (isFetching || state === "loading") return <Loader />;
   return (
-    <LoadOnApiCall isLoading={isLoading}>
-      <div className="product-list-container">
-        <div className="product-list">
-          {cargoList &&
-            cargoList.map((productItem) => (
-              <ProductCard key={productItem._id} productItem={productItem} />
-            ))}
-        </div>
+    <div className="product-list-container">
+      <div className="product-list">
+        {data &&
+          data.map((productItem: Data) => (
+            <ProductCard key={productItem._id} productItem={productItem} />
+          ))}
       </div>
-    </LoadOnApiCall>
+    </div>
   );
 }
 

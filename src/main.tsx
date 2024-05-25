@@ -7,8 +7,8 @@ import { UserContexProvider } from "./UserContextProvider.tsx";
 import { CheckOutContextProvider } from "./CheckOutContextProvider.tsx";
 import { ProductListContextProvider } from "./ProductListContextProvider.tsx";
 import { QueryClientProvider } from "@tanstack/react-query";
-import queryClient from "./queryClient.tsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import queryClient from "./queryClient.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

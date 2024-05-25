@@ -61,6 +61,7 @@ function App() {
   const { loaderState } = useContext(LoaderContext);
   const router = createBrowserRouter([
     { path: "/", element: <Navigate to="/home" /> },
+    
     {
       path: "/home",
       element: createLazyRoute(<MansionHomePage />),

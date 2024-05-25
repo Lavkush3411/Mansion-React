@@ -1,5 +1,4 @@
 import { Link, LoaderFunction, Outlet, useNavigate } from "react-router-dom";
-import queryClient from "../../../queryClient";
 import "./mansionhomepage.scss";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
@@ -11,24 +10,10 @@ import Navbar from "../../mansion_components/navbar/Navbar";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
-import axios from "axios";
 import Bottom from "../../mansion_components/bottom/Bottom";
-import { useQuery } from "@tanstack/react-query";
-const env = import.meta.env;
+import { useQueryClient } from "@tanstack/react-query";
 
-async function fetchData(productName: string) {
-  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
-  return res.data;
-}
-
-const loader: LoaderFunction = async (path) => {
-  const productName = path?.params?.productName;
-  const query = await queryClient.prefetchQuery({
-    queryKey: [productName],
-    queryFn: () => fetchData(productName || "all"),
-  });
-  console.log(query);
-
+const loader: LoaderFunction = async () => {
   return null;
 };
 
@@ -42,11 +27,7 @@ function MansionHomePage() {
   const [loading, setLoad] = useState(true);
   const { productListDispatch } = useContext(ProductListContext);
   const navigate = useNavigate();
-
-  const { data: DataForSearch } = useQuery({
-    queryKey: ["all"],
-    queryFn: () => fetchData("all"),
-  });
+  const querycl = useQueryClient();
   // this effect is used to check authentication status of user
 
   useEffect(() => {
@@ -64,12 +45,11 @@ function MansionHomePage() {
   function onSearch() {
     const searchWorker = new Worker("/search.js");
     searchWorker.postMessage({
-      products: DataForSearch,
+      products: querycl.getQueryData(["all"]),
       query: searchQuerry.toLowerCase(),
     });
 
     searchWorker.onmessage = (event) => {
-      // console.log("received message");
       setSearchQuerry("");
       productListDispatch({ type: "search", payload: event.data });
       setShowSearch(false);

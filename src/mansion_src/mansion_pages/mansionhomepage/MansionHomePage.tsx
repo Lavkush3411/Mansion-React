@@ -12,6 +12,7 @@ import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import Bottom from "../../mansion_components/bottom/Bottom";
 import { useQueryClient } from "@tanstack/react-query";
+import { prefetch } from "../../../queryClient";
 
 const loader: LoaderFunction = async () => {
   return null;
@@ -42,6 +43,8 @@ function MansionHomePage() {
       });
   }, [loggedinuser]);
 
+  useEffect(prefetch, []);
+
   function onSearch() {
     const searchWorker = new Worker("/search.js");
     searchWorker.postMessage({
@@ -64,7 +67,6 @@ function MansionHomePage() {
     setAuthenticated(false);
     navigate("/home/login");
   }
-
   return (
     <div className="homepage-wrapper">
       <div

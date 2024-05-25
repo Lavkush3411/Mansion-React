@@ -1,10 +1,12 @@
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 const env = import.meta.env;
+
+const staleMinutes = 1;
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 30 * 60,
+      staleTime: staleMinutes * 1000 * 60,
     },
   },
 });
@@ -32,5 +34,5 @@ function prefetch() {
   );
 }
 
-prefetch();
+export { prefetch };
 export default queryClient;

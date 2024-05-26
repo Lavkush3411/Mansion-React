@@ -1,20 +1,16 @@
-import { useLocation } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import "./productitem.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
+import queryClient from "../../../queryClient";
+import fetchData from "../../mansion_pages/utils/fetchData";
+import Loader from "../../../admin_src/components/loader/Loader";
 
 interface Stock {
   _id: string;
   size: string;
   quantity: number;
-}
-interface DataReceivedFromParentLink {
-  _id: string;
-  productName: string;
-  image: string[];
-  productPrice: string;
-  stock: Stock[];
 }
 
 interface AddToCartData {
@@ -25,28 +21,31 @@ interface AddToCartData {
   size: string;
 }
 
+interface LoaderData {
+  _id: string;
+  productName: string;
+  image: string[];
+  productPrice: string;
+  stock: Stock[];
+}
+function loader() {
+  const data = queryClient.fetchQuery({
+    queryKey: ["all"],
+    queryFn: () => fetchData,
+  });
+  return data;
+}
 
 function ProductItem() {
-  const location = useLocation();
+  const params = useParams();
   const { setCheckoutState } = useContext(CheckOutContext);
-  // const { id } = useParams();
-  // const { data } = useQuery({ queryKey: ["all"], queryFn: fetchData });
-  // if (!location?.state?.productItem) {
-  //   console.log("nodata");
-  // }
+  const allData = useLoaderData() as LoaderData[];
+  const product = allData
+    .filter((currentProduct) => currentProduct._id === params.id)
+    .reduce((_, currentProduct) => currentProduct);
+  console.log(product);
 
-  // const product = data?.filter((product: any) => product._id === id);
-
-  // if (!product) return <>hello</>;
-  // console.log(product[0]);
-
-  const {
-    _id,
-    productName,
-    image,
-    productPrice,
-    stock,
-  }: DataReceivedFromParentLink = location.state.productItem;
+  const { _id, productName, image, productPrice, stock }: LoaderData = product;
 
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
@@ -100,6 +99,7 @@ function ProductItem() {
     setSize(stockItem.size);
   }
 
+  if (!product) return <Loader />;
   return (
     <div className="product" id={_id}>
       <div className="product-left-section">
@@ -168,5 +168,7 @@ function ProductItem() {
     </div>
   );
 }
+
+export { loader };
 
 export default ProductItem;

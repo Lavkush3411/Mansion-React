@@ -71,10 +71,10 @@ const MansionSearchPage = lazy(
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
 // const Line = lazy(() => import("./pages/charts/line/Line"));
-import { loader as allProductloader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
-import axios from "axios";
-const env = import.meta.env;
+import { loader as productLoader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
+import { loader as allProductsLoader } from "./mansion_src/mansion_components/productitem/ProductItem";
 import queryClient from "./queryClient";
+import fetchData from "./mansion_src/mansion_pages/utils/fetchData";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
 const Transactions = lazy(
@@ -82,19 +82,17 @@ const Transactions = lazy(
 );
 const Users = lazy(() => import("./admin_src/pages/users/Users"));
 
+//additional functions
+
 function createLazyRoute(element: ReactElement) {
   return <Suspense fallback={<Loader />}>{element}</Suspense>;
 }
-async function fetchData() {
-  const res = await axios.get(env.VITE_BASE_URL + "get/all");
-  return res.data;
-}
-
+//this function is called and prefetched the data as soon as / or /home  route is accesssed.
 function renderData() {
-  queryClient.prefetchQuery({ queryKey: ["all"], queryFn: fetchData });
+  queryClient.prefetchQuery({ queryKey: ["all"], queryFn: () => fetchData() });
   return null;
 }
-
+// routes implementation
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/home" />, loader: renderData },
 
@@ -118,7 +116,7 @@ const router = createBrowserRouter([
       {
         path: ":productName",
         element: createLazyRoute(<ProductListMansion />),
-        loader: (path) => allProductloader(path),
+        loader: (path) => productLoader(path),
       },
       {
         path: "search",
@@ -127,6 +125,8 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: createLazyRoute(<ProductItem />),
+        loader: () => allProductsLoader(),
+        errorElement: <div>Product does not exist</div>,
       },
     ],
   },

@@ -2,17 +2,46 @@ import { ReactElement, Suspense, lazy } from "react";
 import "./index.scss";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Loader from "./admin_src/components/loader/Loader";
-import AdminHomePage from "./admin_src/pages/adminhomepage/AdminHomePage";
-import {
-  All,
-  Cargo,
-  Hoodie,
-  Shirts,
-  Sweatpant,
-  Tshirts,
-} from "./admin_src/components/table/ProductsTable";
-import NewProduct from "./admin_src/pages/products/NewProduct";
-import ManageProduct from "./admin_src/pages/products/ManageProduct";
+const AdminHomePage = lazy(
+  () => import("./admin_src/pages/adminhomepage/AdminHomePage")
+);
+// Lazy load the components
+const All = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.All,
+  }))
+);
+const Cargo = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Cargo,
+  }))
+);
+const Hoodie = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Hoodie,
+  }))
+);
+const Shirts = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Shirts,
+  }))
+);
+const Sweatpant = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Sweatpant,
+  }))
+);
+const Tshirts = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Tshirts,
+  }))
+);
+
+const NewProduct = lazy(() => import("./admin_src/pages/products/NewProduct"));
+const ManageProduct = lazy(
+  () => import("./admin_src/pages/products/ManageProduct")
+);
+
 const MansionHomePage = lazy(
   () => import("./mansion_src/mansion_pages/mansionhomepage/MansionHomePage")
 );
@@ -30,13 +59,15 @@ const ProductListMansion = lazy(
 const ProductItem = lazy(
   () => import("./mansion_src/mansion_components/productitem/ProductItem")
 );
-import ProtectedRoute from "./ProtectedRoute";
-// import IndexPage from "./mansion_src/mansion_pages/indexpage/IndexPage";
-import PasswordReset from "./mansion_src/mansion_components/passwordreset/PasswordReset";
-import MansionSearchPage from "./mansion_src/mansion_pages/searchpage/MansionSearchPage";
-// const Forgot = lazy(
-//   () => import("./mansion_src/mansion_pages/forgotpage/Forgot")
-// );
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
+const PasswordReset = lazy(
+  () => import("./mansion_src/mansion_components/passwordreset/PasswordReset")
+);
+
+const MansionSearchPage = lazy(
+  () => import("./mansion_src/mansion_pages/searchpage/MansionSearchPage")
+);
+
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
 // const Line = lazy(() => import("./pages/charts/line/Line"));
@@ -94,7 +125,7 @@ const router = createBrowserRouter([
         element: createLazyRoute(<MansionSearchPage />),
       },
       {
-        path: "product/:card",
+        path: "product/:id",
         element: createLazyRoute(<ProductItem />),
       },
     ],

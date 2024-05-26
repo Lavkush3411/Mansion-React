@@ -12,10 +12,22 @@ import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import Bottom from "../../mansion_components/bottom/Bottom";
 import { useQueryClient } from "@tanstack/react-query";
-import { prefetch } from "../../../queryClient";
+import queryClient, { prefetch } from "../../../queryClient";
+import axios from "axios";
+const env = import.meta.env;
 
-const loader: LoaderFunction = async () => {
-  return null;
+async function fetchData(productName: string) {
+  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
+  return res.data;
+}
+
+const loader: LoaderFunction = async (path) => {
+  const productName = path?.params?.productName || "all";
+  const data = await queryClient.fetchQuery({
+    queryKey: [productName],
+    queryFn: () => fetchData(productName),
+  });
+  return data;
 };
 
 function MansionHomePage() {
@@ -43,7 +55,11 @@ function MansionHomePage() {
       });
   }, [loggedinuser]);
 
-  useEffect(prefetch, []);
+  // this effect will fetch data in background after 2 seconds of loading website
+  useEffect(() => {
+    const fetch = setTimeout(prefetch, 2000);
+    return () => clearTimeout(fetch);
+  }, []);
 
   function onSearch() {
     const searchWorker = new Worker("/search.js");

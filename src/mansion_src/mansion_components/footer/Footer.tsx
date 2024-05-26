@@ -8,7 +8,7 @@ function Footer() {
     <div className="footer">
       <div className="upper-footer">
         <a href="/home">
-          <img className="logo" src="/mansion.svg" />
+          <img className="logo" alt="Site_Logo" src="/mansion.svg" />
         </a>
 
         <div className="company">

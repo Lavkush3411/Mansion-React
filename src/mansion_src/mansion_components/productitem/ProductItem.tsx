@@ -3,6 +3,7 @@ import "./productitem.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
+
 interface Stock {
   _id: string;
   size: string;
@@ -14,7 +15,6 @@ interface DataReceivedFromParentLink {
   image: string[];
   productPrice: string;
   stock: Stock[];
-  moreinfo: string;
 }
 
 interface AddToCartData {
@@ -25,21 +25,32 @@ interface AddToCartData {
   size: string;
 }
 
+
 function ProductItem() {
   const location = useLocation();
+  const { setCheckoutState } = useContext(CheckOutContext);
+  // const { id } = useParams();
+  // const { data } = useQuery({ queryKey: ["all"], queryFn: fetchData });
+  // if (!location?.state?.productItem) {
+  //   console.log("nodata");
+  // }
+
+  // const product = data?.filter((product: any) => product._id === id);
+
+  // if (!product) return <>hello</>;
+  // console.log(product[0]);
+
   const {
     _id,
     productName,
     image,
     productPrice,
     stock,
-    moreinfo,
   }: DataReceivedFromParentLink = location.state.productItem;
-  const { setCheckoutState } = useContext(CheckOutContext);
 
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
-  const [moreInfoText, setMoreInfoText] = useState<string>(moreinfo);
+  const [moreInfoText, setMoreInfoText] = useState<string>("  ");
   const { cartList, cartDispatch, setShowCart } = useContext(CartContext);
   const productItem = { _id, productName, image, productPrice };
 
@@ -72,7 +83,7 @@ function ProductItem() {
 
   function onDescriptionSelect() {
     setInfoElement("discription");
-    setMoreInfoText(moreinfo);
+    setMoreInfoText("");
   }
 
   function onShippingSelect() {

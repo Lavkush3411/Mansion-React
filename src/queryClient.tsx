@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 const env = import.meta.env;
 
-const staleMinutes = 1;
+const staleMinutes = 60;
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

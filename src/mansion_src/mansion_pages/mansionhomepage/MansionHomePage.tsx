@@ -12,22 +12,10 @@ import Footer from "../../mansion_components/footer/Footer";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import Bottom from "../../mansion_components/bottom/Bottom";
 import { useQueryClient } from "@tanstack/react-query";
-import queryClient, { prefetch } from "../../../queryClient";
-import axios from "axios";
-const env = import.meta.env;
+import { prefetch } from "../../../queryClient";
 
-async function fetchData(productName: string) {
-  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
-  return res.data;
-}
-
-const loader: LoaderFunction = async (path) => {
-  const productName = path?.params?.productName || "all";
-  const data = await queryClient.fetchQuery({
-    queryKey: [productName],
-    queryFn: () => fetchData(productName),
-  });
-  return data;
+const loader: LoaderFunction = async () => {
+  return null;
 };
 
 function MansionHomePage() {

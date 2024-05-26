@@ -1,7 +1,12 @@
 import ProductCard from "../../mansion_components/productcard/ProductCard";
-import { useLoaderData, useNavigation } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 import "./productlistmansion.scss";
+
+import { useParams } from "react-router-dom";
 import Loader from "../../../admin_src/components/loader/Loader";
+import axios from "axios";
+const env = import.meta.env;
+import { useQuery } from "@tanstack/react-query";
 interface Stock {
   _id: string;
   size: string;
@@ -15,11 +20,20 @@ interface Data {
   productPrice: string;
   stock: Stock[];
 }
+async function fetchData(productName: string) {
+  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
+  return res.data;
+}
 function ProductListMansion() {
+  const parms = useParams();
   const { state } = useNavigation(); // used to check if loader function is running
-  const data = useLoaderData() as Data[];
 
-  if (state === "loading") return <Loader pos="absolute" />;
+  const { data, isFetching } = useQuery({
+    queryKey: [parms.productName],
+    queryFn: () => fetchData(parms.productName || "all"),
+  });
+
+  if (isFetching || state === "loading") return <Loader />;
   return (
     <div className="product-list-container">
       <div className="product-list">

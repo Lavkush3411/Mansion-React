@@ -31,7 +31,7 @@ interface LoaderData {
 function loader() {
   const data = queryClient.fetchQuery({
     queryKey: ["all"],
-    queryFn: () => fetchData,
+    queryFn: () => fetchData(),
   });
   return data;
 }
@@ -40,10 +40,10 @@ function ProductItem() {
   const params = useParams();
   const { setCheckoutState } = useContext(CheckOutContext);
   const allData = useLoaderData() as LoaderData[];
+  console.log(allData);
   const product = allData
     .filter((currentProduct) => currentProduct._id === params.id)
     .reduce((_, currentProduct) => currentProduct);
-  console.log(product);
 
   const { _id, productName, image, productPrice, stock }: LoaderData = product;
 

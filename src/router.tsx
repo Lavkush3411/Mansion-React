@@ -73,8 +73,6 @@ const MansionSearchPage = lazy(
 // const Line = lazy(() => import("./pages/charts/line/Line"));
 import { loader as productLoader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
 import { loader as allProductsLoader } from "./mansion_src/mansion_components/productitem/ProductItem";
-import queryClient from "./queryClient";
-import fetchData from "./mansion_src/mansion_pages/utils/fetchData";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
 const Transactions = lazy(
@@ -87,19 +85,14 @@ const Users = lazy(() => import("./admin_src/pages/users/Users"));
 function createLazyRoute(element: ReactElement) {
   return <Suspense fallback={<Loader />}>{element}</Suspense>;
 }
-//this function is called and prefetched the data as soon as / or /home  route is accesssed.
-function renderData() {
-  queryClient.prefetchQuery({ queryKey: ["all"], queryFn: () => fetchData() });
-  return null;
-}
+
 // routes implementation
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/home" />, loader: renderData },
+  { path: "/", element: <Navigate to="/home" />, },
 
   {
     path: "/home",
     element: createLazyRoute(<MansionHomePage />),
-    loader: renderData,
 
     children: [
       { path: "login", element: createLazyRoute(<MansionLogInPage />) },
@@ -111,7 +104,6 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Navigate to={"all"} />,
-        loader: renderData,
       },
       {
         path: ":productName",

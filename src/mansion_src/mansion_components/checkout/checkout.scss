@@ -32,12 +32,38 @@
       font-size: 1.3rem;
       cursor: pointer;
     }
+    > .main-section {
+      width: 95%;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .form-input {
+          height: 42px;
+          width: 100%;
+          background: #fff;
+          color: #000;
+          font-size: 14px;
+          border-radius: 2px;
+          padding: 10px;
+          -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        > .button-wrapper {
+          width: 100%;
+          bottom: 0px;
+        }
+      }
+    }
   }
 }
 
 @media (width<400px) {
   .checkout {
     > .checkout-box {
+      position: relative;
       width: 90vw;
       height: 75vh;
     }

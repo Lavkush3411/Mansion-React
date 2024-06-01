@@ -1,9 +1,14 @@
 import "./checkout.scss";
 import { useContext } from "react";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
-
+import axios from "axios";
+import Button from "../button/Button";
+const env = import.meta.env;
 function Checkout() {
   const { setCheckoutState } = useContext(CheckOutContext);
+  async function onCheckOut() {
+    await axios.post(env.VITE_BASE_URL + "test/buy");
+  }
 
   return (
     <div className="checkout">
@@ -13,9 +18,56 @@ function Checkout() {
         </span>
         <div className="title">CHECKOUT</div>
 
-        <main>
-          <div>We are designing the checkoutpage</div>
-          <div>Thank You for your patience.</div>
+        <main className="main-section">
+          <form action="">
+            <input
+              required
+              type="text"
+              className="form-input"
+              name=""
+              placeholder="Address1"
+              id=""
+            />
+            <input
+              required
+              type="text"
+              className="form-input"
+              name=""
+              placeholder="Address2"
+              id=""
+            />
+
+            <input
+              required
+              type="text"
+              className="form-input"
+              name=""
+              placeholder="City"
+              id=""
+            />
+            <input
+              required
+              type="text"
+              className="form-input"
+              name=""
+              placeholder="State"
+              id=""
+            />
+            <input
+              required
+              type="text"
+              className="form-input"
+              name="pincode"
+              placeholder="PinCode"
+              id=""
+            />
+            <h1>Order Summary </h1>
+          </form>
+          <div className="button-wrapper">
+            <Button onClick={onCheckOut} type="submit">
+              Checkout
+            </Button>
+          </div>
         </main>
       </div>
     </div>

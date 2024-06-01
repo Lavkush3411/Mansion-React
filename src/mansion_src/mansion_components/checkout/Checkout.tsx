@@ -7,7 +7,8 @@ const env = import.meta.env;
 function Checkout() {
   const { setCheckoutState } = useContext(CheckOutContext);
   async function onCheckOut() {
-    await axios.post(env.VITE_BASE_URL + "test/buy");
+    const response = await axios.post(env.VITE_BASE_URL + "test/buy");
+    window.location.href = response.data.url;
   }
 
   return (

@@ -7,17 +7,17 @@
   left: 0;
   background-color: rgba(43, 42, 42, 0.5);
   display: flex;
-  align-items: center;
+  padding-top: 20%;
   justify-content: center;
   > .checkout-box {
+    padding: 20px;
     height: 80%;
     width: 370px;
     background-color: white;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 100px;
-    align-items: center;
+    gap: 10px;
     border-radius: 15px;
     > .title {
       margin: 0 auto;
@@ -33,7 +33,7 @@
       cursor: pointer;
     }
     > .main-section {
-      width: 95%;
+      width: 100%;
       form {
         display: flex;
         flex-direction: column;
@@ -65,7 +65,8 @@
     > .checkout-box {
       position: relative;
       width: 90vw;
-      height: 75vh;
+      height: 65vh;
+      // padding: 100px 10px 100px 10px;
     }
   }
 }

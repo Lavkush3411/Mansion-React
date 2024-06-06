@@ -1,4 +1,10 @@
-import { Link, LoaderFunction, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  LoaderFunction,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./mansionhomepage.scss";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
@@ -30,6 +36,11 @@ function MansionHomePage() {
   const navigate = useNavigate();
   const querycl = useQueryClient();
   // this effect is used to check authentication status of user
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    console.log(window);
+  }, [location.pathname]);
 
   useEffect(() => {
     useAuth("user/verify")

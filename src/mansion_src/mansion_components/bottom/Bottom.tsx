@@ -27,7 +27,10 @@ function Bottom({
       <NavLink
         className="bottom-item"
         to=""
-        onClick={() => setShowMobileNavbar((prev: boolean) => !prev)}
+        onClick={(e) => {
+          e.preventDefault();
+          setShowMobileNavbar((prev: boolean) => !prev);
+        }}
       >
         <ListIcon />
       </NavLink>

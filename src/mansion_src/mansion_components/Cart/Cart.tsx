@@ -4,6 +4,8 @@ import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
 import CheckOutPage from "../../mansion_pages/checkoutpage/CheckOutPage";
+import { useDispatch } from "react-redux";
+import { add } from "../../../redux/checkOutProductsSlice";
 interface CartItemType {
   _id: string;
   productName: string;
@@ -13,13 +15,21 @@ interface CartItemType {
   size: string;
 }
 function Cart({ showCart }: { showCart: boolean }) {
-  const { cartList, setShowCart } = useContext(CartContext);
+  const {
+    cartList,
+    setShowCart,
+  }: { cartList: CartItemType[]; setShowCart: React.Dispatch<any> } =
+    useContext(CartContext);
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
-
+  const disptach = useDispatch();
+  const subtotal = cartList.reduce((total, product) => {
+    return total + Number(product.productPrice) * Number(product.qty);
+  }, 0);
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
+    disptach(add(cartList));
     setShowCart(true);
     setCheckoutState(true);
   }
@@ -51,9 +61,12 @@ function Cart({ showCart }: { showCart: boolean }) {
           ) : (
             <h2 className="empty-cart-title">Your Cart Is Empty</h2>
           )}
-          <button className="checkout-btn" onClick={(e) => onCheckout(e)}>
-            Checkout
-          </button>
+          <div className="bottom-section">
+            <h1 className="subtotal">SUBTOTAL : {subtotal}</h1>
+            <button className="checkout-btn" onClick={(e) => onCheckout(e)}>
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
       {checkoutState && <CheckOutPage />}

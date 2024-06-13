@@ -5,6 +5,7 @@ import { ButtonContext, LoaderContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
 import resizeImage from "../../utils/resizeImage";
 import CancelIcon from "@mui/icons-material/Cancel";
+import queryClient from "../../../queryClient";
 const env = import.meta.env;
 
 interface sizeListItem {
@@ -167,6 +168,7 @@ function NewProduct() {
     dispatch({ type: "show" });
     console.log(data);
     loaderDispatch({ type: "hide-product-loader" });
+    queryClient.invalidateQueries({ queryKey: ["all"] });
   };
   return (
     <div className="newproduct">

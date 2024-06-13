@@ -6,6 +6,8 @@ import { CheckOutContext } from "../../../CheckOutContextProvider";
 import queryClient from "../../../queryClient";
 import fetchData from "../../mansion_pages/utils/fetchData";
 import Loader from "../../../admin_src/components/loader/Loader";
+import { useDispatch } from "react-redux";
+import { add } from "../../../redux/checkOutProductsSlice";
 
 interface Stock {
   _id: string;
@@ -40,6 +42,7 @@ function ProductItem() {
   const params = useParams();
   const { setCheckoutState } = useContext(CheckOutContext);
   const allData = useLoaderData() as LoaderData[];
+  const dispatch = useDispatch();
   const product = allData
     .filter((currentProduct) => currentProduct._id === params.id)
     .reduce((_, currentProduct) => currentProduct);
@@ -49,7 +52,7 @@ function ProductItem() {
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
   const [moreInfoText, setMoreInfoText] = useState<string>("  ");
-  const { cartList, cartDispatch, setShowCart } = useContext(CartContext);
+  const {  cartDispatch, setShowCart } = useContext(CartContext);
   const productItem = { _id, productName, image, productPrice };
 
   function onAddToCart(
@@ -64,7 +67,6 @@ function ProductItem() {
     } else {
       alert("select Size first");
     }
-    console.log(cartList);
   }
   function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -73,7 +75,7 @@ function ProductItem() {
     e.preventDefault();
     if (size !== "") {
       setCheckoutState(true);
-      console.log(productItem);
+      dispatch(add([{...productItem,qty:1}]));
     } else {
       alert("select Size first");
     }

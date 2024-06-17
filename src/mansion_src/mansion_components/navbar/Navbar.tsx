@@ -16,15 +16,17 @@ function Navbar({
       {showMobileNavbar && <div style={{ color: "black" }}>"Mansion"</div>}
       <div className={`navbar ${showMobileNavbar ? "show" : ""}`}>
         <div className="navbar-items">
-          {state.productItems.map((product: string) => (
-            <NavLink
-              key={product}
-              to={product}
-              onClick={() => setShowMobileNavbar(false)}
-            >
-              {product}
-            </NavLink>
-          ))}
+          {state.productItems.map(
+            (product: { name: string; image: string }) => (
+              <NavLink
+                key={product.name}
+                to={`/${product.name}`}
+                onClick={() => setShowMobileNavbar(false)}
+              >
+                {product.name}
+              </NavLink>
+            )
+          )}
         </div>
       </div>
     </>

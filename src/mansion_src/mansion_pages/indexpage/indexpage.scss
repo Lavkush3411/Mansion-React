@@ -1,15 +1,64 @@
-.index-page {
-  img {
+.landing-page-wrapper {
+  .landing-page {
     width: 100vw;
-    height: 500px;
+    height: 100vh;
+    background-image: url("/homepage.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    filter: drop-shadow(0px 15px 10px rgb(0, 0, 0, 0.5));
+    margin-top: -100px;
+    .hero-text {
+      font-size: 1.9rem;
+      word-spacing: 10px;
+      line-height: 3rem;
+      letter-spacing: 0.75rem;
+      width: 370px;
+      margin: 0% 25%;
+      padding: 15% 0%;
+      min-height: 400px;
+    }
+  }
+  .bottom-products-conatiner {
+    display: flex;
+    flex-direction: column;
+    margin: 1% 20% 4% 20%;
+    > a {
+      width: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s;
+      &:hover {
+        filter: drop-shadow(0px 10px 10px rgb(0, 0, 0, 0.4));
+      }
+      &:nth-child(even) {
+        margin-left: auto;
+      }
+      &:nth-child(3) {
+        filter: drop-shadow(0px 10px 10px rgb(0, 0, 0, 0));
+        &:hover {
+          filter: drop-shadow(0px 10px 10px rgb(0, 0, 0, 0.5));
+        }
+      }
+      .product-wrapper {
+        img {
+          width: 400px;
+          height: 500px;
+          filter: drop-shadow(0px 10px 10px rgb(0, 0, 0, 0.5));
+          border-radius: 50%;
+        }
+        .text {
+          font-weight: 700;
+          font-family: "Plus Jakarta Sans", sans-serif;
+          color: rgb(103, 102, 102);
+          transition: all 0.5s;
+          &:hover {
+            color: black;
+          }
+        }
+      }
+    }
   }
 }
-
-// @media (width<600px) {
-//   .index-page {
-//     img {
-//       width: 400px;
-//       height: 100vh;
-//     }
-//   }
-// }

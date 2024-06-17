@@ -4,26 +4,36 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import products from "../../../assets/admin/productsdata.json";
 import { ButtonContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
-
+import CancelIcon from "@mui/icons-material/Cancel";
 interface Size {
   id: string;
   quantity: number;
   size: string;
+}
+interface AddedImages {
+  id: string;
+  file: File;
+}
+interface SrcOfAddedImages {
+  id: string;
+  source: string;
 }
 
 function ManageProduct() {
   const navigate = useNavigate();
   const [image, setImage] = useState<string | null>("");
   const [productName, setProductName] = useState<string>("");
+  const [key, setKey] = useState(0);
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
-  const [src, setSrc] = useState<string[]>([]);
+  const [src, setSrc] = useState<SrcOfAddedImages[]>([]);
 
   const [sizeList, setSizeList] = useState<Size[] | []>([]);
   const [type, setType] = useState<string>("");
   const location = useLocation();
   const params = useParams();
+  const [images, setImages] = useState<AddedImages[]>([]);
 
   //hiding the new button if we are on manage page by clicking on manage
   const { state, dispatch } = useContext(ButtonContext);
@@ -40,6 +50,10 @@ function ManageProduct() {
     setProductName(location.state.name);
     setProductPrice(location.state.price);
     setSrc(location.state.image);
+
+    // temporary code must remove
+    setKey(0);
+    console.log(images);
   }, [params.table_row, products]);
 
   const addSize = () => {
@@ -73,6 +87,11 @@ function ManageProduct() {
       return prev.filter((item): boolean => item.id !== id);
     });
   };
+  function removeImage(id: string) {
+    // images.filter((image) => image.id !== id);
+
+    setImages((prev) => prev.filter((image) => image.id !== id));
+  }
 
   const selectImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file: File | undefined = e.target.files?.[0];
@@ -115,11 +134,13 @@ function ManageProduct() {
             <option value="" hidden>
               Type
             </option>
-            {state.productItems.map((product: string) => (
-              <option key={product} value={product}>
-                {product.slice(0, -1)}
-              </option>
-            ))}
+            {state.productItems.map(
+              (product: { name: string; image: string }) => (
+                <option key={product.name} value={product.name}>
+                  {product.name.slice(0, -1)}
+                </option>
+              )
+            )}
           </select>
           <label>Name</label>
           <input
@@ -144,7 +165,6 @@ function ManageProduct() {
                 required
                 className="size"
                 onChange={(e) => updateSize(e, size.id)}
-                value={size.size}
               >
                 <option value="" hidden>
                   Size
@@ -159,7 +179,6 @@ function ManageProduct() {
                 required
                 type="number"
                 className="quantity"
-                value={size.quantity ? size.quantity : ""}
                 onChange={(e) => updateQuantity(e, size.id)}
               />
               {sizeList.length > 1 && (
@@ -181,16 +200,27 @@ function ManageProduct() {
 
           <label>Image</label>
           <input
+            key={key}
             type="file"
-            required
             onChange={(e) => selectImage(e)}
             accept="image/*"
             multiple
           />
           <div className="selected-images">
-            {src && src.map((image) => <img key={image} src={image} alt="" />)}
+            {src &&
+              src.map((image) => (
+                <div key={image.id} className="added-images">
+                  <div
+                    className="removeX"
+                    onClick={() => removeImage(image.id)}
+                  >
+                    <CancelIcon />
+                  </div>
+                  <img src={image.source} alt="" />
+                </div>
+              ))}
           </div>
-          <button type="submit">Update</button>
+          <button type="submit">Create</button>
         </form>
       </article>
     </div>

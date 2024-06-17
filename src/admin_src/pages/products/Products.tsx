@@ -42,14 +42,14 @@ function Products() {
   return (
     <div className="products">
       <section className="products-list">
-        {state.productItems.map((product: string) => (
+        {state.productItems.map((product: { name: string; image: string }) => (
           <NavLink
-            key={product}
-            to={`${product}-list`}
+            key={product.name}
+            to={`${product.name}-list`}
             className="product"
             onClick={() => dispatch({ type: "show" })}
           >
-            {product}
+            {product.name}
           </NavLink>
         ))}
       </section>

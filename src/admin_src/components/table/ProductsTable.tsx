@@ -137,16 +137,16 @@ function Cargo() {
   );
 }
 
-function Sweatpant() {
+function Bottom() {
   const {
     productListState: { sweatpants },
     productListDispatch,
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("sweatpant")
+    fetchData("bottom")
       .then((data: DataType[]) => {
-        productListDispatch({ type: "sweatpants", payload: data });
+        productListDispatch({ type: "bottoms", payload: data });
       })
       .catch(() => {
         console.log("error");
@@ -158,8 +158,8 @@ function Sweatpant() {
       {TableHOC<DataType>(
         filteredColumns,
         sweatpants,
-        "sweatpants",
-        "SweatPants",
+        "bottoms",
+        "Bottoms",
         true
       )()}
     </div>
@@ -267,4 +267,4 @@ function Hoodie() {
   );
 }
 
-export { Cargo, Sweatpant, Shirts, Tshirts, Hoodie, All };
+export { Cargo, Bottom, Shirts, Tshirts, Hoodie, All };

@@ -19,7 +19,7 @@ function CheckOutPage() {
         setCheckoutState(res); //this will hide the current component that makes request to check authorised state
         if (!res) {
           setShowCart(false);
-          navigate("/home/login");
+          navigate("/login");
         }
       })
       .catch(() => setAuthorised(false));

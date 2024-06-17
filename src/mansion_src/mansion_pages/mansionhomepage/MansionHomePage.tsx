@@ -19,6 +19,7 @@ import { ProductListContext } from "../../../ProductListContextProvider";
 import Bottom from "../../mansion_components/bottom/Bottom";
 import { useQueryClient } from "@tanstack/react-query";
 import { prefetch } from "../../../queryClient";
+import StyledButton from "../../mansion_components/button/StyledButton";
 
 const loader: LoaderFunction = async () => {
   return null;
@@ -37,6 +38,13 @@ function MansionHomePage() {
   const querycl = useQueryClient();
   // this effect is used to check authentication status of user
   const location = useLocation();
+  const pathname = location.pathname;
+  const showSearchAndProductList =
+    pathname.includes("cargos") ||
+    pathname.includes("bottoms") ||
+    pathname.includes("tshirts") ||
+    pathname.includes("shirts") ||
+    pathname.includes("hoodies");
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -111,18 +119,10 @@ function MansionHomePage() {
       </div>
       <div className="mansionhomepage">
         <header className="header-section">
-          <div className="topbar">
-            <span>Style you Need</span>
-            <span>Not the style you Want</span>
-          </div>
-
           <div className="container">
-            {!showSearch && (
-              <Link to={"/home"} className="logo">
-                <img src="/mansion.svg" alt="logo" />
-              </Link>
-            )}
-
+            <Link to="/home">
+              <h1 className="logo">Mansion</h1>
+            </Link>
             {showSearch ? (
               <div className="search-section">
                 <div>Search</div>
@@ -152,48 +152,59 @@ function MansionHomePage() {
                 </div>
               </div>
             ) : (
-              <div
-                className="search"
-                onClick={() => setShowSearch(true)}
-                onFocus={() => setShowSearch(true)}
-                onBlur={() => setShowSearch(false)}
-              >
-                Search
-              </div>
+              showSearchAndProductList && (
+                <div
+                  className="search"
+                  onClick={() => setShowSearch(true)}
+                  onFocus={() => setShowSearch(true)}
+                  onBlur={() => setShowSearch(false)}
+                >
+                  Search
+                </div>
+              )
             )}
 
-            {loading ? (
-              <span>Logout</span>
-            ) : (
-              !showSearch &&
-              (!authenticated ? (
-                <Link to={"login"} className="login">
-                  Login
-                </Link>
-              ) : (
+            <div className="login-cart-buttons">
+              {loading ? (
                 <Link
-                  to={"login"}
+                  to={"/login"}
                   onClick={(e) => onLogout(e)}
                   className="login"
                 >
-                  LogOut
+                  <StyledButton>Logout</StyledButton>
                 </Link>
-              ))
-            )}
-            {!showSearch && (
-              <div className="cart" onClick={() => setShowCart(true)}>
-                Cart
-              </div>
-            )}
+              ) : (
+                !showSearch &&
+                (!authenticated ? (
+                  <Link to={"/login"} className="login">
+                    <StyledButton>Login</StyledButton>
+                  </Link>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    onClick={(e) => onLogout(e)}
+                    className="login"
+                  >
+                    <StyledButton>Logout</StyledButton>
+                  </Link>
+                ))
+              )}
+              {!showSearch && (
+                <div className="cart" onClick={() => setShowCart(true)}>
+                  <StyledButton bgCol="black">Cart</StyledButton>
+                </div>
+              )}
+            </div>
           </div>
-          {/* Navbar */}
-          <Navbar
-            showMobileNavbar={showMobileNavbar}
-            setShowMobileNavbar={setShowMobileNavbar}
-          />
         </header>
         <main className="product-container">
-          <div className="product-list">
+          {showSearchAndProductList && (
+            <Navbar
+              showMobileNavbar={showMobileNavbar}
+              setShowMobileNavbar={setShowMobileNavbar}
+            />
+          )}
+          <div className="product-list-wrapper">
             <Outlet />
           </div>
         </main>

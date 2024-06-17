@@ -48,7 +48,7 @@ function reducer(state: valueType, action: actionType) {
       return { ...state, all: action.payload };
     case "cargos":
       return { ...state, cargos: action.payload };
-    case "sweatpants":
+    case "bottoms":
       return { ...state, sweatpants: action.payload };
     case "tshirts":
       return { ...state, tshirts: action.payload };

@@ -33,7 +33,7 @@ function ProductListMansion() {
     queryFn: () => fetchData(parms.productName || "all"),
   });
 
-  if (isFetching || state === "loading") return <Loader pos="absolute" />;
+  if (isFetching || state === "loading") return <Loader />;
   return (
     <div className="product-list-container">
       <div className="product-list">

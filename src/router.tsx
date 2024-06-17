@@ -26,9 +26,9 @@ const Shirts = lazy(() =>
     default: module.Shirts,
   }))
 );
-const Sweatpant = lazy(() =>
+const Bottom = lazy(() =>
   import("./admin_src/components/table/ProductsTable").then((module) => ({
-    default: module.Sweatpant,
+    default: module.Bottom,
   }))
 );
 const Tshirts = lazy(() =>
@@ -73,6 +73,7 @@ const MansionSearchPage = lazy(
 // const Line = lazy(() => import("./pages/charts/line/Line"));
 import { loader as productLoader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
 import { loader as allProductsLoader } from "./mansion_src/mansion_components/productitem/ProductItem";
+import LandingPage from "./mansion_src/mansion_pages/indexpage/LandingPage";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
 const Transactions = lazy(
@@ -88,23 +89,21 @@ function createLazyRoute(element: ReactElement) {
 
 // routes implementation
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/home" />, },
-
   {
-    path: "/home",
-    element: createLazyRoute(<MansionHomePage />),
-
+    path: "/",
+    element: <MansionHomePage />,
     children: [
+      { path: "", element: <Navigate to={"home"} /> },
+      {
+        path: "/home",
+        element: createLazyRoute(<LandingPage />),
+      },
       { path: "login", element: createLazyRoute(<MansionLogInPage />) },
       {
         path: "forgot",
         element: createLazyRoute(<PasswordReset />),
       },
       { path: "signup", element: createLazyRoute(<MansionSignUPPage />) },
-      {
-        path: "",
-        element: <Navigate to={"all"} />,
-      },
       {
         path: ":productName",
         element: createLazyRoute(<ProductListMansion />),
@@ -147,8 +146,8 @@ const router = createBrowserRouter([
             element: createLazyRoute(<Cargo />),
           },
           {
-            path: "/admin/products/sweatpants-list",
-            element: createLazyRoute(<Sweatpant />),
+            path: "/admin/products/bottoms-list",
+            element: createLazyRoute(<Bottom />),
           },
           {
             path: "/admin/products/tshirts-list",

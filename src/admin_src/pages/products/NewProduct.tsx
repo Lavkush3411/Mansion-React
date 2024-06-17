@@ -183,11 +183,13 @@ function NewProduct() {
             <option value="" hidden>
               Type
             </option>
-            {state.productItems.map((product: string) => (
-              <option key={product} value={product}>
-                {product.slice(0, -1)}
-              </option>
-            ))}
+            {state.productItems.map(
+              (product: { name: string; image: string }) => (
+                <option key={product.name} value={product.name}>
+                  {product.name.slice(0, -1)}
+                </option>
+              )
+            )}
           </select>
           <label>Name</label>
           <input

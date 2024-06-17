@@ -2,7 +2,7 @@ import React, { ReactNode, createContext, useReducer } from "react";
 
 interface State {
   showButton: boolean;
-  productItems: string[];
+  productItems: { name: string; image: string }[];
 }
 
 interface actionType {
@@ -17,7 +17,13 @@ interface ContextValue {
 
 const initialState: State = {
   showButton: true,
-  productItems: ["all", "cargos", "sweatpants", "tshirts", "shirts", "hoodies"],
+  productItems: [
+    { name: "tshirts", image: "/tshirt.png" },
+    { name: "cargos", image: "/cargo.png" },
+    { name: "bottoms", image: "/jeans.png" },
+    { name: "shirts", image: "/shirt.png" },
+    { name: "hoodies", image: "/hoodie.png" },
+  ],
 };
 
 const ButtonContext = createContext<ContextValue>({

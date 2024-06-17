@@ -24,19 +24,23 @@ function ProductCard({ productItem }: ProductCardProps) {
   // function onAddToCart
 
   return (
-    <Link
-      to={`/home/product/${productItem._id}`}
-      state={{ productItem }}
-      className="product-card"
-    >
-      <img
-        src={productItem.image[0]}
-        alt={productItem.productName}
-        className="product-img"
-      />
-      <span className="product-name">{productItem.productName}</span>
-      <span className="product-price">₹{[productItem.productPrice]}</span>
-    </Link>
+    <div className="product-card-wrapper">
+      <Link
+        to={`/product/${productItem._id}`}
+        state={{ productItem }}
+        className="product-card"
+      >
+        <div className="img-wrapper">
+          <img
+            src={productItem.image[0]}
+            alt={productItem.productName}
+            className="product-img"
+          />
+        </div>
+        <span className="product-name">{productItem.productName}</span>
+        <span className="product-price">₹{[productItem.productPrice]}</span>
+      </Link>
+    </div>
   );
 }
 

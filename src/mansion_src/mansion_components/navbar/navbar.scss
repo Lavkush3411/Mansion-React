@@ -1,14 +1,28 @@
 .navbar {
-  padding: 0.5% 2%;
-  border-top: 1px solid rgb(55, 54, 54);
-  border-bottom: 1px solid rgb(55, 54, 54);
+  z-index: 997;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  padding: 1% 2%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  position: sticky;
+  background-color: transparent;
+  backdrop-filter: blur(8px);
+  top: 0;
   .navbar-items {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     font-size: medium;
+    > a {
+      color: rgb(103, 102, 102);
+      transition: all 0.5s;
+    }
+    > a:hover {
+      color: black;
+    }
+    > a.active {
+      color: black;
+    }
   }
 }

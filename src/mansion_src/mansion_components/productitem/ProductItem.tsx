@@ -8,6 +8,9 @@ import fetchData from "../../mansion_pages/utils/fetchData";
 import Loader from "../../../admin_src/components/loader/Loader";
 import { useDispatch } from "react-redux";
 import { add } from "../../../redux/checkOutProductsSlice";
+import { open } from "../../../redux/sidebarSlice";
+
+import * as React from "react";
 
 interface Stock {
   _id: string;
@@ -52,7 +55,7 @@ function ProductItem() {
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
   const [moreInfoText, setMoreInfoText] = useState<string>("  ");
-  const {  cartDispatch, setShowCart } = useContext(CartContext);
+  const { cartDispatch } = useContext(CartContext);
   const productItem = { _id, productName, image, productPrice };
 
   function onAddToCart(
@@ -62,7 +65,7 @@ function ProductItem() {
     e.preventDefault();
     if (size !== "") {
       cartDispatch({ type: "add", payload: productItem });
-      setShowCart(true);
+      dispatch(open());
       console.log("added to cart");
     } else {
       alert("select Size first");
@@ -75,7 +78,7 @@ function ProductItem() {
     e.preventDefault();
     if (size !== "") {
       setCheckoutState(true);
-      dispatch(add([{...productItem,qty:1}]));
+      dispatch(add([{ ...productItem, qty: 1 }]));
     } else {
       alert("select Size first");
     }

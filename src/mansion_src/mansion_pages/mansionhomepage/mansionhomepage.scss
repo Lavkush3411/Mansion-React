@@ -1,3 +1,4 @@
+@import "../../../style-variables";
 .homepage-wrapper {
   display: flex;
   flex-direction: column;
@@ -76,6 +77,20 @@
             font-weight: 700;
             color: rgb(77, 75, 75);
             cursor: pointer;
+            .cart-button {
+              @each $property, $value in $button {
+                #{$property}: $value;
+              }
+
+              background-color: black;
+              color: white;
+
+              &:hover {
+                color: black;
+                background-color: transparent;
+                border-color: black;
+              }
+            }
             &:hover {
               color: black;
             }

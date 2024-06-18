@@ -79,10 +79,10 @@ function MansionLogInPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Link to={"/home/forgot"}>Forgot Password ??</Link>
+          <Link to={"/forgot"}>Forgot Password ??</Link>
           {err !== "" && <span className="error">{err}</span>}
           <button type="submit">Login</button>
-          <Link to={"/home/signup"}>Create Account</Link>
+          <Link to={"/signup"}>Create Account</Link>
         </form>
       </div>
     </LoadOnApiCall>

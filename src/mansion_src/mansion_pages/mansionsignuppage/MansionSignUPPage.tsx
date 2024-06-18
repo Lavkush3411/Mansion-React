@@ -81,7 +81,7 @@ function MansionSignUpPage() {
           setErr(err.msg);
           setIsLoading(false);
 
-          navigate("/home/signup");
+          navigate("/signup");
         }
       } else {
         // if form is not filled this block will be executed
@@ -143,7 +143,7 @@ function MansionSignUpPage() {
           />
           {err != "" && <span className="error">{err}</span>}
           <button type="submit">SignUp</button>
-          <Link to={"/home/login"}>Already Have an account login ??</Link>
+          <Link to={"/login"}>Already Have an account login ??</Link>
         </form>
       </div>
     </LoadOnApiCall>

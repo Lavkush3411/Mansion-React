@@ -6,8 +6,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./mansionhomepage.scss";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../../../CartContextProvider";
+import { useContext, useEffect, useRef, useState } from "react";
 import Cart from "../../mansion_components/Cart/Cart";
 import { UserContext } from "../../../UserContextProvider";
 import useAuth from "../../hooks/useAuth";
@@ -20,6 +19,8 @@ import Bottom from "../../mansion_components/bottom/Bottom";
 import { useQueryClient } from "@tanstack/react-query";
 import { prefetch } from "../../../queryClient";
 import StyledButton from "../../mansion_components/button/StyledButton";
+import { useDispatch } from "react-redux";
+import { open, toggle } from "../../../redux/sidebarSlice";
 
 const loader: LoaderFunction = async () => {
   return null;
@@ -28,13 +29,14 @@ const loader: LoaderFunction = async () => {
 function MansionHomePage() {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [searchQuerry, setSearchQuerry] = useState<string>("");
-  const { showCart, setShowCart } = useContext(CartContext);
   const { loggedinuser, userDispatch } = useContext(UserContext);
   const [showMobileNavbar, setShowMobileNavbar] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoad] = useState(true);
   const { productListDispatch } = useContext(ProductListContext);
   const navigate = useNavigate();
+  const btnRef = useRef(null);
+  const disptach = useDispatch();
   const querycl = useQueryClient();
   // this effect is used to check authentication status of user
   const location = useLocation();
@@ -87,7 +89,7 @@ function MansionHomePage() {
     localStorage.removeItem("Token");
     userDispatch({ type: "logout" });
     setAuthenticated(false);
-    navigate("/home/login");
+    navigate("/login");
   }
   return (
     <div className="homepage-wrapper">
@@ -190,8 +192,15 @@ function MansionHomePage() {
                 ))
               )}
               {!showSearch && (
-                <div className="cart" onClick={() => setShowCart(true)}>
-                  <StyledButton bgCol="black">Cart</StyledButton>
+                <div className="cart" onClick={() => disptach(open())}>
+                  {/* button to open cart */}
+                  <button
+                    className="cart-button"
+                    ref={btnRef}
+                    onClick={() => disptach(open())}
+                  >
+                    Cart
+                  </button>
                 </div>
               )}
             </div>
@@ -210,11 +219,11 @@ function MansionHomePage() {
         </main>
       </div>
 
-      <Cart showCart={showCart} />
+      <Cart />
 
       <Footer />
       <Bottom
-        setShowCart={setShowCart}
+        setShowCart={disptach(toggle())}
         setShowMobileNavbar={setShowMobileNavbar}
       />
     </div>

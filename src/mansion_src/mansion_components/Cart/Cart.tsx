@@ -4,8 +4,20 @@ import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
 import CheckOutPage from "../../mansion_pages/checkoutpage/CheckOutPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add } from "../../../redux/checkOutProductsSlice";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
+import { RootState } from "../../../redux/store";
+import { close } from "../../../redux/sidebarSlice";
+
 interface CartItemType {
   _id: string;
   productName: string;
@@ -14,7 +26,7 @@ interface CartItemType {
   qty: number;
   size: string;
 }
-function Cart({ showCart }: { showCart: boolean }) {
+function Cart() {
   const {
     cartList,
     setShowCart,
@@ -22,6 +34,7 @@ function Cart({ showCart }: { showCart: boolean }) {
     useContext(CartContext);
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
   const disptach = useDispatch();
+  const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);
   const subtotal = cartList.reduce((total, product) => {
     return total + Number(product.productPrice) * Number(product.qty);
   }, 0);
@@ -36,39 +49,46 @@ function Cart({ showCart }: { showCart: boolean }) {
 
   return (
     <>
-      <div className={`cartscreen ${showCart ? "active" : ""}`}>
-        <div
-          className={`leftcart ${showCart ? "active" : ""}`}
-          onClick={() => setShowCart(false)}
-        ></div>
-        <div className="rightcart">
-          <button className="close-cart" onClick={() => setShowCart(false)}>
-            X
-          </button>
-          {cartList.length > 0 && <div className="cart-title">YOUR CART</div>}
+      <Drawer
+        variant={"cart"}
+        isOpen={isOpen}
+        placement="right"
+        onClose={() => disptach(close())}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>
+            {cartList.length > 0 && <div className="cart-title">YOUR CART</div>}
+          </DrawerHeader>
 
-          {cartList.length ? (
-            <div className="cart-list">
-              {cartList.map((cartItem: CartItemType) => {
-                return (
-                  <CartItem
-                    key={cartItem._id + cartItem.size}
-                    cartItem={cartItem}
-                  />
-                );
-              })}{" "}
+          <DrawerBody>
+            {cartList.length ? (
+              <div className="cart-list">
+                {cartList.map((cartItem: CartItemType) => {
+                  return (
+                    <CartItem
+                      key={cartItem._id + cartItem.size}
+                      cartItem={cartItem}
+                    />
+                  );
+                })}{" "}
+              </div>
+            ) : (
+              <h2 className="empty-cart-title">Your Cart Is Empty</h2>
+            )}
+          </DrawerBody>
+
+          <DrawerFooter>
+            <div className="bottom-section">
+              <h1 className="subtotal">SUBTOTAL : {subtotal}</h1>
+              <button className="checkout-btn" onClick={(e) => onCheckout(e)}>
+                Checkout
+              </button>
             </div>
-          ) : (
-            <h2 className="empty-cart-title">Your Cart Is Empty</h2>
-          )}
-          <div className="bottom-section">
-            <h1 className="subtotal">SUBTOTAL : {subtotal}</h1>
-            <button className="checkout-btn" onClick={(e) => onCheckout(e)}>
-              Checkout
-            </button>
-          </div>
-        </div>
-      </div>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
       {checkoutState && <CheckOutPage />}
     </>
   );

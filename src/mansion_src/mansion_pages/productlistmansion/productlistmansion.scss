@@ -1,6 +1,7 @@
 .product-list-container {
   display: flex;
   width: 100%;
+  min-height: 100vh;
   background-color: #c7c8cc;
   .product-list {
     display: flex;

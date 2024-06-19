@@ -1,0 +1,13 @@
+.mobile-navbar {
+  .nav-item-link {
+    > .nav-item {
+      color: red;
+    }
+  }
+}
+
+@media (width>570px) {
+  .mobile-navbar {
+    display: none;
+  }
+}

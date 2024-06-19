@@ -3,26 +3,15 @@ import "./navbar.scss";
 import { useContext } from "react";
 import { ButtonContext } from "../../../ContextProvider";
 
-function Navbar({
-  showMobileNavbar,
-  setShowMobileNavbar,
-}: {
-  showMobileNavbar: boolean;
-  setShowMobileNavbar: any;
-}) {
+function Navbar() {
   const { state } = useContext(ButtonContext);
   return (
     <>
-      {showMobileNavbar && <div style={{ color: "black" }}>"Mansion"</div>}
-      <div className={`navbar ${showMobileNavbar ? "show" : ""}`}>
+      <div className={`navbar`}>
         <div className="navbar-items">
           {state.productItems.map(
             (product: { name: string; image: string }) => (
-              <NavLink
-                key={product.name}
-                to={`/${product.name}`}
-                onClick={() => setShowMobileNavbar(false)}
-              >
+              <NavLink key={product.name} to={`/${product.name}`}>
                 {product.name}
               </NavLink>
             )

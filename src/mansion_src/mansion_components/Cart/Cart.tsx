@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import "./cart.scss";
 import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { RootState } from "../../../redux/store";
 import { close } from "../../../redux/sidebarSlice";
+import Button from "../button/Button";
 
 interface CartItemType {
   _id: string;
@@ -79,18 +80,32 @@ function Cart() {
             )}
           </DrawerBody>
 
-          <DrawerFooter>
-            <div className="bottom-section">
-              <h1 className="subtotal">SUBTOTAL : {subtotal}</h1>
-              <button className="checkout-btn" onClick={(e) => onCheckout(e)}>
+          <DrawerFooter width={"100%"}>
+            <BottomSection subtotal={subtotal}>
+              <Button type="button" onClick={(e: any) => onCheckout(e)}>
                 Checkout
-              </button>
-            </div>
+              </Button>
+            </BottomSection>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
       {checkoutState && <CheckOutPage />}
     </>
+  );
+}
+
+function BottomSection({
+  subtotal,
+  children,
+}: {
+  subtotal: number;
+  children: ReactNode;
+}) {
+  return (
+    <div className="bottom-section">
+      <h1 className="subtotal">SUBTOTAL : {subtotal}</h1>
+      {children}
+    </div>
   );
 }
 

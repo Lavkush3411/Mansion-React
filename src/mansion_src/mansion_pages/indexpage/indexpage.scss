@@ -51,14 +51,36 @@
         }
         .text {
           font-weight: 700;
+          margin: 0 auto;
           font-family: "Plus Jakarta Sans", sans-serif;
           color: rgb(103, 102, 102);
           transition: all 0.5s;
+          width: max-content;
           &:hover {
             color: black;
+            border-bottom: 1px solid black;
           }
         }
       }
+    }
+  }
+}
+
+@media (width<460px) {
+  .landing-page-wrapper {
+    .landing-page {
+      margin-top: -300px;
+      .hero-text {
+        width: 350px;
+        margin: 10px;
+        margin-top: 100%;
+        padding: 0;
+        font-weight: bolder;
+      }
+    }
+    .bottom-products-conatiner {
+      margin: 0 0 10% 0;
+      padding: 0 0 10% 0;
     }
   }
 }

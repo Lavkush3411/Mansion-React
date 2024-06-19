@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import checkOutProductsReducer from "./checkOutProductsSlice";
 import sidebarSlice from "./sidebarSlice";
-
+import mobileNavbarSlice from "./mobileNavbarSlice";
 const store = configureStore({
   reducer: {
     checkoutProducts: checkOutProductsReducer,
     sidebar: sidebarSlice,
+    mobileNavbar: mobileNavbarSlice,
   },
 });
 

@@ -8,6 +8,12 @@ const theme = extendTheme({
           dialog: {
             maxW: "350px",
             minW: "350px",
+            bgColor: "#c7c8cc",
+          },
+        },
+        mobilenavbar: {
+          dialog: {
+            bgColor: "#c7c8cc",
           },
         },
       },

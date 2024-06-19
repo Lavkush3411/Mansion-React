@@ -1,6 +1,6 @@
 .checkout {
   position: fixed;
-  z-index: 999;
+  z-index: 2000;
   width: 100vw;
   height: 100%;
   top: 0;
@@ -12,7 +12,7 @@
   > .checkout-box {
     padding: 20px;
     width: 370px;
-    background-color: white;
+    background-color: #c7c8cc;
     position: relative;
     display: flex;
     flex-direction: column;

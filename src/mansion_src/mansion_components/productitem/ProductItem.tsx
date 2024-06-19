@@ -9,7 +9,7 @@ import Loader from "../../../admin_src/components/loader/Loader";
 import { useDispatch } from "react-redux";
 import { add } from "../../../redux/checkOutProductsSlice";
 import { open } from "../../../redux/sidebarSlice";
-
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import * as React from "react";
 
 interface Stock {
@@ -57,6 +57,20 @@ function ProductItem() {
   const [moreInfoText, setMoreInfoText] = useState<string>("  ");
   const { cartDispatch } = useContext(CartContext);
   const productItem = { _id, productName, image, productPrice };
+  // carausal component
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? image.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === image.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
 
   function onAddToCart(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -136,10 +150,20 @@ function ProductItem() {
         <div className="moreinfo">{moreInfoText}</div>
       </div>
       <div className="product-mid-section">
-        {image &&
-          image.map((imagelink) => {
-            return <img key={imagelink} src={imagelink} alt={productName} />;
-          })}
+        {image && (
+          <img src={image[currentIndex]} alt={`Slide ${currentIndex + 1}`} />
+        )}
+
+        {currentIndex !== 0 && (
+          <button className="left-arrow" onClick={prevSlide}>
+            <FaArrowLeft />
+          </button>
+        )}
+        {currentIndex !== image.length - 1 && (
+          <button className="right-arrow" onClick={nextSlide}>
+            <FaArrowRight />
+          </button>
+        )}
       </div>
       <div className="product-right-section">
         <div className="stock">

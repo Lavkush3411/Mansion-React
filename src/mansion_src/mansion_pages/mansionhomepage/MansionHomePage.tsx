@@ -6,7 +6,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./mansionhomepage.scss";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cart from "../../mansion_components/Cart/Cart";
 import { UserContext } from "../../../UserContextProvider";
 import useAuth from "../../hooks/useAuth";
@@ -19,6 +19,11 @@ import { useDispatch } from "react-redux";
 import { open } from "../../../redux/sidebarSlice";
 import MobileNavBar from "../../mansion_components/navbar/MobileNavBar";
 import SearchBar from "../../mansion_components/searchbar/SearchBar";
+import { openUserDrawer } from "../../../redux/userDrawerSlice";
+import UserSection from "../userdetails/UserSection";
+import { FaRegUserCircle } from "react-icons/fa";
+import DeleteCartPopUp from "../../mansion_components/popups/deleteCartPopUp";
+import SizePopUp from "../../mansion_components/popups/sizePopUp";
 
 const loader: LoaderFunction = async () => {
   return null;
@@ -26,12 +31,10 @@ const loader: LoaderFunction = async () => {
 
 function MansionHomePage() {
   const { loggedinuser, userDispatch } = useContext(UserContext);
-  const [setShowMobileNavbar] = useState<boolean>(false);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoad] = useState(true);
 
   const navigate = useNavigate();
-  const btnRef = useRef(null);
   const disptach = useDispatch();
 
   // this effect is used to check authentication status of user
@@ -105,18 +108,17 @@ function MansionHomePage() {
                   <StyledButton>Logout</StyledButton>
                 </Link>
               )}
-              {
-                <div className="cart" onClick={() => disptach(open())}>
-                  {/* button to open cart */}
-                  <button
-                    className="cart-button"
-                    ref={btnRef}
-                    onClick={() => disptach(open())}
-                  >
-                    Cart
-                  </button>
-                </div>
-              }
+
+              <div className="cart" onClick={() => disptach(open())}>
+                {/* button to open cart */}
+                <button className="cart-button">Cart</button>
+              </div>
+
+              {/* button to open profile section */}
+              <FaRegUserCircle
+                className="user-profile"
+                onClick={() => disptach(openUserDrawer())}
+              />
             </div>
           </div>
         </header>
@@ -129,9 +131,11 @@ function MansionHomePage() {
       </div>
 
       <Cart />
-
+      <UserSection />
+      <SizePopUp />
+      <DeleteCartPopUp />
       <Footer />
-      <Bottom setShowMobileNavbar={setShowMobileNavbar} />
+      <Bottom />
     </div>
   );
 }

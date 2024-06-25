@@ -7,8 +7,9 @@ import ListIcon from "@mui/icons-material/List";
 import { useDispatch } from "react-redux";
 import { toggle, close } from "../../../redux/sidebarSlice";
 import { toggleMenu } from "../../../redux/mobileNavbarSlice";
+import { toggleUserDrawer } from "../../../redux/userDrawerSlice";
 
-function Bottom({ setShowMobileNavbar }: { setShowMobileNavbar: any }) {
+function Bottom() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -19,7 +20,6 @@ function Bottom({ setShowMobileNavbar }: { setShowMobileNavbar: any }) {
         onClick={(e) => {
           e.preventDefault();
           navigate("/home");
-          setShowMobileNavbar(() => false);
           dispatch(close());
         }}
       >
@@ -50,8 +50,8 @@ function Bottom({ setShowMobileNavbar }: { setShowMobileNavbar: any }) {
         to=""
         onClick={(e) => {
           e.preventDefault();
-          setShowMobileNavbar(() => false);
           dispatch(close());
+          dispatch(toggleUserDrawer());
         }}
       >
         <AccountCircleIcon />

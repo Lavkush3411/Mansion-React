@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import "./productcard.scss";
+import { MdAddShoppingCart } from "react-icons/md";
+import Button from "../button/Button";
+import { useDispatch } from "react-redux";
+import { openSizeSelectPopUp } from "../../../redux/sizeSelectorPopUpSlice";
 
 interface Stock {
   _id: string;
@@ -21,8 +25,14 @@ interface ProductCardProps {
 
 // this is a product card rendered inside productlistmansion on home component
 function ProductCard({ productItem }: ProductCardProps) {
+  const dispatch = useDispatch();
   // function onAddToCart
+  function onAddToCart(e: React.MouseEvent<HTMLDivElement>, productItem: Data) {
+    e.preventDefault();
+    dispatch(openSizeSelectPopUp(productItem));
 
+    // navigate("/product/" + id);
+  }
   return (
     <div className="product-card-wrapper">
       <Link
@@ -40,6 +50,11 @@ function ProductCard({ productItem }: ProductCardProps) {
         <span className="product-name">{productItem.productName}</span>
         <span className="product-price">₹{[productItem.productPrice]}</span>
       </Link>
+      <div className="cart-btn" onClick={(e) => onAddToCart(e, productItem)}>
+        <Button>
+          <MdAddShoppingCart style={{ fontSize: "1.5rem", margin: "0 auto" }} />
+        </Button>
+      </div>
     </div>
   );
 }

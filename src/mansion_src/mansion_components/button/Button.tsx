@@ -6,9 +6,9 @@ function Button({
   children,
   bgCol = "",
 }: {
-  onClick: any;
-  type: "button" | "submit";
-  children: any;
+  onClick?: any;
+  type?: "button" | "submit";
+  children?: any;
   bgCol?: string;
 }) {
   return (

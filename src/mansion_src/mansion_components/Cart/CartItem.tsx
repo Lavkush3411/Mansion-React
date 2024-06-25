@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import "./cartitem.scss";
 import { CartContext } from "../../../CartContextProvider";
+import { useDispatch } from "react-redux";
+import { openPopUp } from "../../../redux/deleteCartPopUpSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface CartItemType {
   _id: string;
@@ -16,6 +19,7 @@ interface cartItemProps {
 }
 function CartItem({ cartItem }: cartItemProps) {
   const { cartDispatch } = useContext(CartContext);
+  const dispatch = useDispatch();
 
   return (
     <div className="cart-item">
@@ -25,9 +29,13 @@ function CartItem({ cartItem }: cartItemProps) {
         <div className="handle-quantity">
           <div className="quantity">
             <button
-              onClick={() =>
-                cartDispatch({ type: "remove", payload: cartItem })
-              }
+              onClick={() => {
+                if (cartItem.qty > 1) {
+                  cartDispatch({ type: "remove", payload: cartItem });
+                } else {
+                  dispatch(openPopUp(cartItem));
+                }
+              }}
             >
               -
             </button>
@@ -40,9 +48,9 @@ function CartItem({ cartItem }: cartItemProps) {
           </div>
           <button
             className="delete-btn"
-            onClick={() => cartDispatch({ type: "delete", payload: cartItem })}
+            onClick={() => dispatch(openPopUp(cartItem))}
           >
-            Delete
+            <DeleteIcon />
           </button>
         </div>
       </section>

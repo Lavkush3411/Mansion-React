@@ -22,6 +22,14 @@
         justify-content: space-between;
         height: max-content;
         .logo {
+          display: flex;
+          z-index: 3000;
+          > div {
+            transition: all 0.5s;
+            &:hover {
+              transform: rotateY(150deg);
+            }
+          }
           font-family: "Barrio", system-ui;
           letter-spacing: 1rem;
           font-weight: 800;
@@ -87,77 +95,12 @@
   }
 }
 // media querries
-
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 0px;
-}
-
-@media (width<460px) {
-  .homepage-wrapper {
-    max-width: 100%;
-    .mansionhomepage {
-      max-width: 100%;
-
-      > .header-section {
-        > .container {
-          > a {
-            margin: 0 auto;
-          }
-          .login-cart-buttons {
-            display: none;
-          }
-        }
-        > .container {
-          height: 50%;
-        }
-      }
-      > .product-container {
-        margin-top: 100px;
-      }
-    }
-  }
-}
-
-.menu-btn {
-  display: block;
-  z-index: 100;
-}
-
-@media (460px<=width<=605px) {
-  .homepage-wrapper {
-    .mansionhomepage {
-      .loginform {
-        margin-top: 12%;
-        width: 60%;
-      }
-      > .header-section {
-        height: max-content;
-
-        > .container {
-          height: max-content;
-
-          > a.logo {
-            > img {
-              width: 80px;
-              margin-left: -20px;
-            }
-          }
-        }
-      }
-      > .product-container {
-        margin-top: 130px;
-      }
-    }
-  }
-}
-
 @media (width<700px) {
   .homepage-wrapper {
     .mansionhomepage {
       .container {
         flex-direction: column;
+        margin-bottom: 10%;
         .login-cart-buttons#login-cart-buttons {
           display: none;
         }

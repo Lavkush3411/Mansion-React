@@ -5,6 +5,7 @@
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
+  letter-spacing: 0.1rem;
   text-align: center;
   background-color: transparent;
   border: 2px solid transparent;
@@ -19,5 +20,17 @@
     color: #fff;
     background-color: black;
     border-color: black;
+  }
+}
+
+.sort-button {
+  margin: 30px 0 0 50px;
+  width: max-content;
+}
+
+@media (width<400px) {
+  .sort-button {
+    width: 100%;
+    margin: 30px 0;
   }
 }

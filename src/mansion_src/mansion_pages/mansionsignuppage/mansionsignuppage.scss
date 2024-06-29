@@ -2,28 +2,29 @@
   width: 100%;
   display: flex;
   justify-content: center;
-
+  min-height: 68vh;
   .signupform {
     > span.error {
       color: red;
     }
-    h1 {
+    > h1 {
       text-align: center;
+      font-weight: 750;
+      font-size: 2rem;
     }
-    margin-top: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 30%;
     gap: 5px;
     > * {
-      width: 100%;
+      width: inherit;
       padding: 5px 0px;
       background-color: transparent;
     }
     > label {
       cursor: pointer;
+      font-weight: 400;
     }
     > input {
       border: none;
@@ -41,6 +42,7 @@
     }
     > a:first-of-type {
       font-size: 0.8rem;
+      font-weight: 600;
     }
     > a:last-of-type {
       text-align: center;
@@ -51,8 +53,7 @@
 @media (width<400px) {
   .mansionsignuppage {
     .signupform {
-      margin-top: 12%;
-      width: 80%;
+      width: 90%;
     }
   }
 }
@@ -60,8 +61,7 @@
 @media (400px<=width<=600px) {
   .mansionsignuppage {
     .signupform {
-      margin-top: 12%;
-      width: 60%;
+      width: 80%;
     }
   }
 }
@@ -69,8 +69,8 @@
 @media (600px<=width<=800px) {
   .mansionsignuppage {
     .signupform {
-      margin-top: 8%;
-      width: 50%;
+      margin-top: 10%;
+      width: 70%;
     }
   }
 }
@@ -79,7 +79,7 @@
   .mansionsignuppage {
     .signupform {
       margin-top: 5%;
-      width: 40%;
+      width: 50%;
     }
   }
 }

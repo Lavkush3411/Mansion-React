@@ -110,7 +110,7 @@ const router = createBrowserRouter([
         loader: (path) => productLoader(path),
       },
       {
-        path: "search",
+        path: "search?key",
         element: createLazyRoute(<MansionSearchPage />),
       },
       {

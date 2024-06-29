@@ -10,6 +10,7 @@ function SearchBar() {
   const { productListDispatch } = useContext(ProductListContext);
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const navigate = useNavigate();
+
   function onSearch() {
     const searchWorker = new Worker("/search.js");
     searchWorker.postMessage({
@@ -18,7 +19,6 @@ function SearchBar() {
     });
 
     searchWorker.onmessage = (event) => {
-      setSearchQuerry("");
       productListDispatch({ type: "search", payload: event.data });
       setShowSearch(false);
       navigate("search");

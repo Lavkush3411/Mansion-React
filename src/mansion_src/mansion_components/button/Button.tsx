@@ -5,18 +5,20 @@ function Button({
   type = "button",
   children,
   bgCol = "",
+  className = "",
 }: {
   onClick?: any;
   type?: "button" | "submit";
   children?: any;
   bgCol?: string;
+  className?: string;
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
       style={{ backgroundColor: bgCol }}
-      className="button"
+      className={`button ${className}`}
     >
       {children}
     </button>

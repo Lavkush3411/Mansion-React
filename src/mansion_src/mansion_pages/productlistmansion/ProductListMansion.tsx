@@ -7,6 +7,7 @@ import Loader from "../../../admin_src/components/loader/Loader";
 import axios from "axios";
 const env = import.meta.env;
 import { useQuery } from "@tanstack/react-query";
+import SortingButton from "../../mansion_components/button/SortingButton";
 interface Stock {
   _id: string;
   size: string;
@@ -35,14 +36,17 @@ function ProductListMansion() {
 
   if (isFetching || state === "loading") return <Loader />;
   return (
-    <div className="product-list-container">
-      <div className="product-list">
-        {data &&
-          data.map((productItem: Data) => (
-            <ProductCard key={productItem._id} productItem={productItem} />
-          ))}
+    <>
+      <SortingButton />
+      <div className="product-list-container">
+        <div className="product-list">
+          {data &&
+            data.map((productItem: Data) => (
+              <ProductCard key={productItem._id} productItem={productItem} />
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -6,8 +6,12 @@
   }
 }
 
-@media (width>570px) {
-  .mobile-navbar {
-    display: none;
-  }
+.card-title {
+  margin: 5px 0;
+}
+
+.body-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

@@ -36,7 +36,7 @@ function MansionHomePage() {
 
   const navigate = useNavigate();
   const disptach = useDispatch();
-
+  const title = "Mansion";
   // this effect is used to check authentication status of user
   const location = useLocation();
   const pathname = location.pathname;
@@ -83,7 +83,11 @@ function MansionHomePage() {
         <header className="header-section">
           <div className="container">
             <Link to="/home">
-              <h1 className="logo">Mansion</h1>
+              <h1 className="logo">
+                {title.split("").map((char, index) => (
+                  <div key={index}>{char}</div>
+                ))}
+              </h1>
             </Link>
             <SearchBar />
             <div className="login-cart-buttons" id="login-cart-buttons">

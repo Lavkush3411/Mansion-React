@@ -32,13 +32,15 @@ function MobileNavBar() {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>
-            {<h1 className="cart-title">OUR PRODUCTS</h1>}
+            {<h1 className="card-title">OUR PRODUCTS</h1>}
           </DrawerHeader>
 
           <DrawerBody>
-            {state.productItems.map((product: { name: string }) => (
-              <StyledLink name={product.name} />
-            ))}
+            <div className="body-items">
+              {state.productItems.map((product: { name: string }) => (
+                <StyledLink name={product.name} />
+              ))}
+            </div>
           </DrawerBody>
 
           <DrawerFooter></DrawerFooter>

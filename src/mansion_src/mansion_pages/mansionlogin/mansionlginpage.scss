@@ -1,7 +1,7 @@
 .mansionloginpage {
   width: 100%;
   display: flex;
-  justify-content: center;
+  min-height: 68vh;
 
   .loginform {
     > span.error {
@@ -9,26 +9,29 @@
     }
     h1 {
       text-align: center;
+      font-weight: 750;
+      font-size: 2rem;
     }
-    margin-top: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 30%;
     gap: 5px;
+    margin-top: 5%;
     > * {
-      width: 100%;
+      width: inherit;
       padding: 5px 0px;
       background-color: transparent;
     }
     > label {
       cursor: pointer;
+      font-weight: 400;
     }
     > input {
       border: none;
       border-bottom: 1px solid black;
       outline: none;
+
       padding: 5px;
       color: black;
     }
@@ -41,9 +44,11 @@
     }
     > a:first-of-type {
       font-size: 0.8rem;
+      font-weight: 600;
     }
     > a:last-of-type {
       text-align: center;
+      font-weight: 600;
     }
   }
 }
@@ -51,17 +56,15 @@
 @media (width<400px) {
   .mansionloginpage {
     .loginform {
-      margin-top: 15%;
       width: 90%;
     }
   }
 }
 
-@media (400px<=width<=600px) {
+@media (400px<=width<600px) {
   .mansionloginpage {
     .loginform {
-      margin-top: 12%;
-      width: 60%;
+      width: 80%;
     }
   }
 }
@@ -69,17 +72,17 @@
 @media (600px<=width<=800px) {
   .mansionloginpage {
     .loginform {
-      margin-top: 8%;
-      width: 50%;
+      margin-top: 10%;
+      width: 70%;
     }
   }
 }
 
-@media (800px<width<=1200px) {
+@media (800px<width<=1400px) {
   .mansionloginpage {
     .loginform {
       margin-top: 5%;
-      width: 40%;
+      width: 50%;
     }
   }
 }

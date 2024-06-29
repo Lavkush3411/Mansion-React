@@ -6,24 +6,31 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./mansionhomepage.scss";
-import { useContext, useEffect, useState } from "react";
-import Cart from "../../mansion_components/Cart/Cart";
+import { lazy, useContext, useEffect, useState } from "react";
+import SearchBar from "../../mansion_components/searchbar/SearchBar";
+import { openUserDrawer } from "../../../redux/userDrawerSlice";
+import { FaRegUserCircle } from "react-icons/fa";
 import { UserContext } from "../../../UserContextProvider";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../mansion_components/navbar/Navbar";
 import Footer from "../../mansion_components/footer/Footer";
-import Bottom from "../../mansion_components/bottom/Bottom";
 import { prefetch } from "../../../queryClient";
 import StyledButton from "../../mansion_components/button/StyledButton";
 import { useDispatch } from "react-redux";
 import { open } from "../../../redux/sidebarSlice";
-import MobileNavBar from "../../mansion_components/navbar/MobileNavBar";
-import SearchBar from "../../mansion_components/searchbar/SearchBar";
-import { openUserDrawer } from "../../../redux/userDrawerSlice";
-import UserSection from "../userdetails/UserSection";
-import { FaRegUserCircle } from "react-icons/fa";
-import DeleteCartPopUp from "../../mansion_components/popups/deleteCartPopUp";
-import SizePopUp from "../../mansion_components/popups/sizePopUp";
+const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
+const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
+const MobileNavBar = lazy(
+  () => import("../../mansion_components/navbar/MobileNavBar")
+);
+
+const UserSection = lazy(() => import("../userdetails/UserSection"));
+const DeleteCartPopUp = lazy(
+  () => import("../../mansion_components/popups/deleteCartPopUp")
+);
+const SizePopUp = lazy(
+  () => import("../../mansion_components/popups/sizePopUp")
+);
 
 const loader: LoaderFunction = async () => {
   return null;

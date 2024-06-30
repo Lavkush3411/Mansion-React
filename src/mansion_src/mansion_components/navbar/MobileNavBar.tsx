@@ -38,7 +38,7 @@ function MobileNavBar() {
           <DrawerBody>
             <div className="body-items">
               {state.productItems.map((product: { name: string }) => (
-                <StyledLink name={product.name} />
+                <StyledLink key={product.name} name={product.name} />
               ))}
             </div>
           </DrawerBody>

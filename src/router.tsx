@@ -104,14 +104,15 @@ const router = createBrowserRouter([
         element: createLazyRoute(<PasswordReset />),
       },
       { path: "signup", element: createLazyRoute(<MansionSignUPPage />) },
+
+      {
+        path: "search",
+        element: createLazyRoute(<MansionSearchPage />),
+      },
       {
         path: ":productName",
         element: createLazyRoute(<ProductListMansion />),
         loader: (path) => productLoader(path),
-      },
-      {
-        path: "search?key",
-        element: createLazyRoute(<MansionSearchPage />),
       },
       {
         path: "product/:id",

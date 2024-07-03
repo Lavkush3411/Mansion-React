@@ -9,7 +9,7 @@ import queryClient from "../../../queryClient";
 const env = import.meta.env;
 
 interface sizeListItem {
-  id: string;
+  _id: string;
   size: string;
   quantity: number;
 }
@@ -42,12 +42,12 @@ function NewProduct() {
   // function executed when images are selected
   const addSize = () => {
     setSizeList((prev) => {
-      return [...prev, { id: uuid(), size: "", quantity: 0 }];
+      return [...prev, { _id: uuid(), size: "", quantity: 0 }];
     });
   };
 
   const removeSize = (removeSizeID: string): void => {
-    setSizeList(sizeList.filter((size) => size.id !== removeSizeID));
+    setSizeList(sizeList.filter((size) => size._id !== removeSizeID));
   };
 
   const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string): void => {
@@ -55,7 +55,7 @@ function NewProduct() {
 
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
-        if (item.id === id) {
+        if (item._id === id) {
           item.size = e.target.value;
         }
         return item;
@@ -70,7 +70,7 @@ function NewProduct() {
     console.log(sizeList);
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
-        if (item.id === id) {
+        if (item._id === id) {
           item.quantity = Number(e.target.value);
         }
         return item;
@@ -209,11 +209,11 @@ function NewProduct() {
           />
           <label>Stock</label>
           {sizeList.map((size) => (
-            <div className="size-quantity" key={size.id}>
+            <div className="size-quantity" key={size._id}>
               <select
                 required
                 className="size"
-                onChange={(e) => updateSize(e, size.id)}
+                onChange={(e) => updateSize(e, size._id)}
               >
                 <option value="" hidden>
                   Size
@@ -228,13 +228,13 @@ function NewProduct() {
                 required
                 type="number"
                 className="quantity"
-                onChange={(e) => updateQuantity(e, size.id)}
+                onChange={(e) => updateQuantity(e, size._id)}
               />
               {sizeList.length > 1 && (
                 <button
                   type="button"
                   className="close-button"
-                  onClick={() => removeSize(size.id)}
+                  onClick={() => removeSize(size._id)}
                 >
                   X
                 </button>

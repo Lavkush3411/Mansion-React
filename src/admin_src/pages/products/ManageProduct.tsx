@@ -6,7 +6,7 @@ import { ButtonContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
 import CancelIcon from "@mui/icons-material/Cancel";
 interface Size {
-  id: string;
+  _id: string;
   quantity: number;
   size: string;
 }
@@ -58,14 +58,14 @@ function ManageProduct() {
 
   const addSize = () => {
     setSizeList((prevList: Size[]): Size[] => {
-      return [...prevList, { id: uuid(), size: "", quantity: 0 }];
+      return [...prevList, { _id: uuid(), size: "", quantity: 0 }];
     });
   };
 
   const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string) => {
     setSizeList((prev): Size[] =>
       prev.map((item: Size): Size => {
-        if (id === item.id) {
+        if (id === item._id) {
           item.size = e.target.value;
         }
         return item;
@@ -75,7 +75,7 @@ function ManageProduct() {
   const updateQuantity = (e: ChangeEvent<HTMLInputElement>, id: string) => {
     setSizeList((prev): Size[] => {
       return prev.map((item: Size): Size => {
-        if (item.id === id) {
+        if (item._id === id) {
           item.quantity = Number(e.target.value);
         }
         return item;
@@ -84,7 +84,7 @@ function ManageProduct() {
   };
   const removeSize = (id: string) => {
     setSizeList((prev): Size[] => {
-      return prev.filter((item): boolean => item.id !== id);
+      return prev.filter((item): boolean => item._id !== id);
     });
   };
   function removeImage(id: string) {
@@ -160,11 +160,11 @@ function ManageProduct() {
           />
           <label>Stock</label>
           {sizeList.map((size) => (
-            <div className="size-quantity" key={size.id}>
+            <div className="size-quantity" key={size._id}>
               <select
                 required
                 className="size"
-                onChange={(e) => updateSize(e, size.id)}
+                onChange={(e) => updateSize(e, size._id)}
               >
                 <option value="" hidden>
                   Size
@@ -179,13 +179,13 @@ function ManageProduct() {
                 required
                 type="number"
                 className="quantity"
-                onChange={(e) => updateQuantity(e, size.id)}
+                onChange={(e) => updateQuantity(e, size._id)}
               />
               {sizeList.length > 1 && (
                 <button
                   type="button"
                   className="close-button"
-                  onClick={() => removeSize(size.id)}
+                  onClick={() => removeSize(size._id)}
                 >
                   X
                 </button>

@@ -1,11 +1,12 @@
 const env = import.meta.env;
 import axios from "axios";
 import Button from "../button/Button";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext } from "react";
 import "./cartsummary.scss";
 import { useSelector } from "react-redux";
 import SummaryItem from "../summaryItem/SummaryItem";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../../../UserContextProvider";
 interface Data {
   _id: string;
   productName: string;
@@ -27,6 +28,7 @@ function CartSummary({
   const subtotal = checkoutProducts.reduce((total, product) => {
     return total + Number(product.productPrice) * Number(product.qty);
   }, 0);
+  const { loggedinuser } = useContext(UserContext);
   const redirectPath = useLocation();
 
   async function onCheckOut(
@@ -34,8 +36,10 @@ function CartSummary({
   ) {
     e.preventDefault();
     const response = await axios.post(env.VITE_BASE_URL + "payment/initiate", {
-      transactionAmount: subtotal,
+      user: loggedinuser,
+      totalAmount: subtotal,
       contactNumber: 7854696543,
+      products: checkoutProducts,
       redirectPath: redirectPath.pathname,
     });
     window.location.href = response.data.url;

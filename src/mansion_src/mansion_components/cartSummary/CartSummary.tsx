@@ -1,12 +1,13 @@
 const env = import.meta.env;
 import axios from "axios";
 import Button from "../button/Button";
-import { SetStateAction, useContext } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import "./cartsummary.scss";
 import { useSelector } from "react-redux";
 import SummaryItem from "../summaryItem/SummaryItem";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../UserContextProvider";
+import { Spinner } from "@chakra-ui/react";
 interface Data {
   _id: string;
   productName: string;
@@ -21,6 +22,7 @@ function CartSummary({
 }: {
   onButtonClick: React.Dispatch<SetStateAction<boolean>>;
 }) {
+  const [checkOutButtonDisabled, setCheckoutButtonDisabled] = useState(false);
   const checkoutProducts = useSelector(
     (store: any) => store.checkoutProducts
   ) as Data[];
@@ -35,6 +37,7 @@ function CartSummary({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
+    setCheckoutButtonDisabled(true);
     const response = await axios.post(env.VITE_BASE_URL + "payment/initiate", {
       user: loggedinuser,
       totalAmount: subtotal,
@@ -59,8 +62,12 @@ function CartSummary({
           <h1>Total : {subtotal}</h1>
         </div>
         <div className="button-wrapper">
-          <Button onClick={onCheckOut} type="submit">
-            Checkout
+          <Button
+            onClick={onCheckOut}
+            disabledState={checkOutButtonDisabled}
+            type="submit"
+          >
+            {checkOutButtonDisabled ? <Spinner /> : "Checkout"}
           </Button>
           <Button onClick={() => onButtonClick(true)} type="submit">
             Back

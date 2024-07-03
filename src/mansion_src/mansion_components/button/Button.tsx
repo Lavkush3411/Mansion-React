@@ -6,12 +6,14 @@ function Button({
   children,
   bgCol = "",
   className = "",
+  disabledState = false,
 }: {
   onClick?: any;
   type?: "button" | "submit";
   children?: any;
   bgCol?: string;
   className?: string;
+  disabledState?: boolean;
 }) {
   return (
     <button
@@ -19,6 +21,7 @@ function Button({
       onClick={onClick}
       style={{ backgroundColor: bgCol }}
       className={`button ${className}`}
+      disabled={disabledState}
     >
       {children}
     </button>

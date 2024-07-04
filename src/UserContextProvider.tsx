@@ -13,30 +13,33 @@ interface actionType {
 }
 
 interface initialContextValueType {
-  loggedinuser: UserType | {};
+  loggedinuser: UserType | null;
   userDispatch: React.Dispatch<any>;
 }
 
 const UserContext = createContext<initialContextValueType>({
-  loggedinuser: {},
+  loggedinuser: null,
   userDispatch: () => {},
 });
 
-const reducer = (state: UserType | {}, action: actionType): UserType | {} => {
+const reducer = (
+  state: UserType | null,
+  action: actionType
+): UserType | null => {
   switch (action.type) {
     case "login":
       //   console.log({ context: { ...action.payload } });
       return { ...action.payload };
     case "logout":
-      return {};
+      return null;
     default:
-      return { ...state };
+      return state;
   }
 };
 
-const initialValue: UserType | {} = localStorage.getItem("Token")
+const initialValue: UserType | null = localStorage.getItem("Token")
   ? jwtDecode(localStorage.getItem("Token") || "")
-  : {};
+  : null;
 
 function UserContexProvider({ children }: { children: ReactNode }) {
   const [user, userDispatch] = useReducer(reducer, initialValue);

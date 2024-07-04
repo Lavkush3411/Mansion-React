@@ -9,7 +9,7 @@ function StyledLink({ name }: { name: string }) {
       className="nav-item-link"
       onClick={() => dispatch(closeMenu())}
       key={name}
-      to={`/${name}`}
+      to={`/get/${name}`}
     >
       <div className="nav-item">{name}</div>
     </NavLink>

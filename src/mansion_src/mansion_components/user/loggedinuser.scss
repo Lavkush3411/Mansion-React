@@ -1,0 +1,32 @@
+@import "../../../admin_src/mixin";
+.logged-in-user {
+  .dashboard-wrapper {
+    > h3 {
+      padding: 5px;
+      @include heading;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: rgb(95, 91, 91);
+    }
+    > .dashboard {
+      margin-top: 10px;
+      display: flex;
+      padding: 10px;
+      flex-direction: column;
+      gap: 5px;
+      .dashboard-item {
+        @include heading;
+        padding: 5px 20px;
+        font-weight: 350;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        &.active {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        &:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+  }
+}

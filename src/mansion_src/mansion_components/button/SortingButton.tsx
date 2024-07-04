@@ -20,7 +20,8 @@ interface Data {
 
 function SortingButton() {
   const location = useLocation();
-  const queryKey = location.pathname.replace("/", "");
+  let queryKey = location.pathname;
+  queryKey = queryKey !== "/search" ? queryKey.split("/")[2] : "search";
   const queryClient = useQueryClient();
   const { productListState, productListDispatch } =
     useContext(ProductListContext);

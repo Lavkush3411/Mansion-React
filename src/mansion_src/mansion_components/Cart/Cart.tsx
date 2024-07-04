@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode, useContext, useState } from "react";
 import "./cart.scss";
 import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
@@ -27,6 +27,11 @@ interface CartItemType {
   qty: number;
   size: string;
 }
+
+// const SidbarStyle={
+//   <style></style>
+// }
+
 function Cart() {
   const {
     cartList,
@@ -47,7 +52,7 @@ function Cart() {
     setShowCart(true);
     setCheckoutState(true);
   }
-
+  const [innerWidth] = useState(window.innerWidth);
   return (
     <>
       <Drawer
@@ -57,7 +62,9 @@ function Cart() {
         onClose={() => disptach(close())}
       >
         <DrawerOverlay />
-        <DrawerContent padding={"0px 0px 50px 0px"}>
+        <DrawerContent
+          padding={innerWidth <= 700 ? "0px 0px 50px 0px" : "0px 0px 0px 0px"}
+        >
           <DrawerCloseButton />
           <DrawerHeader>
             {cartList.length > 0 && <div className="cart-title">YOUR CART</div>}

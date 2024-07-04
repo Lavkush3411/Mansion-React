@@ -11,7 +11,7 @@ function Navbar() {
         <div className="navbar-items">
           {state.productItems.map(
             (product: { name: string; image: string }) => (
-              <NavLink key={product.name} to={`/${product.name}`}>
+              <NavLink key={product.name} to={`/get/${product.name}`}>
                 {product.name}
               </NavLink>
             )

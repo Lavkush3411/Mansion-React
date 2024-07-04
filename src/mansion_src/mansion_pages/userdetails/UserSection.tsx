@@ -13,11 +13,16 @@ import { closeUserDrawer } from "../../../redux/userDrawerSlice";
 import { NavLink } from "react-router-dom";
 import Button from "../../mansion_components/button/Button";
 import "./usersection.scss";
-import StyledButton from "../../mansion_components/button/StyledButton";
+import { useContext, useState } from "react";
+import { UserContext } from "../../../UserContextProvider";
+import NotLoggedInUser from "../../mansion_components/user/NotLoggedInUser";
+import LoggedInUser from "../../mansion_components/user/LoggedInUser";
 
 function UserSection() {
   const isOpen = useSelector((state: RootState) => state.userDrawer.isOpen);
   const dispatch = useDispatch();
+  const { loggedinuser } = useContext(UserContext);
+  const [innerWidth] = useState(window.innerWidth);
   return (
     <Drawer
       variant={"cart"}
@@ -26,28 +31,16 @@ function UserSection() {
       onClose={() => dispatch(closeUserDrawer())}
     >
       <DrawerOverlay />
-      <DrawerContent padding={"0px 0px 50px 0px"}>
+      <DrawerContent padding={innerWidth <= 700 ? "0px 0px 50px 0px" : "0px "}>
         <DrawerCloseButton />
-        <DrawerHeader>Hey, User </DrawerHeader>
+        <DrawerHeader>Hey, {loggedinuser && loggedinuser.name}</DrawerHeader>
 
         <DrawerBody>
-          {
-            // if not login then show
-            <div className="user-login-buttons">
-              <NavLink
-                to={"/login"}
-                onClick={() => dispatch(closeUserDrawer())}
-              >
-                <Button>Login</Button>
-              </NavLink>
-              <NavLink
-                to={"/signup"}
-                onClick={() => dispatch(closeUserDrawer())}
-              >
-                <StyledButton bgCol="black">SignUp</StyledButton>
-              </NavLink>
-            </div>
-          }
+          {loggedinuser ? (
+            <LoggedInUser />
+          ) : (
+            <NotLoggedInUser />
+          )}
         </DrawerBody>
 
         <DrawerFooter width={"100%"}>

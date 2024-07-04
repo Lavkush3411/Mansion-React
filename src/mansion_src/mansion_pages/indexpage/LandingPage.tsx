@@ -22,7 +22,7 @@ function LandingPage() {
 
       <div className="bottom-products-conatiner">
         {state.productItems.map((product: { name: string; image: string }) => (
-          <NavLink key={product.name} to={`/${product.name}`}>
+          <NavLink key={product.name} to={`/get/${product.name}`}>
             <div className="product-wrapper">
               <img src={product.image} alt="" />
               <div className="text">{product.name}</div>

@@ -4,6 +4,7 @@
 
 @media (width<700px) {
   .bottom {
+    z-index: 2100;
     background-color: black;
     height: 50px;
     position: sticky;

@@ -29,7 +29,7 @@ function MobileNavBar() {
         onClose={() => dispatch(closeMenu())}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent padding={"0px 0px 50px 0px"}>
           <DrawerCloseButton />
           <DrawerHeader>
             {<h1 className="card-title">OUR PRODUCTS</h1>}

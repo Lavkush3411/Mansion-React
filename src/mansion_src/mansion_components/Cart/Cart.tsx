@@ -57,7 +57,7 @@ function Cart() {
         onClose={() => disptach(close())}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent padding={"0px 0px 50px 0px"}>
           <DrawerCloseButton />
           <DrawerHeader>
             {cartList.length > 0 && <div className="cart-title">YOUR CART</div>}

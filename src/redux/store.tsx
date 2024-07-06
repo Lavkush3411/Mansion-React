@@ -6,6 +6,7 @@ import userDrawerSlice from "./userDrawerSlice";
 import popUpSlice from "./deleteCartPopUpSlice";
 import sizeSelectorPopUpSlice from "./sizeSelectorPopUpSlice";
 import userSlice from "./userSlice";
+import authenticatedSlice from "./authenticatedSlice";
 const store = configureStore({
   reducer: {
     checkoutProducts: checkOutProductsReducer,
@@ -15,6 +16,7 @@ const store = configureStore({
     popUp: popUpSlice,
     sizeSelectPopUp: sizeSelectorPopUpSlice,
     user: userSlice,
+    authentication: authenticatedSlice,
   },
 });
 

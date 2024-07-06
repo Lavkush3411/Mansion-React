@@ -16,8 +16,14 @@ import Navbar from "../../mansion_components/navbar/Navbar";
 import Footer from "../../mansion_components/footer/Footer";
 import { prefetch } from "../../../queryClient";
 import StyledButton from "../../mansion_components/button/StyledButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { open } from "../../../redux/sidebarSlice";
+import { logout } from "../../../redux/userSlice";
+import { RootState } from "../../../redux/store";
+import {
+  deauthenticate,
+  setAuthentiation,
+} from "../../../redux/authenticatedSlice";
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
 const MobileNavBar = lazy(
@@ -37,12 +43,13 @@ const loader: LoaderFunction = async () => {
 };
 
 function MansionHomePage() {
-  const { loggedinuser, userDispatch } = useContext(UserContext);
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const { loggedinuser } = useContext(UserContext);
   const [loading, setLoad] = useState(true);
-
+  const authenticated = useSelector(
+    (store: RootState) => store.authentication.authenticated
+  );
   const navigate = useNavigate();
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const title = "Mansion";
   // this effect is used to check authentication status of user
   const location = useLocation();
@@ -61,11 +68,12 @@ function MansionHomePage() {
   useEffect(() => {
     useAuth("user/verify")
       .then((res) => {
-        setAuthenticated(res as boolean);
+        dispatch(setAuthentiation({ authenticated: res as boolean }));
+        dispatch;
         setLoad(false);
       })
       .catch(() => {
-        setAuthenticated(false);
+        dispatch(deauthenticate());
         setLoad(false);
       });
   }, [loggedinuser]);
@@ -78,9 +86,8 @@ function MansionHomePage() {
 
   function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
-    localStorage.removeItem("Token");
-    userDispatch({ type: "logout" });
-    setAuthenticated(false);
+    dispatch(logout());
+    dispatch(deauthenticate());
     navigate("/login");
   }
   return (
@@ -120,7 +127,7 @@ function MansionHomePage() {
                 </Link>
               )}
 
-              <div className="cart" onClick={() => disptach(open())}>
+              <div className="cart" onClick={() => dispatch(open())}>
                 {/* button to open cart */}
                 <button className="cart-button">Cart</button>
               </div>
@@ -128,7 +135,7 @@ function MansionHomePage() {
               {/* button to open profile section */}
               <FaRegUserCircle
                 className="user-profile"
-                onClick={() => disptach(openUserDrawer())}
+                onClick={() => dispatch(openUserDrawer())}
               />
             </div>
           </div>

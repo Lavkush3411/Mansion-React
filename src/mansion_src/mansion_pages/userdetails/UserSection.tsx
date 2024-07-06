@@ -22,6 +22,9 @@ function UserSection() {
   const isOpen = useSelector((state: RootState) => state.userDrawer.isOpen);
   const dispatch = useDispatch();
   const { loggedinuser } = useContext(UserContext);
+  const authenticated = useSelector(
+    (store: RootState) => store.authentication.authenticated
+  );
   const [innerWidth] = useState(window.innerWidth);
   return (
     <Drawer
@@ -33,18 +36,19 @@ function UserSection() {
       <DrawerOverlay />
       <DrawerContent padding={innerWidth <= 700 ? "0px 0px 50px 0px" : "0px "}>
         <DrawerCloseButton />
-        <DrawerHeader>Hey, {loggedinuser && loggedinuser.name}</DrawerHeader>
+        <DrawerHeader>
+          Hey, {authenticated && loggedinuser && loggedinuser.name}
+        </DrawerHeader>
 
         <DrawerBody>
-          {loggedinuser ? (
-            <LoggedInUser />
-          ) : (
-            <NotLoggedInUser />
-          )}
+          {authenticated ? <LoggedInUser /> : <NotLoggedInUser />}
         </DrawerBody>
 
         <DrawerFooter width={"100%"}>
-          <NavLink to={"/tshirts"} onClick={() => dispatch(closeUserDrawer())}>
+          <NavLink
+            to={"get/tshirts"}
+            onClick={() => dispatch(closeUserDrawer())}
+          >
             <Button>FIND SOME TSHIRTS</Button>
           </NavLink>
         </DrawerFooter>

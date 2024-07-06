@@ -21,6 +21,7 @@ const userSlice = createSlice({
       return action.payload;
     },
     logout() {
+      localStorage.removeItem("Token");
       return null;
     },
   },

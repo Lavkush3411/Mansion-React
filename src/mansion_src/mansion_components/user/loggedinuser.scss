@@ -20,13 +20,15 @@
         font-weight: 350;
         border-radius: 5px;
         font-size: 1.1rem;
-        &.active {
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
+
         &:hover {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
       }
     }
   }
+}
+
+.dashboard-item.active {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

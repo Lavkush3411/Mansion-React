@@ -6,6 +6,7 @@ interface UserType {
   email: string;
   contact: number;
   isAdmin: boolean;
+  orders: string[];
 }
 interface actionType {
   type: string;

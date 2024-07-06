@@ -74,7 +74,9 @@ const MansionSearchPage = lazy(
 import { loader as productLoader } from "./mansion_src/mansion_pages/mansionhomepage/MansionHomePage";
 import { loader as allProductsLoader } from "./mansion_src/mansion_components/productitem/ProductItem";
 import LandingPage from "./mansion_src/mansion_pages/indexpage/LandingPage";
-import OrdersPage from "./mansion_src/mansion_pages/orderspage/OrdersPage";
+import OrdersPage, {
+  ordersLoader,
+} from "./mansion_src/mansion_pages/orderspage/OrdersPage";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
 const Transactions = lazy(
@@ -108,6 +110,7 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: createLazyRoute(<OrdersPage />),
+        loader: () => ordersLoader(),
       },
 
       {

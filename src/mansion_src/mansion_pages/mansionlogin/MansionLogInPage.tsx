@@ -4,6 +4,8 @@ import { FormEvent, useContext, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../UserContextProvider";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
+import { useDispatch } from "react-redux";
+import { login } from "../../../redux/userSlice";
 
 const env = import.meta.env;
 
@@ -14,6 +16,7 @@ function MansionLogInPage() {
   const [password, setPassword] = useState<string>("");
   const { userDispatch } = useContext(UserContext);
   const [err, setErr] = useState<string>("");
+  const dispatch = useDispatch();
   async function onSubmitHandler(e: FormEvent<HTMLFormElement>) {
     console.log("login is called");
     e.preventDefault();
@@ -33,6 +36,7 @@ function MansionLogInPage() {
         const user = jwtDecode(jsontoken);
         localStorage.setItem("Token", jsontoken);
         userDispatch({ type: "login", payload: user });
+        dispatch(login(user));
         // We will modify this to go to the page originally requested.
         // const redirectTo = location.state?.path || "/";
         // console.log(redirectTo);

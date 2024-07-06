@@ -5,6 +5,7 @@ import mobileNavbarSlice from "./mobileNavbarSlice";
 import userDrawerSlice from "./userDrawerSlice";
 import popUpSlice from "./deleteCartPopUpSlice";
 import sizeSelectorPopUpSlice from "./sizeSelectorPopUpSlice";
+import userSlice from "./userSlice";
 const store = configureStore({
   reducer: {
     checkoutProducts: checkOutProductsReducer,
@@ -13,6 +14,7 @@ const store = configureStore({
     userDrawer: userDrawerSlice,
     popUp: popUpSlice,
     sizeSelectPopUp: sizeSelectorPopUpSlice,
+    user: userSlice,
   },
 });
 

@@ -3,9 +3,10 @@ import TableHOC from "./Table";
 import { CiSettings } from "react-icons/ci";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ProductListContext } from "../../../ProductListContextProvider";
+import { Spinner } from "@chakra-ui/react";
 
 const env = import.meta.env;
 
@@ -80,16 +81,19 @@ const columns: Column<DataType>[] = [
     accessor: "delete",
     Cell: ({ row }) => {
       const { productListDispatch } = useContext(ProductListContext);
-
+      const [isDeleting, setIsDeleting] = useState<boolean>(false);
       return (
         <div
           onClick={async () => {
+            setIsDeleting(true);
             await deleteProduct(row.original.type, row.original._id);
+
             const data = await fetchData(row.original.type.slice(0, -1));
+            setIsDeleting(false);
             productListDispatch({ type: row.original.type, payload: data });
           }}
         >
-          <DeleteIcon />
+          {isDeleting ? <Spinner /> : <DeleteIcon />}
         </div>
       );
     },
@@ -128,7 +132,7 @@ function Cargo() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
 
   return (
     <div className="cargos">
@@ -151,7 +155,7 @@ function Bottom() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
 
   return (
     <div className="sweatpants">
@@ -180,7 +184,7 @@ function All() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
 
   return (
     <div className="products-list-class">
@@ -203,7 +207,7 @@ function Shirts() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
   return (
     <div className="shirts">
       {TableHOC<DataType>(filteredColumns, shirts, "shirts", "Shirts", true)()}
@@ -225,7 +229,7 @@ function Tshirts() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
   return (
     <div className="tshirts">
       {TableHOC<DataType>(
@@ -253,7 +257,7 @@ function Hoodie() {
       .catch(() => {
         console.log("error");
       });
-  }, []);
+  }, [productListDispatch]);
   return (
     <div className="hoodies">
       {TableHOC<DataType>(

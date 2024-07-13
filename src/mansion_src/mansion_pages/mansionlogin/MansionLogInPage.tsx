@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./mansionlginpage.scss";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../UserContextProvider";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/userSlice";
+import { RootState } from "../../../redux/store";
 
 const env = import.meta.env;
 
@@ -17,6 +18,19 @@ function MansionLogInPage() {
   const { userDispatch } = useContext(UserContext);
   const [err, setErr] = useState<string>("");
   const dispatch = useDispatch();
+
+  //login check effect
+
+  const authenticated = useSelector(
+    (store: RootState) => store.authentication.authenticated
+  );
+
+  useEffect(() => {
+    if (authenticated) {
+      navigate("/home");
+    }
+  }, [authenticated]);
+
   async function onSubmitHandler(e: FormEvent<HTMLFormElement>) {
     console.log("login is called");
     e.preventDefault();

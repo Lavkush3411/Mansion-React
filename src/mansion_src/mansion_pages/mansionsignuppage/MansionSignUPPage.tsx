@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./mansionsignuppage.scss";
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../UserContextProvider";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 const env = import.meta.env;
 
 interface UserType {
@@ -26,6 +28,16 @@ function MansionSignUpPage() {
     password: "",
     contact: "",
   });
+
+  const authenticated = useSelector(
+    (store: RootState) => store.authentication.authenticated
+  );
+
+  useEffect(() => {
+    if (authenticated) {
+      navigate("/home");
+    }
+  }, [authenticated]);
 
   function onDetailsChange(e: ChangeEvent<HTMLInputElement>) {
     setUserData((prev) => {

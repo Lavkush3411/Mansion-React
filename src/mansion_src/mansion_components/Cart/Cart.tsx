@@ -93,16 +93,20 @@ function Cart() {
                 })}{" "}
               </div>
             ) : (
-              <h2 className="empty-cart-title">Your Cart Is Empty</h2>
+              <div className="empty-cart">
+                <h2 className="empty-cart-title">Your Cart Is Empty</h2>
+              </div>
             )}
           </DrawerBody>
 
           <DrawerFooter width={"100%"}>
-            <BottomSection subtotal={subtotal}>
-              <Button type="button" onClick={(e: any) => onCheckout(e)}>
-                Checkout
-              </Button>
-            </BottomSection>
+            {cartList.length ? (
+              <BottomSection subtotal={subtotal}>
+                <Button type="button" onClick={(e: any) => onCheckout(e)}>
+                  Checkout
+                </Button>
+              </BottomSection>
+            ) : null}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

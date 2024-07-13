@@ -8,7 +8,10 @@ import {
 import "./mansionhomepage.scss";
 import { lazy, useContext, useEffect, useState } from "react";
 import SearchBar from "../../mansion_components/searchbar/SearchBar";
-import { openUserDrawer } from "../../../redux/userDrawerSlice";
+import {
+  closeUserDrawer,
+  openUserDrawer,
+} from "../../../redux/userDrawerSlice";
 import { FaRegUserCircle } from "react-icons/fa";
 import { UserContext } from "../../../UserContextProvider";
 import useAuth from "../../hooks/useAuth";
@@ -17,13 +20,16 @@ import Footer from "../../mansion_components/footer/Footer";
 import { prefetch } from "../../../queryClient";
 import StyledButton from "../../mansion_components/button/StyledButton";
 import { useDispatch, useSelector } from "react-redux";
-import { open } from "../../../redux/sidebarSlice";
+import { close, open } from "../../../redux/sidebarSlice";
 import { logout } from "../../../redux/userSlice";
 import { RootState } from "../../../redux/store";
 import {
   deauthenticate,
   setAuthentiation,
 } from "../../../redux/authenticatedSlice";
+import { closeMenu } from "../../../redux/mobileNavbarSlice";
+import { closePopUp } from "../../../redux/deleteCartPopUpSlice";
+import { closeSizeSelectPopUp } from "../../../redux/sizeSelectorPopUpSlice";
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
 const MobileNavBar = lazy(
@@ -65,18 +71,48 @@ function MansionHomePage() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  const { mobNav, sideBar, user, sizeSelector, popup } = useSelector(
+    (store: RootState) => ({
+      mobNav: store.mobileNavbar.isOpen,
+      sideBar: store.sidebar.isOpen,
+      user: store.userDrawer.isOpen,
+      sizeSelector: store.sizeSelectPopUp.isOpen,
+      popup: store.popUp.isOpen,
+    })
+  );
+
+  console.log(mobNav);
+
+  useEffect(() => {
+    function backButtonFunc() {
+      if (mobNav || sideBar || user || sizeSelector || popup) {
+        dispatch(close());
+        dispatch(closeMenu());
+        dispatch(closePopUp());
+        dispatch(closeSizeSelectPopUp());
+        dispatch(closeUserDrawer());
+        navigate(1);
+      }
+    }
+
+    window.addEventListener("popstate", backButtonFunc);
+
+    return () => {
+      window.removeEventListener("popstate", backButtonFunc);
+    };
+  }, [mobNav, sideBar, user, sizeSelector, popup]);
+
   useEffect(() => {
     useAuth("user/verify")
       .then((res) => {
         dispatch(setAuthentiation({ authenticated: res as boolean }));
-        dispatch;
         setLoad(false);
       })
       .catch(() => {
         dispatch(deauthenticate());
         setLoad(false);
       });
-  }, [loggedinuser]);
+  }, [loggedinuser, dispatch]);
 
   // this effect will fetch data in background after 2 seconds of loading website
   useEffect(() => {

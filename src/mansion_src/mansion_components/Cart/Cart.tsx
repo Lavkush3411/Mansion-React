@@ -19,6 +19,7 @@ import { RootState } from "../../../redux/store";
 import { close } from "../../../redux/sidebarSlice";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 interface CartItemType {
   _id: string;
@@ -45,10 +46,7 @@ function Cart() {
   const subtotal = cartList.reduce((total, product) => {
     return total + Number(product.productPrice) * Number(product.qty);
   }, 0);
-
-  const authenticated = useSelector(
-    (store: RootState) => store.authentication.authenticated
-  );
+  const [authenticated] = useAuth();
   const navigate = useNavigate();
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

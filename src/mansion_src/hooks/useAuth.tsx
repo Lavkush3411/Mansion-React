@@ -1,17 +1,40 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  deauthenticate,
+  setAuthentiation,
+} from "../../redux/authenticatedSlice";
 const env = import.meta.env;
 
-async function useAuth(path: string) {
-  return new Promise(async (resolve) => {
-    const token = localStorage.getItem("Token");
-    if (!token) return resolve(false);
-    try {
-      await axios.post(env.VITE_BASE_URL + path, { Token: token });
-      resolve(true);
-    } catch (error) {
-      resolve(false);
+function useAuth() {
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const token=localStorage.getItem("Token")
+  useEffect(() => {
+    async function checkAuth() {
+      if (!token) {
+        dispatch(deauthenticate());
+        setAuthenticated(false);
+        return;
+      }
+      try {
+        setLoading(true);
+        await axios.post(env.VITE_BASE_URL + "user/verify", { Token: token });
+        dispatch(setAuthentiation({ authenticated: true }));
+        setAuthenticated(true);
+      } catch (error) {
+        dispatch(deauthenticate());
+        setAuthentiation(false);
+      } finally {
+        setLoading(false);
+      }
     }
-  });
+    checkAuth();
+  }, [token]);
+
+  return [authenticated, loading];
 }
 
 export default useAuth;

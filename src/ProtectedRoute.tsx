@@ -1,21 +1,11 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { ReactNode } from "react";
 import UnAuthorised from "./mansion_src/mansion_pages/unauthorisedpage/UnAuthorised";
 import Loader from "./admin_src/components/loader/Loader";
-import useAuth from "./mansion_src/hooks/useAuth";
+import { useAdminAuth } from "./mansion_src/hooks/useAdminAuth";
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
-  const navigate = useNavigate();
-  const location = useLocation();
-  useEffect(() => {
-    useAuth("user/verify-admin")
-      .then((res) => {
-        setAuthenticated(res as boolean);
-        navigate(location.pathname);
-      })
-      .catch(() => setAuthenticated(false));
-  }, []);
+  const token = localStorage.getItem("Token");
+  const authenticated = useAdminAuth(token);
 
   return authenticated === null ? (
     <Loader />

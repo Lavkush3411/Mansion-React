@@ -1,35 +1,22 @@
-import {
-  Link,
-  LoaderFunction,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, LoaderFunction, Outlet, useNavigate } from "react-router-dom";
 import "./mansionhomepage.scss";
-import { lazy, useContext, useEffect, useState } from "react";
+import { lazy } from "react";
 import SearchBar from "../../mansion_components/searchbar/SearchBar";
-import {
-  closeUserDrawer,
-  openUserDrawer,
-} from "../../../redux/userDrawerSlice";
+import { openUserDrawer } from "../../../redux/userDrawerSlice";
 import { FaRegUserCircle } from "react-icons/fa";
-import { UserContext } from "../../../UserContextProvider";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../mansion_components/navbar/Navbar";
 import Footer from "../../mansion_components/footer/Footer";
-import { prefetch } from "../../../queryClient";
 import StyledButton from "../../mansion_components/button/StyledButton";
 import { useDispatch, useSelector } from "react-redux";
-import { close, open } from "../../../redux/sidebarSlice";
+import { open } from "../../../redux/sidebarSlice";
 import { logout } from "../../../redux/userSlice";
 import { RootState } from "../../../redux/store";
-import {
-  deauthenticate,
-  setAuthentiation,
-} from "../../../redux/authenticatedSlice";
-import { closeMenu } from "../../../redux/mobileNavbarSlice";
-import { closePopUp } from "../../../redux/deleteCartPopUpSlice";
-import { closeSizeSelectPopUp } from "../../../redux/sizeSelectorPopUpSlice";
+import { deauthenticate } from "../../../redux/authenticatedSlice";
+import { useBackToClosePopup } from "../../hooks/useBackToClosePopup";
+import { useScrollToTop } from "../../hooks/useScrolltoTop";
+import useShowSearchAndProductList from "../../hooks/useShowSearchAndProductList";
+import { usePrefetch } from "../../hooks/usePrefetch";
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
 const MobileNavBar = lazy(
@@ -49,76 +36,16 @@ const loader: LoaderFunction = async () => {
 };
 
 function MansionHomePage() {
-  const { loggedinuser } = useContext(UserContext);
-  const [loading, setLoad] = useState(true);
+  useAuth();
+  useBackToClosePopup();
+  useScrollToTop();
+  usePrefetch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const showSearchAndProductList = useShowSearchAndProductList();
   const authenticated = useSelector(
     (store: RootState) => store.authentication.authenticated
   );
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const title = "Mansion";
-  // this effect is used to check authentication status of user
-  const location = useLocation();
-  const pathname = location.pathname;
-  const showSearchAndProductList =
-    pathname.includes("cargos") ||
-    pathname.includes("bottoms") ||
-    pathname.includes("tshirts") ||
-    pathname.includes("shirts") ||
-    pathname.includes("hoodies") ||
-    pathname.includes("search");
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  const { mobNav, sideBar, user, sizeSelector, popup } = useSelector(
-    (store: RootState) => ({
-      mobNav: store.mobileNavbar.isOpen,
-      sideBar: store.sidebar.isOpen,
-      user: store.userDrawer.isOpen,
-      sizeSelector: store.sizeSelectPopUp.isOpen,
-      popup: store.popUp.isOpen,
-    })
-  );
-
-  console.log(mobNav);
-
-  useEffect(() => {
-    function backButtonFunc() {
-      if (mobNav || sideBar || user || sizeSelector || popup) {
-        dispatch(close());
-        dispatch(closeMenu());
-        dispatch(closePopUp());
-        dispatch(closeSizeSelectPopUp());
-        dispatch(closeUserDrawer());
-        navigate(1);
-      }
-    }
-
-    window.addEventListener("popstate", backButtonFunc);
-
-    return () => {
-      window.removeEventListener("popstate", backButtonFunc);
-    };
-  }, [mobNav, sideBar, user, sizeSelector, popup]);
-
-  useEffect(() => {
-    useAuth("user/verify")
-      .then((res) => {
-        dispatch(setAuthentiation({ authenticated: res as boolean }));
-        setLoad(false);
-      })
-      .catch(() => {
-        dispatch(deauthenticate());
-        setLoad(false);
-      });
-  }, [loggedinuser, dispatch]);
-
-  // this effect will fetch data in background after 2 seconds of loading website
-  useEffect(() => {
-    const fetch = setTimeout(prefetch, 2000);
-    return () => clearTimeout(fetch);
-  }, []);
 
   function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
@@ -134,22 +61,14 @@ function MansionHomePage() {
           <div className="container">
             <Link to="/home">
               <h1 className="logo">
-                {title.split("").map((char, index) => (
+                {"Mansion".split("").map((char, index) => (
                   <div key={index}>{char}</div>
                 ))}
               </h1>
             </Link>
             <SearchBar />
             <div className="login-cart-buttons" id="login-cart-buttons">
-              {loading ? (
-                <Link
-                  to={"/login"}
-                  onClick={(e) => onLogout(e)}
-                  className="login"
-                >
-                  <StyledButton>Logout</StyledButton>
-                </Link>
-              ) : !authenticated ? (
+              {!authenticated ? (
                 <Link to={"/login"} className="login">
                   <StyledButton>Login</StyledButton>
                 </Link>

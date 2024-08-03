@@ -137,6 +137,7 @@ function MansionSignUpPage() {
           <input
             type="password"
             id="password"
+            name="password"
             required
             value={userData.password}
             onChange={(e) => onDetailsChange(e)}

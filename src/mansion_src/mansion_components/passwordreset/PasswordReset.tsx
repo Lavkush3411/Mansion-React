@@ -48,7 +48,7 @@ function PasswordReset() {
         formdata
       );
       if (res.status === 200) {
-        navigate("/home/login");
+        navigate("/login");
       }
     } catch (e: any) {
       if (e.response.status === 400) {

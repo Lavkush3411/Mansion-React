@@ -22,7 +22,7 @@ interface Data {
   stock: Stock[];
 }
 async function fetchData(productName: string) {
-  const res = await axios.get(env.VITE_BASE_URL + "get/" + productName);
+  const res = await axios.get(env.VITE_BASE_URL + "products/" + productName);
   return res.data;
 }
 function ProductListMansion() {

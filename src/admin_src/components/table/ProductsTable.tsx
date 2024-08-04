@@ -125,7 +125,7 @@ function Cargo() {
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("cargo")
+    fetchData("cargos")
       .then((data: DataType[]) => {
         productListDispatch({ type: "cargos", payload: data });
       })
@@ -148,7 +148,7 @@ function Bottom() {
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("bottom")
+    fetchData("bottoms")
       .then((data: DataType[]) => {
         productListDispatch({ type: "bottoms", payload: data });
       })
@@ -200,7 +200,7 @@ function Shirts() {
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("shirt")
+    fetchData("shirts")
       .then((data: DataType[]) => {
         productListDispatch({ type: "shirts", payload: data });
       })
@@ -222,7 +222,7 @@ function Tshirts() {
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("tshirt")
+    fetchData("tshirts")
       .then((data: DataType[]) => {
         productListDispatch({ type: "tshirts", payload: data });
       })
@@ -250,7 +250,7 @@ function Hoodie() {
   } = useContext(ProductListContext);
 
   useEffect(() => {
-    fetchData("hoodie")
+    fetchData("hoodies")
       .then((data: DataType[]) => {
         productListDispatch({ type: "hoodies", payload: data });
       })

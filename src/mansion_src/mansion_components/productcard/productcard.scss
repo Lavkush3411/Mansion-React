@@ -34,7 +34,7 @@
       font-family: "plus jakarta sans", sans-serif;
       padding: 5px 5px 0 5px;
       &:hover {
-        color: rgb(0, 179, 255);
+        font-weight: bold;
       }
     }
     .product-price {
@@ -45,12 +45,12 @@
     }
   }
   .cart-btn {
-    display: none;
-    padding: 0 5px;
+    padding: 0 20px;
+    transition: all 0.2s ease-in;
   }
   &:hover {
     .cart-btn {
-      display: block;
+      padding: 0 10px;
     }
   }
 }

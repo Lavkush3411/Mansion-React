@@ -51,8 +51,10 @@ function ProductCard({ productItem }: ProductCardProps) {
         <span className="product-price">₹{[productItem.productPrice]}</span>
       </Link>
       <div className="cart-btn" onClick={(e) => onAddToCart(e, productItem)}>
-        <Button>
-          <MdAddShoppingCart style={{ fontSize: "1.5rem", margin: "0 auto" }} />
+        <Button bgCol="black">
+          <MdAddShoppingCart
+            style={{ fontSize: "1.5rem", color: "white", margin: "0 auto" }}
+          />
         </Button>
       </div>
     </div>

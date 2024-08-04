@@ -7,12 +7,13 @@ import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/userSlice";
 import { RootState } from "../../../redux/store";
-
+import { Spinner } from "@chakra-ui/react";
 const env = import.meta.env;
 
 function MansionLogInPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [spinner, setSpinner] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { userDispatch } = useContext(UserContext);
@@ -35,6 +36,7 @@ function MansionLogInPage() {
     console.log("login is called");
     e.preventDefault();
     setIsLoading(true);
+    setSpinner(true);
     const formdata = new FormData();
     formdata.append("email", email);
     formdata.append("password", password);
@@ -68,6 +70,8 @@ function MansionLogInPage() {
       setIsLoading(false);
       setErr(error.msg);
       console.error(error.msg);
+    } finally {
+      setSpinner(false);
     }
   }
 
@@ -99,7 +103,7 @@ function MansionLogInPage() {
           />
           <Link to={"/forgot"}>Forgot Password ??</Link>
           {err !== "" && <span className="error">{err}</span>}
-          <button type="submit">Login</button>
+          <button type="submit">{spinner ? <Spinner /> : "Login"}</button>
           <Link to={"/signup"}>Create Account</Link>
         </form>
       </div>

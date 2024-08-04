@@ -6,6 +6,7 @@ import { UserContext } from "../../../UserContextProvider";
 import LoadOnApiCall from "../../../loadonapicall/LoadOnApiCall";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { Spinner } from "@chakra-ui/react";
 const env = import.meta.env;
 
 interface UserType {
@@ -21,6 +22,7 @@ function MansionSignUpPage() {
   const navigate = useNavigate();
   const { userDispatch } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [spinner, setSpinner] = useState<boolean>(false);
   const [err, setErr] = useState<string>("");
   const [userData, setUserData] = useState<UserType>({
     name: "",
@@ -52,6 +54,7 @@ function MansionSignUpPage() {
     try {
       if (isFormFilled) {
         setIsLoading(true);
+        setSpinner(true);
         const formdata = new FormData();
         Object.keys(userData).forEach((key) => {
           formdata.append(key, String(userData[key]));
@@ -101,6 +104,8 @@ function MansionSignUpPage() {
       }
     } catch (e: any) {
       console.log(e);
+    } finally {
+      setSpinner(false);
     }
   }
 
@@ -155,7 +160,7 @@ function MansionSignUpPage() {
             onChange={(e) => onDetailsChange(e)}
           />
           {err != "" && <span className="error">{err}</span>}
-          <button type="submit">SignUp</button>
+          <button type="submit">{spinner ? <Spinner /> : "SignUp"}</button>
           <Link to={"/login"}>Already Have an account login ??</Link>
         </form>
       </div>

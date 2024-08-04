@@ -7,7 +7,7 @@ interface LoadingProps {
 }
 
 function LoadOnApiCall({ isLoading, children }: LoadingProps) {
-  return isLoading ? <Loader pos="absolute" /> : children;
+  return isLoading ? <Loader /> : children;
 }
 
 export default LoadOnApiCall;

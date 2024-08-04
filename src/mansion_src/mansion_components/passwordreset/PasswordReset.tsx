@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import "./passwordreset.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "@chakra-ui/react";
 const env = import.meta.env;
 
 function PasswordReset() {
@@ -15,11 +16,13 @@ function PasswordReset() {
   const [showPinbox, setShowPinbox] = useState<boolean | null>(null);
   const [resendOtp, setResendOtp] = useState(false);
   const navigate = useNavigate();
+  const [spinner, setSpinner] = useState<boolean>(false);
 
   async function sendOTP(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     setErrorWhileOtpSend(null);
     setWrongOtpError(null);
+    setSpinner(true);
 
     try {
       const res = await axios.post(
@@ -34,6 +37,8 @@ function PasswordReset() {
       }
     } catch (e: any) {
       setErrorWhileOtpSend(e.response.data.msg);
+    } finally {
+      setSpinner(false);
     }
   }
 
@@ -42,6 +47,7 @@ function PasswordReset() {
     formdata.append("email", email);
     formdata.append("otp", otp);
     formdata.append("password", password);
+    setSpinner(true);
     try {
       const res = await axios.post(
         env.VITE_BASE_URL + "user/reset-password",
@@ -58,6 +64,8 @@ function PasswordReset() {
         setPassword("");
         setResendOtp(true);
       }
+    } finally {
+      setSpinner(false);
     }
   }
 
@@ -115,11 +123,26 @@ function PasswordReset() {
         {wrongOtpError && <span className="error">{wrongOtpError}</span>}
         {!showPinbox && (
           <button onClick={sendOTP}>
-            {resendOtp ? "Send OTP Again" : "Send OTP"}
+            {resendOtp ? (
+              spinner ? (
+                <Spinner />
+              ) : (
+                "Send OTP Again"
+              )
+            ) : spinner ? (
+              <Spinner />
+            ) : (
+              "Send OTP"
+            )}
           </button>
         )}
 
-        {showPinbox && <button onClick={resetPassword}> Reset Password</button>}
+        {showPinbox && (
+          <button onClick={resetPassword}>
+            {" "}
+            {spinner ? <Spinner /> : "Reset Password"}
+          </button>
+        )}
         {/* <input type="submit" onSubmit={(e)=>e.preventDefault()} /> */}
       </form>
     </section>

@@ -44,6 +44,7 @@ function CartSummary({
       contactNumber: 7854696543,
       products: checkoutProducts,
       redirectPath: redirectPath.pathname,
+      Token: localStorage.getItem("Token"),
     });
     window.location.href = response.data.url;
   }

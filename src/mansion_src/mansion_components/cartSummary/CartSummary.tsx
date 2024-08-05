@@ -5,7 +5,7 @@ import { SetStateAction, useContext, useState } from "react";
 import "./cartsummary.scss";
 import { useSelector } from "react-redux";
 import SummaryItem from "../summaryItem/SummaryItem";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../UserContextProvider";
 import { Spinner } from "@chakra-ui/react";
 interface Data {
@@ -23,6 +23,7 @@ function CartSummary({
   onButtonClick: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [checkOutButtonDisabled, setCheckoutButtonDisabled] = useState(false);
+  const navigate = useNavigate();
   const checkoutProducts = useSelector(
     (store: any) => store.checkoutProducts
   ) as Data[];
@@ -54,6 +55,7 @@ function CartSummary({
       window.location.href = response.data.url;
     } catch (e) {
       console.log(e);
+      navigate("/");
     }
   }
   return (

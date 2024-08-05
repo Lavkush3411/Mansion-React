@@ -38,15 +38,23 @@ function CartSummary({
   ) {
     e.preventDefault();
     setCheckoutButtonDisabled(true);
-    const response = await axios.post(env.VITE_BASE_URL + "payment/initiate", {
-      user: loggedinuser,
-      totalAmount: subtotal,
-      contactNumber: 7854696543,
-      products: checkoutProducts,
-      redirectPath: redirectPath.pathname,
-      Token: localStorage.getItem("Token"),
-    });
-    window.location.href = response.data.url;
+    try {
+      const response = await axios.post(
+        env.VITE_BASE_URL + "payment/initiate",
+        {
+          user: loggedinuser,
+          totalAmount: subtotal,
+          contactNumber: 7854696543,
+          products: checkoutProducts,
+          redirectPath: redirectPath.pathname,
+          Token: localStorage.getItem("Token"),
+        }
+      );
+      console.log(response.data.url);
+      window.location.href = response.data.url;
+    } catch (e) {
+      console.log(e);
+    }
   }
   return (
     <main

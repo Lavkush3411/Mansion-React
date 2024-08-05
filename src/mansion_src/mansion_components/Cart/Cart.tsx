@@ -35,11 +35,7 @@ interface CartItemType {
 // }
 
 function Cart() {
-  const {
-    cartList,
-    setShowCart,
-  }: { cartList: CartItemType[]; setShowCart: React.Dispatch<any> } =
-    useContext(CartContext);
+  const { cartList }: { cartList: CartItemType[] } = useContext(CartContext);
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
   const disptach = useDispatch();
   const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);
@@ -53,16 +49,15 @@ function Cart() {
   ) {
     e.preventDefault();
     disptach(add(cartList));
-    setShowCart(true);
+    disptach(close());
     if (!authenticated) {
-      disptach(close());
       navigate("/login");
     }
     setCheckoutState(true);
   }
   const [innerWidth] = useState(window.innerWidth);
   return (
-    <>
+    <div>
       <Drawer
         variant={"cart"}
         isOpen={isOpen}
@@ -109,7 +104,7 @@ function Cart() {
         </DrawerContent>
       </Drawer>
       {checkoutState && <CheckOutPage />}
-    </>
+    </div>
   );
 }
 

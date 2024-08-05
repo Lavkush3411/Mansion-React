@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { closeUserDrawer } from "../../../redux/userDrawerSlice";
 import { logout } from "../../../redux/userSlice";
 import { deauthenticate } from "../../../redux/authenticatedSlice";
+import { open } from "../../../redux/sidebarSlice";
 
 function LoggedInUser() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function LoggedInUser() {
             onClick={(e) => {
               e.preventDefault();
               dispatch(closeUserDrawer());
+              dispatch(open());
             }}
             className="dashboard-item"
             to={""}

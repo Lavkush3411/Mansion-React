@@ -48,7 +48,9 @@ function CartSummary({
           contactNumber: 7854696543,
           products: checkoutProducts,
           redirectPath: redirectPath.pathname,
-          Token: localStorage.getItem("Token"),
+        },
+        {
+          withCredentials: true,
         }
       );
       console.log(response.data.url);

@@ -35,7 +35,7 @@ function OrderedItem({ orderItem }: { orderItem: orderType }) {
   return (
     <div className="order-item-wrapper">
       <Accordion m={"1% 5%"} defaultIndex={[1]} allowMultiple>
-        <AccordionItem border={"none"} m={" auto"}>
+        <AccordionItem border={"none"} m={" auto"} key={orderItem._id}>
           <h2>
             <AccordionButton
               _expanded={{

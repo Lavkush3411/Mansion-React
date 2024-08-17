@@ -35,7 +35,7 @@ function OrdersPage() {
   return (
     <div className="orders-page">
       {orders.map((orderItem) => (
-        <OrderedItem orderItem={orderItem} />
+        <OrderedItem key={orderItem._id} orderItem={orderItem} />
       ))}
     </div>
   );

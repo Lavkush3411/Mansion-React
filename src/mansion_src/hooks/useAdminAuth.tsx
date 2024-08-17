@@ -16,8 +16,8 @@ export const useAdminAuth = <T,>(token: T) => {
         return;
       }
       try {
-        await axios.post(env.VITE_BASE_URL + "user/verify-admin", {
-          Token: token,
+        await axios.get(env.VITE_BASE_URL + "user/verify-admin", {
+          withCredentials: true,
         });
         setAuthenticated(true);
       } catch (error) {

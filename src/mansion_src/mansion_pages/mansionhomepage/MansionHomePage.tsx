@@ -17,6 +17,8 @@ import { useBackToClosePopup } from "../../hooks/useBackToClosePopup";
 import { useScrollToTop } from "../../hooks/useScrolltoTop";
 import useShowSearchAndProductList from "../../hooks/useShowSearchAndProductList";
 import { usePrefetch } from "../../hooks/usePrefetch";
+import axios from "axios";
+const env = import.meta.env;
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
 const MobileNavBar = lazy(
@@ -47,10 +49,13 @@ function MansionHomePage() {
     (store: RootState) => store.authentication.authenticated
   );
 
-  function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+  async function onLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
     dispatch(logout());
     dispatch(deauthenticate());
+    await axios.get(env.VITE_BASE_URL + "user/logout", {
+      withCredentials: true,
+    });
     navigate("/login");
   }
   return (

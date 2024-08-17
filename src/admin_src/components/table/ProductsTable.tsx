@@ -108,8 +108,8 @@ async function fetchData(item: string) {
   const token = localStorage.getItem("Token");
   if (!token) return [];
   try {
-    const res = await axios.post(env.VITE_BASE_URL + "admin/post/" + item, {
-      Token: token,
+    const res = await axios.get(env.VITE_BASE_URL + "admin/" + item, {
+      withCredentials: true,
     });
     return res.data;
   } catch (error) {

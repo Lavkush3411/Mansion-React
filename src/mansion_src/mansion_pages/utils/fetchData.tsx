@@ -8,8 +8,8 @@ export default async function fetchData(productName = "all") {
 
 export const fetchOrders = async (email: string | null) => {
   if (!email) return [];
-  const res = await axios.post(env.VITE_BASE_URL + "order/userOrders", {
-    email: email,
+  const res = await axios.get(env.VITE_BASE_URL + "order/userOrders", {
+    withCredentials: true,
   });
   return res.data;
 };

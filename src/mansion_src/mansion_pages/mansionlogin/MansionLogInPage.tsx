@@ -43,6 +43,7 @@ function MansionLogInPage() {
 
     try {
       const res = await fetch(env.VITE_BASE_URL + "user/login", {
+        credentials: "include",
         method: "POST",
         body: formdata,
       });

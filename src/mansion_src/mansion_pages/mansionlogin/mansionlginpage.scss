@@ -1,7 +1,8 @@
 .mansionloginpage {
   width: 100%;
   display: flex;
-  min-height: 68vh;
+  min-height: 70vh;
+  justify-content: center;
 
   .loginform {
     > span.error {
@@ -78,11 +79,20 @@
   }
 }
 
-@media (800px<width<=1400px) {
+@media (800px<width<=1200px) {
   .mansionloginpage {
     .loginform {
       margin-top: 5%;
-      width: 50%;
+      width: 70%;
+    }
+  }
+}
+
+@media (1200px<width) {
+  .mansionloginpage {
+    .loginform {
+      margin-top: 5%;
+      width: 55%;
     }
   }
 }

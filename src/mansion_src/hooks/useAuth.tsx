@@ -11,7 +11,7 @@ function useAuth() {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const token=localStorage.getItem("Token")
+  const token = localStorage.getItem("Token");
   useEffect(() => {
     async function checkAuth() {
       if (!token) {
@@ -21,7 +21,10 @@ function useAuth() {
       }
       try {
         setLoading(true);
-        await axios.post(env.VITE_BASE_URL + "user/verify", { Token: token });
+        await axios.get(
+          env.VITE_BASE_URL + "user/verify",
+          { withCredentials: true }
+        );
         dispatch(setAuthentiation({ authenticated: true }));
         setAuthenticated(true);
       } catch (error) {

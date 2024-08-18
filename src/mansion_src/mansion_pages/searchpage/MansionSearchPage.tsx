@@ -39,7 +39,10 @@ function MansionSearchPage() {
               <ProductCard key={productItem._id} productItem={productItem} />
             ))
           ) : (
-            <div>Nothing Found</div>
+            <div className="empty-search-items">
+              <span style={{ color: "red" }}>Sorry, </span> No Items Found for
+              your search !
+            </div>
           )}
         </div>
       </div>

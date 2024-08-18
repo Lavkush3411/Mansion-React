@@ -4,12 +4,15 @@
   min-height: 100vh;
   background-color: #c7c8cc;
   .product-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-rows: masonry;
+    gap: 30px;
     padding: 2%;
     flex-wrap: wrap;
-    gap: 5%;
     row-gap: 40px;
     width: 100%;
+    margin: 20px 0px;
     justify-content: center;
   }
 }

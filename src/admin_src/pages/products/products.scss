@@ -22,7 +22,7 @@
       }
     }
   }
-  .newitem {
+  .add-product-btn {
     position: absolute;
     @include square(3rem);
     border-radius: 50%;
@@ -31,8 +31,10 @@
     right: 3%;
     top: 2%;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    background-color: rgb(230, 232, 233);
     &:hover {
-      background-color: orange;
+      background-color: gray;
     }
   }
 }

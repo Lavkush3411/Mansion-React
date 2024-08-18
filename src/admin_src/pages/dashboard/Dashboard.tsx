@@ -4,8 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import "./dashboard.scss";
 import { useRef } from "react";
 import WidgetBox from "../../components/widgetbox/WidgetBox";
-import ProductComponent from "../../components/productcomponent/ProductComponent";
-import clothData from "../../../assets/admin/data.json";
+// import ProductComponent from "../../components/productcomponent/ProductComponent";
 import { BarChart, DoughnutChart } from "../../components/charts/Charts";
 
 function Dashboard() {
@@ -92,14 +91,14 @@ function Dashboard() {
           <div className="inventory">
             <h5>Inventory</h5>
             <div className="product-list">
-              {clothData.products.map((clothItem) => {
+              {/* {clothData.products.map((clothItem) => {
                 return (
                   <ProductComponent
                     name={clothItem.name}
                     percent={clothItem.quantity}
                   />
                 );
-              })}
+              })} */}
             </div>
           </div>
 

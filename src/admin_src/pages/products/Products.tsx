@@ -1,12 +1,15 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import "./products.scss";
 import { useContext, useEffect, useRef } from "react";
-import { ButtonContext } from "../../../ContextProvider";
+import { ButtonContext, LoaderContext } from "../../../ContextProvider";
+import Loader from "../../components/loader/Loader";
+
 function Products() {
   //location.pathname might don't have the reference of current path therefore we need to use useRef and use one useEffect to
   const currentPathRef = useRef("");
   const location = useLocation();
   const { state, dispatch } = useContext(ButtonContext);
+  const { loaderState } = useContext(LoaderContext);
   //hiding the new button if we are on managepage|new page by clicking on back button by using the pathname
   useEffect(() => {
     function handleBack() {
@@ -53,11 +56,13 @@ function Products() {
           </NavLink>
         ))}
       </section>
-      <Outlet />
+
+      {loaderState.showLoaderInProductsPlace ? <Loader /> : <Outlet />}
       {state.showButton && (
         <NavLink to={`new`}>
           <button
-            className="newitem"
+            className="add-product-btn"
+            title="Add new Products"
             onClick={() => dispatch({ type: "hide" })}
           >
             {" "}

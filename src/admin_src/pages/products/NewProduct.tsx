@@ -163,6 +163,7 @@ function NewProduct() {
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
       method: "POST",
       body: formdata,
+      credentials: "include",
     });
     const data = await res.json();
     dispatch({ type: "show" });

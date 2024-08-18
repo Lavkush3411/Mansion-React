@@ -1,39 +1,47 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./manageproduct.scss";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import products from "../../../assets/admin/productsdata.json";
-import { ButtonContext } from "../../../ContextProvider";
+import { ButtonContext, LoaderContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
-import CancelIcon from "@mui/icons-material/Cancel";
-interface Size {
+import axios from "axios";
+import queryClient from "../../../queryClient";
+const env = import.meta.env;
+
+interface sizeListItem {
+  _id: string;
+  size: string;
+  quantity: number;
+}
+
+interface Stock {
   _id: string;
   quantity: number;
   size: string;
 }
-interface AddedImages {
-  id: string;
-  file: File;
-}
-interface SrcOfAddedImages {
-  id: string;
-  source: string;
+interface DataType {
+  _id: string;
+  image: string[];
+  productName: string;
+  productPrice: string;
+  manage?: string;
+  delete?: string;
+  type: string;
+  stock: Stock[];
 }
 
 function ManageProduct() {
   const navigate = useNavigate();
   const [image, setImage] = useState<string | null>("");
   const [productName, setProductName] = useState<string>("");
-  const [key, setKey] = useState(0);
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
-  const [src, setSrc] = useState<SrcOfAddedImages[]>([]);
-
-  const [sizeList, setSizeList] = useState<Size[] | []>([]);
+  const { loaderDispatch } = useContext(LoaderContext);
+  const [src, setSrc] = useState<string[]>([]);
+  const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
   const [type, setType] = useState<string>("");
   const location = useLocation();
   const params = useParams();
-  const [images, setImages] = useState<AddedImages[]>([]);
 
   //hiding the new button if we are on manage page by clicking on manage
   const { state, dispatch } = useContext(ButtonContext);
@@ -43,80 +51,88 @@ function ManageProduct() {
 
   //   checking and finding the data from database based on queryparams passed
   useEffect(() => {
-    console.log(location.state);
-    setType(location.state.type);
-    setImage(location.state.image[0]);
-    setSizeList(location.state.stock);
-    setProductName(location.state.name);
-    setProductPrice(location.state.price);
-    setSrc(location.state.image);
-
-    // temporary code must remove
-    setKey(0);
-    console.log(images);
-  }, [params.table_row, products]);
+    axios
+      .get(env.VITE_BASE_URL + "products/id/" + location.state._id)
+      .then((res) => {
+        const data: DataType = res.data;
+        setType(data.type);
+        setImage(data.image[0]);
+        setSizeList(data.stock);
+        console.log(data);
+        setProductName(data.productName);
+        setProductPrice(Number(data.productPrice));
+        setSrc(data.image);
+      })
+      .catch(() => {
+        console.log("Unable to fetch product");
+      });
+  }, [params.table_row]);
 
   const addSize = () => {
-    setSizeList((prevList: Size[]): Size[] => {
-      return [...prevList, { _id: uuid(), size: "", quantity: 0 }];
+    setSizeList((prev) => {
+      return [...prev, { _id: uuid(), size: "", quantity: 0 }];
     });
   };
 
-  const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string) => {
-    setSizeList((prev): Size[] =>
-      prev.map((item: Size): Size => {
-        if (id === item._id) {
+  const removeSize = (removeSizeID: string): void => {
+    setSizeList(sizeList.filter((size) => size._id !== removeSizeID));
+  };
+
+  const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string): void => {
+    console.log(sizeList);
+
+    setSizeList((prev): sizeListItem[] => {
+      const newSizeList = prev.map((item) => {
+        if (item._id === id) {
           item.size = e.target.value;
         }
         return item;
-      })
-    );
+      });
+      return newSizeList;
+    });
   };
-  const updateQuantity = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-    setSizeList((prev): Size[] => {
-      return prev.map((item: Size): Size => {
+
+  const updateQuantity = (
+    e: ChangeEvent<HTMLInputElement>,
+    id: string
+  ): void => {
+    console.log(sizeList);
+    setSizeList((prev): sizeListItem[] => {
+      const newSizeList = prev.map((item) => {
         if (item._id === id) {
           item.quantity = Number(e.target.value);
         }
         return item;
       });
+      return newSizeList;
     });
   };
-  const removeSize = (id: string) => {
-    setSizeList((prev): Size[] => {
-      return prev.filter((item): boolean => item._id !== id);
-    });
-  };
-  function removeImage(id: string) {
-    // images.filter((image) => image.id !== id);
 
-    setImages((prev) => prev.filter((image) => image.id !== id));
-  }
-
-  const selectImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file: File | undefined = e.target.files?.[0];
-
-    if (file) {
-      // Check if the selected file is an image
-      if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          if (typeof reader.result === "string") {
-            setImage(reader.result);
-          }
-        };
-      } else {
-        alert("Please select an image file.");
-        setImage(null);
-      }
-    }
-  };
-
-  const submitForm = (e: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(-1);
+    if (sizeList.length === 0) {
+      alert("Add Size and Quantity by clicking on Add new Size Button");
+      return;
+    }
+    loaderDispatch({ type: "hide-product-loader" });
+    navigate("/admin/products/" + `${type}-list`);
+
+    //form data
+    const formdata = new FormData();
+    formdata.append("productName", String(productName));
+    formdata.append("productPrice", String(productPrice));
+    formdata.append("stock", JSON.stringify(sizeList));
+    formdata.append("type", String(type));
+    const res = await fetch(env.VITE_BASE_URL + "admin/" + location.state._id, {
+      method: "PATCH",
+      body: formdata,
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log(data);
     dispatch({ type: "show" });
+    queryClient.invalidateQueries({ queryKey: ["all"] });
+    loaderDispatch({ type: "hide-product-loader" });
   };
   return (
     <div className="manageproduct">
@@ -163,6 +179,7 @@ function ManageProduct() {
             <div className="size-quantity" key={size._id}>
               <select
                 required
+                value={size.size}
                 className="size"
                 onChange={(e) => updateSize(e, size._id)}
               >
@@ -179,6 +196,7 @@ function ManageProduct() {
                 required
                 type="number"
                 className="quantity"
+                value={size.quantity}
                 onChange={(e) => updateQuantity(e, size._id)}
               />
               {sizeList.length > 1 && (
@@ -198,29 +216,16 @@ function ManageProduct() {
             </button>
           )}
 
-          <label>Image</label>
-          <input
-            key={key}
-            type="file"
-            onChange={(e) => selectImage(e)}
-            accept="image/*"
-            multiple
-          />
+          <label>Photos</label>
           <div className="selected-images">
             {src &&
               src.map((image) => (
-                <div key={image.id} className="added-images">
-                  <div
-                    className="removeX"
-                    onClick={() => removeImage(image.id)}
-                  >
-                    <CancelIcon />
-                  </div>
-                  <img src={image.source} alt="" />
+                <div key={image} className="added-images">
+                  <img src={image} alt="" />
                 </div>
               ))}
           </div>
-          <button type="submit">Create</button>
+          <button type="submit">Update</button>
         </form>
       </article>
     </div>

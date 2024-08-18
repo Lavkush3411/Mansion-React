@@ -29,6 +29,9 @@
         outline: none;
         padding: 10px 0px;
         background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
         color: black;
       }
 
@@ -65,6 +68,8 @@
           background-color: transparent;
           width: 100%;
           color: black;
+          border: 1px solid black;
+          border-radius: 5px;
         }
 
         .quantity {
@@ -78,11 +83,15 @@
         margin-top: 0px;
         margin-bottom: 0px;
         margin-left: auto;
+        border: 1px solid black;
+        border-radius: 5px;
       }
       > button {
         width: 100%;
         margin: 30px 0px;
         padding: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
       }
 
       > .selected-images {

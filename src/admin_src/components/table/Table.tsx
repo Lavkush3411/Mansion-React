@@ -39,7 +39,7 @@ export default function TableHOC<T extends Object>(
     } = useTable(options, useSortBy, usePagination);
     return (
       <div className={containerClassname}>
-        <h2 className="heading">{heading}</h2>
+        <h2 className="theading">{heading}</h2>
 
         <table {...getTableProps()}>
           <thead>

@@ -31,7 +31,8 @@ const deleteProduct = async (type: string, id: string) => {
   const token = localStorage.getItem("Token");
   if (!token) return;
   await axios.delete(env.VITE_BASE_URL + "admin/delete/" + type, {
-    data: { id: id, Token: token },
+    data: { id: id },
+    withCredentials: true,
   });
   return;
 };
@@ -88,7 +89,7 @@ const columns: Column<DataType>[] = [
             setIsDeleting(true);
             await deleteProduct(row.original.type, row.original._id);
 
-            const data = await fetchData(row.original.type.slice(0, -1));
+            const data = await fetchData(row.original.type);
             setIsDeleting(false);
             productListDispatch({ type: row.original.type, payload: data });
           }}

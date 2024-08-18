@@ -11,9 +11,13 @@
   padding: 2%;
   width: 100%;
   text-align: left;
-  .heading {
+  .theading {
     @include heading;
-    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 20px 0px;
+    color: rgb(75, 75, 75);
   }
   table {
     margin-top: 1%;

@@ -1,7 +1,9 @@
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import Button from "../button/Button";
 import "./address.scss";
 import zod from "zod";
+import axios from "axios";
+const env = import.meta.env;
 
 const zodAddressSchema = zod.object({
   address1: zod.string().min(1, { message: "Address1 is required" }),
@@ -27,6 +29,17 @@ function Address({
     pincode: "",
     country: "India",
   });
+
+  useEffect(() => {
+    axios
+      .get(env.VITE_BASE_URL + "user/address", { withCredentials: true })
+      .then((res) => {
+        if (res.data) {
+          setAddress(res.data.address);
+        }
+      });
+  }, []);
+
   const [error, setError] = useState("");
 
   function onAddressChange(e: ChangeEvent<HTMLInputElement>) {
@@ -36,7 +49,7 @@ function Address({
     setAddress((prev) => ({ ...prev, [name]: e.target.value }));
   }
 
-  function onAddressConfirm(
+  async function onAddressConfirm(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     if (!zodAddressSchema.safeParse(address).success) {
@@ -44,6 +57,11 @@ function Address({
       return;
     }
     e.preventDefault();
+    await axios.post(
+      env.VITE_BASE_URL + "user/address",
+      { address },
+      { withCredentials: true }
+    );
     onButtonClick(false);
   }
   return (

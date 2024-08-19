@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import "./productitem.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
@@ -11,6 +11,7 @@ import { add } from "../../../redux/checkOutProductsSlice";
 import { open } from "../../../redux/sidebarSlice";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import * as React from "react";
+import useAuth from "../../hooks/useAuth";
 
 interface Stock {
   _id: string;
@@ -59,6 +60,8 @@ function ProductItem() {
   const productItem = { _id, productName, image, productPrice };
   // carausal component
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [authenticated] = useAuth();
+  const navigate = useNavigate();
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -91,8 +94,12 @@ function ProductItem() {
   ) {
     e.preventDefault();
     if (size !== "") {
-      setCheckoutState(true);
-      dispatch(add([{ ...productItem, qty: 1 }]));
+      if (!authenticated) {
+        navigate("/login");
+      } else {
+        setCheckoutState(true);
+        dispatch(add([{ ...productItem, qty: 1 }]));
+      }
     } else {
       alert("select Size first");
     }

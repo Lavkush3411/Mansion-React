@@ -18,6 +18,7 @@ import { useScrollToTop } from "../../hooks/useScrolltoTop";
 import useShowSearchAndProductList from "../../hooks/useShowSearchAndProductList";
 import { usePrefetch } from "../../hooks/usePrefetch";
 import axios from "axios";
+import UnavailibilityPopup from "../../mansion_components/popups/unavailibilityPopUp";
 const env = import.meta.env;
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
@@ -111,6 +112,7 @@ function MansionHomePage() {
       <Cart />
       <UserSection />
       <SizePopUp />
+      <UnavailibilityPopup />
       <DeleteCartPopUp />
       <Footer />
       <Bottom />

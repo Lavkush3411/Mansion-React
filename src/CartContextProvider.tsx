@@ -1,13 +1,6 @@
 import { ReactNode, createContext, useReducer, useState } from "react";
+import { CartItemType } from "./mansion_src/types/cart";
 
-interface CartItemType {
-  _id: string;
-  productName: string;
-  image: string[];
-  productPrice: number;
-  size: string;
-  qty: number;
-}
 interface actionType {
   type: string;
   payload: any;

@@ -67,7 +67,9 @@ function CartSummary({
     >
       <div className="checkout-products-list">
         {checkoutProducts.map((product) => {
-          return <SummaryItem key={product._id} product={product} />;
+          return (
+            <SummaryItem key={product._id + product.size} product={product} />
+          );
         })}
       </div>
       <div className="bottom-section-wrapper">

@@ -1,6 +1,5 @@
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import "./cart.scss";
-import { CartContext } from "../../../CartContextProvider";
 import CartItem from "./CartItem";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
 import CheckOutPage from "../../mansion_pages/checkoutpage/CheckOutPage";
@@ -20,22 +19,13 @@ import { close } from "../../../redux/sidebarSlice";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-
-interface CartItemType {
-  _id: string;
-  productName: string;
-  image: string[];
-  productPrice: number;
-  qty: number;
-  size: string;
-}
-
-// const SidbarStyle={
-//   <style></style>
-// }
+import useProductAvailibilityCheck from "../../hooks/useProductAvailibilityCheck";
+import { CartItemType } from "../../types/cart";
+import { availiblityCheck } from "../../mansion_pages/utils/AvailibilityCheckBeforeCheckout";
+import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
 
 function Cart() {
-  const { cartList }: { cartList: CartItemType[] } = useContext(CartContext);
+  const { cartList, removedData } = useProductAvailibilityCheck();
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
   const disptach = useDispatch();
   const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);
@@ -44,18 +34,35 @@ function Cart() {
   }, 0);
   const [authenticated] = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (removedData.length) {
+      alert("Some of your cartItems are removed as we no longer sell those");
+    }
+  }, [removedData]);
+
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-    disptach(add(cartList));
-    disptach(close());
+
     if (!authenticated) {
       navigate("/login");
+      disptach(add(cartList));
+      disptach(close());
+    } else {
+      const res = await availiblityCheck(cartList);
+      if (res.availibility) {
+        setCheckoutState(true);
+        disptach(add(cartList));
+        disptach(close());
+      } else {
+        disptach(showUnavailibility(res.msg));
+      }
     }
-    setCheckoutState(true);
   }
   const [innerWidth] = useState(window.innerWidth);
+
   return (
     <div>
       <Drawer

@@ -1,0 +1,99 @@
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+.labeled-input {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  label {
+    font-weight: 400;
+    padding-bottom: 10px;
+    text-align: start;
+    min-width: 100px;
+  }
+}
+.profile-info {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-input {
+  flex-grow: 1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-btn,
+.update-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+}
+
+.update-btn {
+  border: 2px solid black;
+  color: black;
+}
+
+.edit-btn:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.update-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

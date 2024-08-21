@@ -13,3 +13,25 @@ export const fetchOrders = async (email: string | null) => {
   });
   return res.data;
 };
+
+export const findData = async (path: string | null) => {
+  try {
+    const res = await axios.get(env.VITE_BASE_URL + path, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const updateUserData = async (data: any) => {
+  try {
+    const res = await axios.post(env.VITE_BASE_URL + "user", data, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

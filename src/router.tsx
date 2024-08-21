@@ -67,6 +67,13 @@ const PasswordReset = lazy(
 const MansionSearchPage = lazy(
   () => import("./mansion_src/mansion_pages/searchpage/MansionSearchPage")
 );
+const SupportPage = lazy(
+  () => import("./mansion_src/mansion_pages/supoortpage/supportPage")
+);
+
+const ProfilePage = lazy(
+  () => import("./mansion_src/mansion_pages/profilepage/ProfilePage")
+);
 
 // const Pie = lazy(() => import("./components/charts/Charts"));
 // const Bar = lazy(() => import("./pages/charts/bar/Bar"));
@@ -97,6 +104,8 @@ const router = createBrowserRouter([
     element: <MansionHomePage />,
     children: [
       { path: "", element: <Navigate to={"home"} /> },
+      { path: "/profile", element: createLazyRoute(<ProfilePage />) },
+      { path: "/support", element: createLazyRoute(<SupportPage />) },
       {
         path: "/home",
         element: createLazyRoute(<LandingPage />),

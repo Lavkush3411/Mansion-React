@@ -23,6 +23,7 @@ function LoggedInUser() {
             onClick={(e) => {
               e.preventDefault();
               dispatch(closeUserDrawer());
+              navigate("/profile");
             }}
             className="dashboard-item"
             to={"/"}
@@ -51,9 +52,10 @@ function LoggedInUser() {
             onClick={(e) => {
               e.preventDefault();
               dispatch(closeUserDrawer());
+              navigate("/support");
             }}
             className="dashboard-item"
-            to={""}
+            to={"/support"}
           >
             Support
           </NavLink>

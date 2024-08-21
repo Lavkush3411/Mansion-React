@@ -1,0 +1,14 @@
+.support-page {
+  min-height: 80vh;
+  padding: 0 2%;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  section {
+    font-weight: 300;
+    h1 {
+      margin: 14px 0px 7px 0px;
+      font-weight: 600;
+    }
+  }
+}

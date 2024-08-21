@@ -56,7 +56,17 @@ const columns: Column<DataType>[] = [
         />
       ) : null,
   },
-  { Header: "Name", accessor: "productName" },
+  {
+    Header: "Name",
+    accessor: "productName",
+    Cell: ({ row, value }) => {
+      return (
+        <Link to={"/product/" + row.original._id} style={{ cursor: "pointer" }}>
+          {value}
+        </Link>
+      );
+    },
+  },
   { Header: "Price", accessor: "productPrice" },
   {
     Header: "Manage",
@@ -94,7 +104,7 @@ const columns: Column<DataType>[] = [
             productListDispatch({ type: row.original.type, payload: data });
           }}
         >
-          {isDeleting ? <Spinner /> : <DeleteIcon />}
+          {isDeleting ? <Spinner /> : <DeleteIcon cursor={"pointer"} />}
         </div>
       );
     },

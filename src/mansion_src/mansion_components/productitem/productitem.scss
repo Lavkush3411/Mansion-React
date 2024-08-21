@@ -4,8 +4,9 @@
   display: flex;
   width: 100%;
   height: 500px;
-  gap: 10px;
+  gap: 30px;
   justify-content: left;
+  padding: 0 30px 0 60px;
   & > * {
     flex: 1;
   }
@@ -18,14 +19,15 @@
       text-align: center;
       display: flex;
       justify-content: space-between;
+      font-weight: 500;
     }
     > .additional-info {
       display: flex;
       user-select: none;
       justify-content: space-between;
-      margin: 5px 10px;
+      margin: 5px 0px;
       border-bottom: 1px solid rgb(183, 183, 183);
-
+      font-weight: 400;
       > * {
         padding: 3px 10px;
         &:hover {
@@ -38,6 +40,8 @@
     }
     > .moreinfo {
       height: 100px;
+      padding: 5px 15px;
+      font-family: "Courier New", Courier, monospace;
     }
   }
   .product-mid-section {
@@ -48,6 +52,8 @@
     overflow-y: scroll;
     position: relative;
     max-width: fit-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
 
     .left-arrow,
     .right-arrow {
@@ -72,7 +78,7 @@
   }
   > .product-right-section {
     align-self: flex-end;
-    padding: 40px;
+    padding: 40px 40px 40px 0;
     > .stock {
       display: flex;
       gap: 10px;
@@ -121,10 +127,12 @@
   .product {
     padding: 2px;
     display: flex;
+    margin-top: 100px;
     width: 100%;
     height: 100%;
-    gap: 10px;
+    gap: 30px;
     flex-direction: column;
+    padding: 0 15px;
     & > * {
       //   flex:none;
       width: 100%;
@@ -164,11 +172,12 @@
       display: flex;
       flex-direction: row;
       width: 100%;
+
       &::-webkit-scrollbar {
         display: none; /* Hide scrollbar for webkit browsers like Chrome and Safari */
       }
       > img {
-        height: 300px;
+        height: 350px;
         width: 100vw;
       }
     }
@@ -217,11 +226,11 @@
   .product {
     margin: 10px auto;
     padding: 2px;
-
+    margin-top: 80px;
     display: flex;
     height: 100%;
     width: 100%;
-    gap: 10px;
+    gap: 40px;
     flex-direction: column;
     & > * {
       //   flex:none;
@@ -269,7 +278,7 @@
         display: none; /* Hide scrollbar for webkit browsers like Chrome and Safari */
       }
       > img {
-        height: 300px;
+        height: 400px;
         width: 100vw;
       }
     }
@@ -371,7 +380,7 @@
         display: none; /* Hide scrollbar for webkit browsers like Chrome and Safari */
       }
       > img {
-        height: 300px;
+        height: 350px;
         width: 100vw;
       }
     }

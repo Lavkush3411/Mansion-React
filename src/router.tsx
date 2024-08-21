@@ -101,7 +101,7 @@ function createLazyRoute(element: ReactElement) {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MansionHomePage />,
+    element: createLazyRoute(<MansionHomePage />),
     children: [
       { path: "", element: <Navigate to={"home"} /> },
       { path: "/profile", element: createLazyRoute(<ProfilePage />) },

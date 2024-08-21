@@ -1,4 +1,9 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import {
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+  useParams,
+} from "react-router-dom";
 import "./productitem.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../CartContextProvider";
@@ -46,6 +51,7 @@ function ProductItem() {
   const params = useParams();
   const { setCheckoutState } = useContext(CheckOutContext);
   const allData = useLoaderData() as LoaderData[];
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const product = allData
     .filter((currentProduct) => currentProduct._id === params.id)
@@ -55,7 +61,9 @@ function ProductItem() {
 
   const [infoElement, setInfoElement] = useState<string>("discription");
   const [size, setSize] = useState<string>("");
-  const [moreInfoText, setMoreInfoText] = useState<string>("  ");
+  const [moreInfoText, setMoreInfoText] = useState<string>(
+    "  Discover stylish and comfortable clothing that suits every occasion."
+  );
   const { cartDispatch } = useContext(CartContext);
   const productItem = { _id, productName, image, productPrice };
   // carausal component
@@ -107,22 +115,28 @@ function ProductItem() {
 
   function onDescriptionSelect() {
     setInfoElement("discription");
-    setMoreInfoText("");
+    setMoreInfoText(
+      "Discover stylish and comfortable clothing that suits every occasion."
+    );
   }
 
   function onShippingSelect() {
     setInfoElement("shipping");
-    setMoreInfoText("Currently Shipping in Ahmedabad");
+    setMoreInfoText("Currently Shipping in Ahmedabad Only.");
   }
 
   function onDetailsSelect() {
     setInfoElement("details");
-    setMoreInfoText("Fabric and Wash Precautions");
+    setMoreInfoText(
+      "Machine wash cold, gentle cycle; avoid bleach and tumble drying for lasting quality."
+    );
   }
 
   function onSizeSelect(stockItem: Stock) {
     setSize(stockItem.size);
   }
+
+  if (navigation.state === "loading") return <Loader />;
 
   if (!product) return <Loader />;
   return (

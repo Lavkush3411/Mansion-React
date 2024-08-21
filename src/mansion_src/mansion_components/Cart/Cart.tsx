@@ -19,13 +19,15 @@ import { close } from "../../../redux/sidebarSlice";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import useProductAvailibilityCheck from "../../hooks/useProductAvailibilityCheck";
+// import useProductAvailibilityCheck from "../../hooks/useProductAvailibilityCheck";
 import { CartItemType } from "../../types/cart";
 import { availiblityCheck } from "../../mansion_pages/utils/AvailibilityCheckBeforeCheckout";
 import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
+import { CartContext } from "../../../CartContextProvider";
 
 function Cart() {
-  const { cartList } = useProductAvailibilityCheck();
+  // const { cartList } = useProductAvailibilityCheck();
+  const { cartList }: { cartList: CartItemType[] } = useContext(CartContext);
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
   const disptach = useDispatch();
   const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);

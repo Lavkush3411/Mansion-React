@@ -39,7 +39,7 @@ function Cart() {
     if (removedData.length) {
       alert("Some of your cartItems are removed as we no longer sell those");
     }
-  }, [removedData]);
+  }, []);
 
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

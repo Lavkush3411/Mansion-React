@@ -22,7 +22,7 @@ function useProductAvailibilityCheck() {
     }
   });
   // localStorage.setItem("cart", JSON.stringify(newCartList));
-  return { cartList: newCartList, removedData };
+  return { cartList, removedData };
 }
 
 export default useProductAvailibilityCheck;

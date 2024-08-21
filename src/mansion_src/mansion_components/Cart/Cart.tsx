@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import "./cart.scss";
 import CartItem from "./CartItem";
 import { CheckOutContext } from "../../../CheckOutContextProvider";
@@ -25,7 +25,7 @@ import { availiblityCheck } from "../../mansion_pages/utils/AvailibilityCheckBef
 import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
 
 function Cart() {
-  const { cartList, removedData } = useProductAvailibilityCheck();
+  const { cartList } = useProductAvailibilityCheck();
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
   const disptach = useDispatch();
   const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);
@@ -34,12 +34,6 @@ function Cart() {
   }, 0);
   const [authenticated] = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (removedData.length) {
-      alert("Some of your cartItems are removed as we no longer sell those");
-    }
-  }, []);
 
   async function onCheckout(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

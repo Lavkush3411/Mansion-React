@@ -21,7 +21,7 @@ function useProductAvailibilityCheck() {
       removedData.push(cartItem);
     }
   });
-  localStorage.setItem("cart", JSON.stringify(newCartList));
+  // localStorage.setItem("cart", JSON.stringify(newCartList));
   return { cartList: newCartList, removedData };
 }
 

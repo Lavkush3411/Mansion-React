@@ -34,9 +34,11 @@ function OrdersPage() {
   if (state === "loading") return <Loader />;
   return (
     <div className="orders-page">
-      {orders.map((orderItem) => (
-        <OrderedItem key={orderItem._id} orderItem={orderItem} />
-      ))}
+      {orders &&
+        orders.length > 0 &&
+        orders.map((orderItem) => (
+          <OrderedItem key={orderItem._id} orderItem={orderItem} />
+        ))}
     </div>
   );
 }

@@ -40,15 +40,17 @@ const Profile = () => {
   useEffect(() => {
     findData("user")
       .then((data) => {
-        setUserData(data.user);
-        setUserAddress(data.user.address);
-        console.log(data);
+        if (data.user) {
+          setUserData(data.user);
+        }
+        if (data.user && data.user.address) {
+          setUserAddress(data.user.address);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
 
   const handleUpdateClick = async () => {
-    // console.log({ ...userData, address: userAddress });
     updateUserData({ ...userData, address: userAddress })
       .then(() => {
         console.log("updated");

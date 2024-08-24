@@ -190,6 +190,7 @@ function ProductItem() {
         <div className="stock">
           {stock &&
             stock.map((stockItem) => {
+              console.log(stockItem.quantity);
               return stockItem.quantity > 0 ? (
                 <button
                   className={`${size === stockItem.size ? "active" : ""}`}
@@ -198,11 +199,7 @@ function ProductItem() {
                 >
                   {stockItem.size}
                 </button>
-              ) : (
-                <button disabled key={stockItem._id}>
-                  {stockItem.size}
-                </button>
-              );
+              ) : null;
             })}
         </div>
         <div className="buying-buttons">

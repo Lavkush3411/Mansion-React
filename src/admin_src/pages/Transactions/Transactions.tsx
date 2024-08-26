@@ -12,7 +12,7 @@ import {
   PaymentStatus,
   updateTransactionsData,
 } from "../../../redux/transactionListState";
-import { DataType } from "../../../redux/transactionListState";
+import { OrderType } from "../../../redux/transactionListState";
 
 const env = import.meta.env;
 
@@ -38,7 +38,7 @@ function OrderComponent({
   value,
   children,
 }: {
-  value: DataType;
+  value: OrderType;
   children: string;
 }) {
   return (
@@ -53,7 +53,7 @@ function OrderComponent({
   );
 }
 
-const columns: Column<DataType>[] = [
+const columns: Column<OrderType>[] = [
   {
     Header: "Transaction ID",
     accessor: "_id",

@@ -8,26 +8,10 @@ import {
 } from "@chakra-ui/react";
 import "./ordereditem.scss";
 import { NavLink } from "react-router-dom";
+import HorizontalStepper from "../horizontalSteper/HorizontalStepper";
+import { OrderType } from "../../../redux/transactionListState";
 
-interface productType {
-  productId: string;
-  productName: string;
-  productPrice: number;
-  size: string;
-  qty: number;
-  image: string;
-}
-
-interface orderType {
-  _id: string;
-  userId: string;
-  products: productType[];
-  totalAmount: number;
-  orderStatus: string;
-  updatedAt: string;
-}
-
-function OrderedItem({ orderItem }: { orderItem: orderType }) {
+function OrderedItem({ orderItem }: { orderItem: OrderType }) {
   const orders = orderItem.products;
   const firstProduct = orders[0].productName;
   const totalProducts = orders.length;
@@ -58,7 +42,7 @@ function OrderedItem({ orderItem }: { orderItem: orderType }) {
                       : " ")}
                 </h2>
                 <div className="status">
-                  Payment Status : {orderItem.orderStatus}
+                  Payment Status : {orderItem.paymentStatus}
                 </div>
               </Box>
               <AccordionIcon />
@@ -74,6 +58,12 @@ function OrderedItem({ orderItem }: { orderItem: orderType }) {
                     {item.productName.toLocaleUpperCase()}
                   </NavLink>
                   <div className="quantity">QTY : {item.qty}</div>
+                </section>
+
+                <section className="stepper-wrapper">
+                  <div className="stepper">
+                    <HorizontalStepper />
+                  </div>
                 </section>
 
                 <div className="price-size">

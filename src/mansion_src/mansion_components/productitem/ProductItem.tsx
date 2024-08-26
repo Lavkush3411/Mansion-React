@@ -190,11 +190,10 @@ function ProductItem() {
         <div className="stock">
           {stock &&
             stock.map((stockItem) => {
-              console.log(stockItem.quantity);
               return stockItem.quantity > 0 ? (
                 <button
                   className={`${size === stockItem.size ? "active" : ""}`}
-                  key={stockItem.size}
+                  key={`${stockItem.size}${stockItem._id}`}
                   onClick={() => onSizeSelect(stockItem)}
                 >
                   {stockItem.size}

@@ -33,7 +33,7 @@ function UnavailibilityPopup() {
 
           <AlertDialogBody>
             {msg.map((m) => (
-              <div>{m}</div>
+              <div key={m.charAt(0)}>{m}</div>
             ))}
           </AlertDialogBody>
 

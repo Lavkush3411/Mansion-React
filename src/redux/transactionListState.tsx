@@ -15,17 +15,27 @@ export enum PaymentStatus {
   Failed = "Failed",
 }
 
-interface DataType {
+interface productType {
+  productId: string;
+  productName: string;
+  productPrice: number;
+  size: string;
+  qty: number;
+  image: string;
+}
+
+interface OrderType {
   _id: string;
   userId: string;
-  products: string;
+  products: productType[];
   totalAmount: string;
   createdAt: string;
+  updatedAt: string;
   orderStatus: OrderStatus;
   paymentStatus: PaymentStatus;
 }
 
-const initialData: DataType[] = [];
+const initialData: OrderType[] = [];
 
 const transactionListSlice = createSlice({
   name: "transactions",
@@ -39,4 +49,4 @@ const transactionListSlice = createSlice({
 
 export default transactionListSlice.reducer;
 export const { updateTransactionsData } = transactionListSlice.actions;
-export type { DataType };
+export type { OrderType };

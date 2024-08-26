@@ -46,13 +46,29 @@
   }
 }
 
-@media (width<500px) {
+@media (width<650px) {
   .order-item {
     flex-direction: column;
+
     gap: 10px;
+    > .stepper-wrapper {
+      width: 100%;
+      .stepper {
+        padding: 0;
+        flex: 1;
+      }
+    }
     > .image {
       width: 75px;
       height: 75px;
+      align-self: center;
+    }
+    > .details {
+      align-self: center;
+    }
+    > .price-size {
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 }

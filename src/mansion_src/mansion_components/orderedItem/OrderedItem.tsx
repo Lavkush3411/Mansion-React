@@ -49,7 +49,7 @@ function OrderedItem({ orderItem }: { orderItem: OrderType }) {
             </AccordionButton>
           </h2>
           {orders.map((item) => (
-            <AccordionPanel pb={4}>
+            <AccordionPanel pb={4} key={item.productId}>
               <div className="order-item">
                 <img className="image" src={`${item.image}`} alt="" />
 
@@ -62,7 +62,7 @@ function OrderedItem({ orderItem }: { orderItem: OrderType }) {
 
                 <section className="stepper-wrapper">
                   <div className="stepper">
-                    <HorizontalStepper />
+                    <HorizontalStepper state={orderItem.orderStatus} />
                   </div>
                 </section>
 

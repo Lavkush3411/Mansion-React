@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 enum OrderStatus {
-  Initiated,
-  Placed,
-  Accepted,
-  Packed,
-  Transit,
-  OutForDelivery,
-  Delivered,
+  Initiated = "Initiated",
+  Accepted = "Accepted",
+  Transit = "Transit",
+  Delivered = "Delivered",
 }
+
 export enum PaymentStatus {
   Initiated = "Initiated",
   Success = "Success",

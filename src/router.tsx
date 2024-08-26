@@ -84,11 +84,10 @@ import LandingPage from "./mansion_src/mansion_pages/indexpage/LandingPage";
 import OrdersPage, {
   ordersLoader,
 } from "./mansion_src/mansion_pages/orderspage/OrdersPage";
+import SingleOrder from "./admin_src/components/SingleOrder/SingleOrder";
 const Dashboard = lazy(() => import("./admin_src/pages/dashboard/Dashboard"));
 const Products = lazy(() => import("./admin_src/pages/products/Products"));
-const Transactions = lazy(
-  () => import("./admin_src/pages/Transactions/Transactions")
-);
+const Orders = lazy(() => import("./admin_src/pages/Orders/Orders"));
 const Users = lazy(() => import("./admin_src/pages/users/Users"));
 
 //additional functions
@@ -195,8 +194,12 @@ const router = createBrowserRouter([
       },
       ///* Product route ends here*/
       {
-        path: "/admin/transactions",
-        element: createLazyRoute(<Transactions />),
+        path: "/admin/orders",
+        element: createLazyRoute(<Orders />),
+      },
+      {
+        path: "/admin/orders/:orderId",
+        element: createLazyRoute(<SingleOrder />),
       },
       { path: "/admin/users", element: createLazyRoute(<Users />) },
       { path: "/admin/bar-chart", element: createLazyRoute(<div>bar</div>) },

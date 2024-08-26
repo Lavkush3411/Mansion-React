@@ -38,7 +38,7 @@ function Sidebar() {
           >
             <FaBoxOpen /> Products
           </NavLink>
-          <NavLink to={"transactions"} className={"sidebar-dashboard-item"}>
+          <NavLink to={"orders"} className={"sidebar-dashboard-item"}>
             <AiFillDollarCircle /> Transactions
           </NavLink>
           <NavLink to={"users"} className={"sidebar-dashboard-item"}>

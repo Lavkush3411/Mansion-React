@@ -8,7 +8,9 @@ import {
 } from "@chakra-ui/react";
 import "./ordereditem.scss";
 import { NavLink } from "react-router-dom";
-import HorizontalStepper from "../horizontalSteper/HorizontalStepper";
+import HorizontalStepper, {
+  steps,
+} from "../horizontalSteper/HorizontalStepper";
 import { OrderType } from "../../../redux/transactionListState";
 
 function OrderedItem({ orderItem }: { orderItem: OrderType }) {
@@ -23,9 +25,13 @@ function OrderedItem({ orderItem }: { orderItem: OrderType }) {
           <h2>
             <AccordionButton
               _expanded={{
-                bg: "rgba(159, 157, 157, 0.521)",
+                bg: "rgba(159, 157, 157, 0.350)",
                 color: "black",
                 m: "auto ",
+              }}
+              bg={"rgba(159, 157, 157, 0.200)"}
+              _hover={{
+                bg: "rgba(159, 157, 157, 0.300)",
               }}
             >
               <Box
@@ -62,7 +68,9 @@ function OrderedItem({ orderItem }: { orderItem: OrderType }) {
 
                 <section className="stepper-wrapper">
                   <div className="stepper">
-                    <HorizontalStepper state={orderItem.orderStatus} />
+                    <HorizontalStepper
+                      state={steps.indexOf(orderItem.orderStatus) + 1}
+                    />
                   </div>
                 </section>
 

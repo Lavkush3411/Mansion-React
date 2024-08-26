@@ -8,7 +8,7 @@
     @include flex(column, none, none);
     background-color: rgb(230, 232, 233);
     padding: 17% 5%;
-
+    gap: 30px;
     a.active {
       color: red;
     }
@@ -17,6 +17,8 @@
       @include heading;
       background-color: transparent;
       height: max-content;
+      margin: 0;
+      padding: 0;
       &:hover {
         color: red;
       }

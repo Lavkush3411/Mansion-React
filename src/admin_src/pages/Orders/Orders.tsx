@@ -45,7 +45,6 @@ function OrderComponent({
     <Link
       to={"/admin/orders/" + value._id}
       state={value}
-      target="_blank"
       style={{ color: "gray", fontWeight: "bold", textDecoration: "underline" }}
     >
       {children}
@@ -63,7 +62,7 @@ const columns: Column<OrderType>[] = [
     accessor: "userId",
   },
   {
-    Header: "Product",
+    Header: "Products",
     accessor: "products",
     Cell: ({ row }) => {
       return <OrderComponent value={row.original}>goTo</OrderComponent>;
@@ -124,7 +123,7 @@ const columns: Column<OrderType>[] = [
   },
 ];
 
-function Transactions() {
+function Orders() {
   const transactions = useSelector((state: RootState) => state.transaction);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -139,4 +138,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default Orders;

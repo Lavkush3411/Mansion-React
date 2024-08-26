@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-enum OrderStatus {
+export enum OrderStatus {
   Initiated = "Initiated",
   Accepted = "Accepted",
   Transit = "Transit",

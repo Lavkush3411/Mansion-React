@@ -24,11 +24,13 @@ import { CartItemType } from "../../types/cart";
 import { availiblityCheck } from "../../mansion_pages/utils/AvailibilityCheckBeforeCheckout";
 import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
 import { CartContext } from "../../../CartContextProvider";
+import { Spinner } from "@chakra-ui/react";
 
 function Cart() {
   // const { cartList } = useProductAvailibilityCheck();
   const { cartList }: { cartList: CartItemType[] } = useContext(CartContext);
   const { checkoutState, setCheckoutState } = useContext(CheckOutContext);
+  const [availibilityCheckLoader, setAvailibilityCheckLoader] = useState(false);
   const disptach = useDispatch();
   const isOpen = useSelector((store: RootState) => store.sidebar.isOpen);
   const subtotal = cartList.reduce((total, product) => {
@@ -41,7 +43,7 @@ function Cart() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-
+    setAvailibilityCheckLoader(true);
     if (!authenticated) {
       navigate("/login");
       disptach(add(cartList));
@@ -56,6 +58,7 @@ function Cart() {
         disptach(showUnavailibility(res.msg));
       }
     }
+    setAvailibilityCheckLoader(false);
   }
   const [innerWidth] = useState(window.innerWidth);
 
@@ -98,8 +101,12 @@ function Cart() {
           <DrawerFooter width={"100%"}>
             {cartList.length ? (
               <BottomSection subtotal={subtotal}>
-                <Button type="button" onClick={(e: any) => onCheckout(e)}>
-                  Checkout
+                <Button
+                  type="button"
+                  disabledState={availibilityCheckLoader}
+                  onClick={(e: any) => onCheckout(e)}
+                >
+                  {availibilityCheckLoader ? <Spinner /> : "Checkout"}
                 </Button>
               </BottomSection>
             ) : null}

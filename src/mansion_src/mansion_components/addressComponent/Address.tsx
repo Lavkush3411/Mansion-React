@@ -1,8 +1,16 @@
-import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Button from "../button/Button";
 import "./address.scss";
 import zod from "zod";
 import axios from "axios";
+import { Spinner } from "@chakra-ui/react";
+
 const env = import.meta.env;
 
 const zodAddressSchema = zod.object({
@@ -15,13 +23,16 @@ const zodAddressSchema = zod.object({
 });
 
 type AddressSchema = zod.infer<typeof zodAddressSchema>;
+interface AddressWithIndexSignature extends AddressSchema {
+  [key: string]: string; // Add index signature for dynamic properties
+}
 
 function Address({
   onButtonClick,
 }: {
   onButtonClick: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const [address, setAddress] = useState<AddressSchema>({
+  const [address, setAddress] = useState<AddressWithIndexSignature>({
     address1: "",
     address2: "",
     city: "",
@@ -29,6 +40,8 @@ function Address({
     pincode: "",
     country: "India",
   });
+  const [addressUpdateLoader, setAddressUpdateLoader] = useState(false);
+  const refToAddress = useRef<AddressWithIndexSignature>();
 
   useEffect(() => {
     axios
@@ -36,6 +49,7 @@ function Address({
       .then((res) => {
         if (res.data) {
           setAddress(res.data.address);
+          refToAddress.current = res.data.address;
         }
       });
   }, []);
@@ -52,17 +66,34 @@ function Address({
   async function onAddressConfirm(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
+    let isAddressChanged = false;
+    const currentAddressInDb = refToAddress.current;
+
+    for (let add in currentAddressInDb) {
+      if (currentAddressInDb[add] != address[add]) {
+        isAddressChanged = true;
+      }
+    }
+
+    setAddressUpdateLoader(true);
     if (!zodAddressSchema.safeParse(address).success) {
       setError("Please Fill out complete Address");
       return;
     }
     e.preventDefault();
-    await axios.post(
-      env.VITE_BASE_URL + "user/address",
-      { address },
-      { withCredentials: true }
-    );
-    onButtonClick(false);
+
+    if (isAddressChanged) {
+      await axios.post(
+        env.VITE_BASE_URL + "user/address",
+        { address },
+        { withCredentials: true }
+      );
+      onButtonClick(false);
+      setAddressUpdateLoader(false);
+    } else {
+      onButtonClick(false);
+      setAddressUpdateLoader(false);
+    }
   }
   return (
     <main className="main-section">
@@ -130,8 +161,12 @@ function Address({
       </div>
       <div className="error">{error}</div>
       <div className="button-wrapper">
-        <Button onClick={onAddressConfirm} type="submit">
-          Confirm Address
+        <Button
+          onClick={onAddressConfirm}
+          disabledState={addressUpdateLoader}
+          type="submit"
+        >
+          {addressUpdateLoader ? <Spinner /> : "Confirm Address"}
         </Button>
       </div>
     </main>

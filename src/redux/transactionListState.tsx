@@ -9,10 +9,10 @@ enum OrderStatus {
   Delivered,
 }
 export enum PaymentStatus {
-  Initiated,
-  Success,
-  Pending,
-  Failed,
+  Initiated = "Initiated",
+  Success = "Success",
+  Pending = "Pending",
+  Failed = "Failed",
 }
 
 interface DataType {

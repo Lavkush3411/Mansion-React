@@ -88,6 +88,10 @@ const columns: Column<DataType>[] = [
   {
     Header: "Payment Status",
     accessor: "paymentStatus",
+    Cell: ({ value }) => {
+      console.log(value);
+      return value;
+    },
   },
   {
     Header: "Delete",
@@ -125,8 +129,6 @@ function Transactions() {
   const dispatch = useDispatch();
   useEffect(() => {
     getTransactionsData().then((data) => {
-      console.log(data);
-
       dispatch(updateTransactionsData(data));
     });
   }, []);

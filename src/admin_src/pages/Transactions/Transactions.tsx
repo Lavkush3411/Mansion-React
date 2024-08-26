@@ -4,23 +4,34 @@ import { Column } from "react-table";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Spinner } from "@chakra-ui/react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import {
+  PaymentStatus,
+  updateTransactionsData,
+} from "../../../redux/transactionListState";
+import { DataType } from "../../../redux/transactionListState";
+
 const env = import.meta.env;
 
-interface DataType {
-  productId: string;
-  image: string;
-  productName: string;
-  productPrice: string;
-  type: string;
-  qty: number;
-  size: string;
-}
-interface DataType {
-  _id: string;
-  userId: string;
-  products: string;
-  totalAmount: string;
-  createdAt: string;
+const deleteOrder = async (id: string) => {
+  await axios.delete(env.VITE_BASE_URL + "admin/order/" + id, {
+    data: { id: id },
+    withCredentials: true,
+  });
+  return;
+};
+
+function getTransactionsData() {
+  const data = axios
+    .get(env.VITE_BASE_URL + "admin/orders", { withCredentials: true })
+    .then((res) => {
+      return res.data;
+    });
+
+  return data;
 }
 
 function OrderComponent({
@@ -70,16 +81,54 @@ const columns: Column<DataType>[] = [
     accessor: "totalAmount",
     Cell: ({ value }) => "₹" + value,
   },
+  {
+    Header: "Order Status",
+    accessor: "orderStatus",
+  },
+  {
+    Header: "Payment Status",
+    accessor: "paymentStatus",
+  },
+  {
+    Header: "Delete",
+    accessor: "_id",
+    id: "Delete",
+    Cell: ({ value, row }) => {
+      const [isDeleting, setIsDeleting] = useState<boolean>(false);
+      const dispatch = useDispatch();
+
+      return (
+        <div
+          onClick={async () => {
+            if (
+              row.original.paymentStatus === PaymentStatus.Pending ||
+              row.original.paymentStatus === PaymentStatus.Success
+            )
+              return;
+            setIsDeleting(true);
+            await deleteOrder(value);
+            const data = await getTransactionsData();
+            dispatch(updateTransactionsData(data));
+
+            setIsDeleting(false);
+          }}
+        >
+          {isDeleting ? <Spinner /> : <DeleteIcon cursor={"pointer"} />}
+        </div>
+      );
+    },
+  },
 ];
 
 function Transactions() {
-  const [transactions, setTransactions] = useState<DataType[] | []>([]);
+  const transactions = useSelector((state: RootState) => state.transaction);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get(env.VITE_BASE_URL + "admin/orders", { withCredentials: true })
-      .then((res) => {
-        setTransactions(res.data);
-      });
+    getTransactionsData().then((data) => {
+      console.log(data);
+
+      dispatch(updateTransactionsData(data));
+    });
   }, []);
   return (
     <div className="transactions">

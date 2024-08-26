@@ -1,5 +1,6 @@
 @import "../../mixin";
 .adminhomepage {
+  user-select: text;
   display: flex;
   width: 100%;
   // @include heading;

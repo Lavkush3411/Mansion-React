@@ -28,8 +28,6 @@ interface DataType {
 }
 
 const deleteProduct = async (type: string, id: string) => {
-  const token = localStorage.getItem("Token");
-  if (!token) return;
   await axios.delete(env.VITE_BASE_URL + "admin/delete/" + type, {
     data: { id: id },
     withCredentials: true,

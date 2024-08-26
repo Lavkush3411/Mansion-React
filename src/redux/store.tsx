@@ -8,9 +8,9 @@ import sizeSelectorPopUpSlice from "./sizeSelectorPopUpSlice";
 import userSlice from "./userSlice";
 import authenticatedSlice from "./authenticatedSlice";
 import unavailibilityPopupSlice from "./unavailibilitypopupSlice";
+import transactionsSlice from "./transactionListState";
 const store = configureStore({
   reducer: {
-    
     checkoutProducts: checkOutProductsReducer,
     sidebar: sidebarSlice,
     mobileNavbar: mobileNavbarSlice,
@@ -19,7 +19,8 @@ const store = configureStore({
     sizeSelectPopUp: sizeSelectorPopUpSlice,
     user: userSlice,
     authentication: authenticatedSlice,
-    unavailibility:unavailibilityPopupSlice,
+    unavailibility: unavailibilityPopupSlice,
+    transaction: transactionsSlice,
   },
 });
 

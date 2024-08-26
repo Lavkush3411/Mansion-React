@@ -99,15 +99,13 @@ const columns: Column<OrderType>[] = [
     Cell: ({ value, row }) => {
       const [isDeleting, setIsDeleting] = useState<boolean>(false);
       const dispatch = useDispatch();
-
+      const shouldBeDisabled =
+        row.original.paymentStatus === PaymentStatus.Pending ||
+        row.original.paymentStatus === PaymentStatus.Success;
       return (
         <div
           onClick={async () => {
-            if (
-              row.original.paymentStatus === PaymentStatus.Pending ||
-              row.original.paymentStatus === PaymentStatus.Success
-            )
-              return;
+            if (shouldBeDisabled) return;
             setIsDeleting(true);
             await deleteOrder(value);
             const data = await getTransactionsData();
@@ -116,7 +114,15 @@ const columns: Column<OrderType>[] = [
             setIsDeleting(false);
           }}
         >
-          {isDeleting ? <Spinner /> : <DeleteIcon cursor={"pointer"} />}
+          {isDeleting ? (
+            <Spinner />
+          ) : (
+            <DeleteIcon
+              className={`${shouldBeDisabled ? "disabled-btn" : ""}`}
+              color="disabled"
+              cursor={"pointer"}
+            />
+          )}
         </div>
       );
     },

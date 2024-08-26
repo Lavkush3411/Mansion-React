@@ -1,6 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import "./singleorder.scss";
-import { Accordion, AccordionItem } from "@chakra-ui/react";
+import { Accordion, AccordionItem, Spinner } from "@chakra-ui/react";
 import {
   Box,
   Stack,
@@ -22,6 +22,8 @@ function SingleOrder() {
   const [orderItem, setOrderItem] = useState<OrderType | null>();
   const [disableButtons, setDisabledButtons] = useState(false);
   const [refetch, setRefetch] = useState(false);
+  const [reverSpinner, setreverseSpinner] = useState(false);
+  const [processSpinner, setProcessSpinner] = useState(false);
 
   useEffect(() => {
     axios
@@ -30,6 +32,8 @@ function SingleOrder() {
       })
       .then(({ data }) => {
         setOrderItem(data);
+        setreverseSpinner(false);
+        setProcessSpinner(false);
       });
   }, [refetch]);
   if (!orderItem) return null;
@@ -42,6 +46,7 @@ function SingleOrder() {
     const currentIndex = steps.indexOf(currentOrderStatus);
     if (currentIndex >= steps.length - 1) return;
     setDisabledButtons(true);
+    setProcessSpinner(true);
     await axios.patch(
       env.VITE_BASE_URL + "admin/update-order-status",
       {
@@ -61,6 +66,7 @@ function SingleOrder() {
     const currentIndex = steps.indexOf(currentOrderStatus); // finding index of current status
     if (currentIndex <= 0) return; // if already at start returning at 0
     setDisabledButtons(true);
+    setreverseSpinner(true);
     await axios.patch(
       env.VITE_BASE_URL + "admin/update-order-status",
       {
@@ -111,10 +117,10 @@ function SingleOrder() {
           col="white"
           onClick={reverse}
         >
-          Reverse{" "}
+          {reverSpinner ? <Spinner size={"sm"} /> : "Reverse"}
         </Button>
         <Button disabledState={disableButtons} onClick={process}>
-          Process{" "}
+          {processSpinner ? <Spinner size={"sm"} /> : "Process"}
         </Button>
       </div>
     </div>

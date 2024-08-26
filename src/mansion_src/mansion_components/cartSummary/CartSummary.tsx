@@ -3,11 +3,12 @@ import axios from "axios";
 import Button from "../button/Button";
 import { SetStateAction, useContext, useState } from "react";
 import "./cartsummary.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SummaryItem from "../summaryItem/SummaryItem";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../UserContextProvider";
 import { Spinner } from "@chakra-ui/react";
+import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
 interface Data {
   _id: string;
   productName: string;
@@ -23,7 +24,7 @@ function CartSummary({
   onButtonClick: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [checkOutButtonDisabled, setCheckoutButtonDisabled] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const checkoutProducts = useSelector(
     (store: any) => store.checkoutProducts
   ) as Data[];
@@ -55,9 +56,9 @@ function CartSummary({
       );
       console.log(response.data.url);
       window.location.href = response.data.url;
-    } catch (e) {
-      console.log(e);
-      navigate("/");
+    } catch (e: any) {
+      dispatch(showUnavailibility(e.response.data.msg));
+      setCheckoutButtonDisabled(true);
     }
   }
   return (

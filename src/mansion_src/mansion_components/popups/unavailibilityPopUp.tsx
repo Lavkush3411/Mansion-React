@@ -25,7 +25,7 @@ function UnavailibilityPopup() {
       isOpen={isOpen}
       onClose={() => dispatch(hideUnavailibility())}
     >
-      <AlertDialogOverlay>
+      <AlertDialogOverlay zIndex={2100}>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             Product Not available

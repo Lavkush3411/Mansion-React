@@ -102,7 +102,7 @@ function MansionHomePage() {
           </div>
         </header>
         <main className="product-container">
-          {showSearchAndProductList && <Navbar />}
+        {showSearchAndProductList && <Navbar />} 
           <div className="product-list-wrapper">
             <Outlet />
           </div>

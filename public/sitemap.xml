@@ -3,10 +3,33 @@
   <url>
     <loc>https://www.mansionhub.in/</loc>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dohpvw2or/image/upload/v1719666083/homepage/pz3qbojyr4ucms8kyri9.png</image:loc> 
+      <image:title>Welcome to MansionHub</image:title>
+      <image:caption>Your ultimate online clothing store for Tshirts</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.mansionhub.in/home</loc>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dohpvw2or/image/upload/v1719666083/homepage/pz3qbojyr4ucms8kyri9.png</image:loc> 
+      <image:title>Welcome to Mansion Hub</image:title>
+      <image:caption>Your ultimate online clothing store.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.mansionhub.in/get/:productName</loc>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dohpvw2or/image/upload/v1719666083/homepage/bownpwlvh4n7yefjr2bj.png</image:loc> 
+      <image:title>Tshirts</image:title>
+      <image:caption>Find your Trendy Tshirts Shirts Jeans Cargos here..</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.mansionhub.in/product/:id</loc>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.mansionhub.in/profile</loc>
@@ -36,30 +59,23 @@
     <loc>https://www.mansionhub.in/search</loc>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.mansionhub.in/get/:productName</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.mansionhub.in/product/:id</loc>
-    <priority>0.5</priority>
-  </url>
+  
   <!-- Admin URLs -->
   <url>
     <loc>https://www.mansionhub.in/admin</loc>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.mansionhub.in/admin/products</loc>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.mansionhub.in/admin/orders</loc>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.mansionhub.in/admin/users</loc>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   <!-- Add other admin/product pages as required -->
 </urlset>

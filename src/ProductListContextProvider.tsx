@@ -23,6 +23,7 @@ interface valueType {
   tshirts: [] | DataType[];
   shirts: [] | DataType[];
   hoodies: [] | DataType[];
+  thrifted: [] | DataType[];
   search: [] | DataType[];
 }
 interface actionType {
@@ -38,6 +39,7 @@ const intialValue: valueType = {
   shirts: [],
   hoodies: [],
   search: [],
+  thrifted: [],
 };
 
 function reducer(state: valueType, action: actionType) {
@@ -56,6 +58,8 @@ function reducer(state: valueType, action: actionType) {
       return { ...state, shirts: action.payload };
     case "hoodies":
       return { ...state, hoodies: action.payload };
+    case "thrifted":
+      return { ...state, thrifted: action.payload };
     default:
       return { ...state };
   }

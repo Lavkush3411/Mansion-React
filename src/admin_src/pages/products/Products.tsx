@@ -20,7 +20,7 @@ function Products() {
             ? "hide"
             : "show",
       });
-      console.log(currentPathRef.current.includes);
+      // console.log(currentPathRef.current.includes);
     }
     window.addEventListener("popstate", handleBack);
 

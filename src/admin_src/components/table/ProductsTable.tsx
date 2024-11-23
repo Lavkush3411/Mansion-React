@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ProductListContext } from "../../../ProductListContextProvider";
 import { Spinner } from "@chakra-ui/react";
+import toast from "react-hot-toast";
 
 const env = import.meta.env;
 
@@ -86,6 +87,16 @@ const columns: Column<DataType>[] = [
     ),
   },
   {
+    Header: "Availibility",
+    accessor: "stock",
+    Cell: ({ row }) => {
+      const availableStock = row.original.stock;
+      // Check if any stock item has quantity > 0
+      const isAvailable = availableStock.some((item) => item.quantity > 0);
+      return isAvailable ? "Available" : "Out of Stock";
+    },
+  },
+  {
     Header: "Delete",
     accessor: "delete",
     Cell: ({ row }) => {
@@ -98,6 +109,7 @@ const columns: Column<DataType>[] = [
             await deleteProduct(row.original.type, row.original._id);
 
             const data = await fetchData(row.original.type);
+            toast.success("Product removed Successfully.");
             setIsDeleting(false);
             productListDispatch({ type: row.original.type, payload: data });
           }}
@@ -280,4 +292,33 @@ function Hoodie() {
   );
 }
 
-export { Cargo, Bottom, Shirts, Tshirts, Hoodie, All };
+function Thrifted() {
+  const {
+    productListState: { thrifted },
+    productListDispatch,
+  } = useContext(ProductListContext);
+
+  useEffect(() => {
+    fetchData("thrifted")
+      .then((data: DataType[]) => {
+        productListDispatch({ type: "thrifted", payload: data });
+      })
+      .catch(() => {
+        console.log("error");
+      });
+  }, [productListDispatch]);
+
+  return (
+    <div className="thrifted">
+      {TableHOC<DataType>(
+        filteredColumns,
+        thrifted,
+        "thrifted",
+        "Thrifted",
+        true
+      )()}
+    </div>
+  );
+}
+
+export { Cargo, Bottom, Shirts, Tshirts, Hoodie, All, Thrifted };

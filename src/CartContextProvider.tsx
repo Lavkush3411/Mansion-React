@@ -89,6 +89,8 @@ function reducer(
       localStorage.setItem("cart", JSON.stringify(cart));
       return cart;
     }
+    case "clear":
+      return [];
     default:
       return [...state];
   }

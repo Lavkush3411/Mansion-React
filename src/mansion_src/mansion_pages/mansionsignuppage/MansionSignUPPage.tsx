@@ -81,7 +81,7 @@ function MansionSignUpPage() {
               const data = await loginRes.json();
               const jsontoken = data.Token;
               const user = jwtDecode(jsontoken);
-              console.log(data.msg);
+              // console.log(data.msg);
               localStorage.setItem("Token", jsontoken);
               userDispatch({ type: "login", payload: user });
 

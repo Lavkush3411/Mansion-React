@@ -5,6 +5,7 @@ import { ButtonContext, LoaderContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import queryClient from "../../../queryClient";
+import toast from "react-hot-toast";
 const env = import.meta.env;
 
 interface sizeListItem {
@@ -58,7 +59,7 @@ function ManageProduct() {
         setType(data.type);
         setImage(data.image[0]);
         setSizeList(data.stock);
-        console.log(data);
+        // console.log(data);
         setProductName(data.productName);
         setProductPrice(Number(data.productPrice));
         setSrc(data.image);
@@ -79,7 +80,7 @@ function ManageProduct() {
   };
 
   const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string): void => {
-    console.log(sizeList);
+    // console.log(sizeList);
 
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
@@ -96,7 +97,7 @@ function ManageProduct() {
     e: ChangeEvent<HTMLInputElement>,
     id: string
   ): void => {
-    console.log(sizeList);
+    // console.log(sizeList);
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
         if (item._id === id) {
@@ -129,7 +130,8 @@ function ManageProduct() {
       credentials: "include",
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
+    toast.success("Product Updated Successfully.");
     dispatch({ type: "show" });
     queryClient.invalidateQueries({ queryKey: ["all"] });
     loaderDispatch({ type: "hide-product-loader" });
@@ -153,7 +155,9 @@ function ManageProduct() {
             {state.productItems.map(
               (product: { name: string; image: string }) => (
                 <option key={product.name} value={product.name}>
-                  {product.name.slice(0, -1)}
+                  {!(product.name === "thrifted")
+                    ? product.name.slice(0, -1)
+                    : product.name}
                 </option>
               )
             )}

@@ -11,6 +11,12 @@ const All = lazy(() =>
     default: module.All,
   }))
 );
+
+const Thrifted = lazy(() =>
+  import("./admin_src/components/table/ProductsTable").then((module) => ({
+    default: module.Thrifted,
+  }))
+);
 const Cargo = lazy(() =>
   import("./admin_src/components/table/ProductsTable").then((module) => ({
     default: module.Cargo,
@@ -158,6 +164,10 @@ const router = createBrowserRouter([
         element: createLazyRoute(<Products />),
         children: [
           { path: "", element: <Navigate to="cargos-list" /> },
+          {
+            path: "/admin/products/thrifted-list",
+            element: createLazyRoute(<Thrifted />),
+          },
           {
             path: "/admin/products/cargos-list",
             element: createLazyRoute(<Cargo />),

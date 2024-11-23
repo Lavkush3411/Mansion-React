@@ -17,7 +17,15 @@ function prefetch() {
     return res.data;
   }
 
-  const products = ["all", "cargos", "bottoms", "tshirts", "shirts", "hoodies"];
+  const products = [
+    "thrifteds",
+    "all",
+    "cargos",
+    "bottoms",
+    "tshirts",
+    "shirts",
+    "hoodies",
+  ];
 
   products.forEach((product) =>
     queryClient.prefetchQuery({

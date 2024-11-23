@@ -40,11 +40,15 @@ function SizePopUp() {
       cartDispatch({ type: "add", payload: cartItem });
       dispatch(closeSizeSelectPopUp());
       dispatch(open());
-      console.log("added to cart");
+      // console.log("added to cart");
     } else {
       alert("select Size first");
     }
   }
+
+  const productAvailable =
+    productItem &&
+    productItem.stock.filter((stockItem) => stockItem.quantity > 0).length > 0;
 
   return (
     <AlertDialog
@@ -59,7 +63,7 @@ function SizePopUp() {
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            {productItem &&
+            {productItem && productAvailable ? (
               productItem.stock.map((stockItem: any) => {
                 return (
                   <Button
@@ -73,7 +77,18 @@ function SizePopUp() {
                     {stockItem.size}
                   </Button>
                 );
-              })}
+              })
+            ) : (
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: "1.5rem",
+                  fontFamily: "cursive",
+                }}
+              >
+                Product Out Of Stock
+              </span>
+            )}
           </AlertDialogBody>
 
           <AlertDialogFooter>
@@ -86,26 +101,28 @@ function SizePopUp() {
                 }
               }}
             >
-              Cancel
+              {productAvailable ? "Cancel" : "Ok"}
             </Button>
-            <Button
-              backgroundColor="transparent"
-              color="black"
-              border={"2px solid black"}
-              _hover={{
-                backgroundColor: "black",
-                color: "white",
-                border: "2px solid black",
-              }}
-              onClick={(e) => {
-                dispatch(closeSizeSelectPopUp());
-                onAddToCart(e);
-                setSize("");
-              }}
-              ml={3}
-            >
-              Add to cart
-            </Button>
+            {productAvailable && (
+              <Button
+                backgroundColor="transparent"
+                color="black"
+                border={"2px solid black"}
+                _hover={{
+                  backgroundColor: "black",
+                  color: "white",
+                  border: "2px solid black",
+                }}
+                onClick={(e) => {
+                  dispatch(closeSizeSelectPopUp());
+                  onAddToCart(e);
+                  setSize("");
+                }}
+                ml={3}
+              >
+                Add to cart
+              </Button>
+            )}
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialogOverlay>

@@ -19,6 +19,7 @@ import useShowSearchAndProductList from "../../hooks/useShowSearchAndProductList
 import { usePrefetch } from "../../hooks/usePrefetch";
 import axios from "axios";
 import UnavailibilityPopup from "../../mansion_components/popups/unavailibilityPopUp";
+import toast from "react-hot-toast";
 const env = import.meta.env;
 const Bottom = lazy(() => import("../../mansion_components/bottom/Bottom"));
 const Cart = lazy(() => import("../../mansion_components/Cart/Cart"));
@@ -57,6 +58,7 @@ function MansionHomePage() {
     await axios.get(env.VITE_BASE_URL + "user/logout", {
       withCredentials: true,
     });
+    toast.success("Logged Out Successfully.");
     navigate("/login");
   }
   return (
@@ -102,7 +104,7 @@ function MansionHomePage() {
           </div>
         </header>
         <main className="product-container">
-        {showSearchAndProductList && <Navbar />} 
+          {showSearchAndProductList && <Navbar />}
           <div className="product-list-wrapper">
             <Outlet />
           </div>

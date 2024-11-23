@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import resizeImage from "../../utils/resizeImage";
 import CancelIcon from "@mui/icons-material/Cancel";
 import queryClient from "../../../queryClient";
+import toast from "react-hot-toast";
 const env = import.meta.env;
 
 interface sizeListItem {
@@ -51,7 +52,7 @@ function NewProduct() {
   };
 
   const updateSize = (e: ChangeEvent<HTMLSelectElement>, id: string): void => {
-    console.log(sizeList);
+    // console.log(sizeList);
 
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
@@ -67,7 +68,7 @@ function NewProduct() {
     e: ChangeEvent<HTMLInputElement>,
     id: string
   ): void => {
-    console.log(sizeList);
+    // console.log(sizeList);
     setSizeList((prev): sizeListItem[] => {
       const newSizeList = prev.map((item) => {
         if (item._id === id) {
@@ -82,7 +83,7 @@ function NewProduct() {
   useEffect(() => {
     (async function () {
       // force rerender if images are empty by updating the key
-      console.log("effect ran");
+      // console.log("effect ran");
       setKey((prev) => prev + 1);
 
       //executing function normally
@@ -160,14 +161,17 @@ function NewProduct() {
     formdata.append("stock", JSON.stringify(sizeList));
     formdata.append("type", String(type));
     formdata.append("Token", String(token));
+    toast.success("New Product is being added");
     const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
       method: "POST",
       body: formdata,
       credentials: "include",
     });
     const data = await res.json();
+    toast.success("Product Created Successfully");
+
     dispatch({ type: "show" });
-    console.log(data);
+    // console.log(data);
     loaderDispatch({ type: "hide-product-loader" });
     queryClient.invalidateQueries({ queryKey: ["all"] });
   };
@@ -187,7 +191,9 @@ function NewProduct() {
             {state.productItems.map(
               (product: { name: string; image: string }) => (
                 <option key={product.name} value={product.name}>
-                  {product.name.slice(0, -1)}
+                  {!(product.name === "thrifted")
+                    ? product.name.slice(0, -1)
+                    : product.name}
                 </option>
               )
             )}

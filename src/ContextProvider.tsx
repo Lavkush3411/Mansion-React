@@ -19,6 +19,11 @@ const initialState: State = {
   showButton: true,
   productItems: [
     {
+      name: "thrifted",
+      image:
+        "https://res.cloudinary.com/dohpvw2or/image/upload/v1732342249/homepage/wdxmgoqlzslzurnzr7to.png",
+    },
+    {
       name: "tshirts",
       image:
         "https://res.cloudinary.com/dohpvw2or/image/upload/v1719666083/homepage/bownpwlvh4n7yefjr2bj.png",

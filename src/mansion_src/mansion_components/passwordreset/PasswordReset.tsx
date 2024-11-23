@@ -33,7 +33,7 @@ function PasswordReset() {
       );
       if (res.status === 200) {
         setShowPinbox(true);
-        console.log(res.data.msg);
+        // console.log(res.data.msg);
       }
     } catch (e: any) {
       setErrorWhileOtpSend(e.response.data.msg);
@@ -74,7 +74,7 @@ function PasswordReset() {
     if (pattern.test(e.target.value)) {
       setOtp(e.target.value);
     } else {
-      console.log("integer expected");
+      // console.log("integer expected");
     }
   }
 

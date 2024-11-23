@@ -9,6 +9,11 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../UserContextProvider";
 import { Spinner } from "@chakra-ui/react";
 import { showUnavailibility } from "../../../redux/unavailibilitypopupSlice";
+import { toast } from "react-hot-toast";
+import { CheckOutContext } from "../../../CheckOutContextProvider";
+import { CartContext } from "../../../CartContextProvider";
+import queryClient from "../../../queryClient";
+
 interface Data {
   _id: string;
   productName: string;
@@ -24,6 +29,9 @@ function CartSummary({
   onButtonClick: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [checkOutButtonDisabled, setCheckoutButtonDisabled] = useState(false);
+  const { setCheckoutState } = useContext(CheckOutContext);
+  const { cartDispatch } = useContext(CartContext);
+
   const dispatch = useDispatch();
   const checkoutProducts = useSelector(
     (store: any) => store.checkoutProducts
@@ -42,7 +50,7 @@ function CartSummary({
     setCheckoutButtonDisabled(true);
     try {
       const response = await axios.post(
-        env.VITE_BASE_URL + "payment/initiate",
+        env.VITE_BASE_URL + "payment/initiate-cod", //cod order
         {
           user: loggedinuser,
           totalAmount: subtotal,
@@ -54,11 +62,18 @@ function CartSummary({
           withCredentials: true,
         }
       );
-      console.log(response.data.url);
-      window.location.href = response.data.url;
+      toast.success(response.data.message);
+      cartDispatch({ type: "clear", payload: [] });
+      setCheckoutButtonDisabled(false);
+      setCheckoutState(false);
+      queryClient.refetchQueries();
+
+      // console.log(response.data.url);
+      // window.location.href = response.data.url;
     } catch (e: any) {
+      toast.error(e.message);
       dispatch(showUnavailibility(e.response.data.msg));
-      setCheckoutButtonDisabled(true);
+      setCheckoutButtonDisabled(false);
     }
   }
   return (

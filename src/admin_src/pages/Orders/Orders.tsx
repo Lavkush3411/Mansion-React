@@ -13,6 +13,7 @@ import {
   updateTransactionsData,
 } from "../../../redux/transactionListState";
 import { OrderType } from "../../../redux/transactionListState";
+import toast from "react-hot-toast";
 
 const env = import.meta.env;
 
@@ -110,7 +111,7 @@ const columns: Column<OrderType>[] = [
             await deleteOrder(value);
             const data = await getTransactionsData();
             dispatch(updateTransactionsData(data));
-
+            toast.success("Order removed Successfully");
             setIsDeleting(false);
           }}
         >

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/userSlice";
 import { RootState } from "../../../redux/store";
 import { Spinner } from "@chakra-ui/react";
+import toast from "react-hot-toast";
 const env = import.meta.env;
 
 function MansionLogInPage() {
@@ -57,6 +58,7 @@ function MansionLogInPage() {
         // We will modify this to go to the page originally requested.
         // const redirectTo = location.state?.path || "/";
         // console.log(redirectTo);
+        toast.success("Login Successful");
         setIsLoading(false);
         navigate("/");
       } else if (res.status === 404) {

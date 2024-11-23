@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import "./profilepage.scss"; // Optional: Create a CSS file for styling
 import { findData, updateUserData } from "../utils/fetchData";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -54,8 +55,10 @@ const Profile = () => {
     updateUserData({ ...userData, address: userAddress })
       .then(() => {
         console.log("updated");
+        toast.success("Data Updated Successfully");
       })
       .catch(() => {
+        toast.success("some error occured while updating user data");
         console.log("some error occured while updating user data");
       });
     setIsEditing(false);

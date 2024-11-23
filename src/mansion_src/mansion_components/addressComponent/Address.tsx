@@ -10,15 +10,29 @@ import "./address.scss";
 import zod from "zod";
 import axios from "axios";
 import { Spinner } from "@chakra-ui/react";
+import toast from "react-hot-toast";
 
 const env = import.meta.env;
 
 const zodAddressSchema = zod.object({
-  address1: zod.string().min(1, { message: "Address1 is required" }),
-  address2: zod.string().min(1, { message: "Address2 is required" }),
-  city: zod.string().min(1, { message: "City is required" }),
+  address1: zod
+    .string({ message: "Address should be valid text " })
+    .min(1, { message: "Address 1 is required" }),
+  address2: zod
+    .string({ message: "Address should be valid text" })
+    .min(1, { message: "Address 2 is required" }),
+  city: zod
+    .string({ message: "City should be valid text" })
+    .min(1, { message: "City is required" }),
   state: zod.string().min(1, { message: "State is required" }),
-  pincode: zod.string().min(1, { message: "Pincode is required" }),
+  pincode: zod
+    .string({ message: "Enter valid digits only in pincode" })
+    .min(1, { message: "Pincode is required" }),
+  contact: zod
+    .string({ message: "Contact number should be valid digits only" })
+    .min(10, { message: "Contact should be a 10 digit valid number" })
+    .max(12, { message: "Contact number should not exceed 12 digits" })
+    .regex(/^\d+$/, { message: "Contact number should only contain digits" }), // Ensure only digits
   country: zod.string().min(1, { message: "Country is required" }),
 });
 
@@ -38,6 +52,7 @@ function Address({
     city: "",
     state: "",
     pincode: "",
+    contact: "",
     country: "India",
   });
   const [addressUpdateLoader, setAddressUpdateLoader] = useState(false);
@@ -54,11 +69,8 @@ function Address({
       });
   }, []);
 
-  const [error, setError] = useState("");
-
   function onAddressChange(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    console.log("changed");
     const name = e.target.name;
     setAddress((prev) => ({ ...prev, [name]: e.target.value }));
   }
@@ -69,17 +81,29 @@ function Address({
     let isAddressChanged = false;
     const currentAddressInDb = refToAddress.current;
 
-    for (let add in currentAddressInDb) {
-      if (currentAddressInDb[add] != address[add]) {
+    for (const add in address) {
+      if (!currentAddressInDb || currentAddressInDb[add] != address[add]) {
+        console.log("add changed");
         isAddressChanged = true;
       }
     }
 
     setAddressUpdateLoader(true);
-    if (!zodAddressSchema.safeParse(address).success) {
-      setError("Please Fill out complete Address");
-      return;
+
+    try {
+      // Validate the address using Zod schema
+      zodAddressSchema.parse(address);
+    } catch (error) {
+      if (error instanceof zod.ZodError) {
+        const e = error.errors.map((err) => err.message).join(", ");
+        toast.error(e);
+        setAddressUpdateLoader(false);
+        return;
+      } else {
+        console.log("Unexpected error:", error);
+      }
     }
+
     e.preventDefault();
 
     if (isAddressChanged) {
@@ -95,6 +119,7 @@ function Address({
       setAddressUpdateLoader(false);
     }
   }
+
   return (
     <main className="main-section">
       <div className="form">
@@ -115,9 +140,7 @@ function Address({
           name="address2"
           placeholder="Address2"
           onChange={onAddressChange}
-          id=""
         />
-
         <input
           required
           type="text"
@@ -126,7 +149,6 @@ function Address({
           onChange={onAddressChange}
           name="city"
           placeholder="City"
-          id=""
         />
         <input
           required
@@ -136,7 +158,6 @@ function Address({
           value={address.state}
           placeholder="State"
           onChange={onAddressChange}
-          id=""
         />
         <input
           required
@@ -146,7 +167,6 @@ function Address({
           placeholder="PinCode"
           value={address.pincode}
           onChange={onAddressChange}
-          id=""
         />
         <input
           required
@@ -156,10 +176,17 @@ function Address({
           placeholder="Country"
           value={address.country}
           disabled
-          id=""
+        />
+        <input
+          required
+          type="text"
+          className="form-input"
+          name="contact"
+          value={address.contact}
+          placeholder="Contact"
+          onChange={onAddressChange}
         />
       </div>
-      <div className="error">{error}</div>
       <div className="button-wrapper">
         <Button
           onClick={onAddressConfirm}

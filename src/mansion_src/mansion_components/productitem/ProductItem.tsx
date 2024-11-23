@@ -91,7 +91,7 @@ function ProductItem() {
     if (size !== "") {
       cartDispatch({ type: "add", payload: productItem });
       dispatch(open());
-      console.log("added to cart");
+      // console.log("added to cart");
     } else {
       alert("select Size first");
     }
@@ -189,6 +189,7 @@ function ProductItem() {
       <div className="product-right-section">
         <div className="stock">
           {stock &&
+          stock.filter((stockItem) => stockItem.quantity > 0).length > 0 ? (
             stock.map((stockItem) => {
               return stockItem.quantity > 0 ? (
                 <button
@@ -199,7 +200,18 @@ function ProductItem() {
                   {stockItem.size}
                 </button>
               ) : null;
-            })}
+            })
+          ) : (
+            <span
+              style={{
+                fontWeight: "bolder",
+                fontSize: "1.5rem",
+                fontFamily: "cursive",
+              }}
+            >
+              Product Out Of Stock
+            </span>
+          )}
         </div>
         <div className="buying-buttons">
           <button onClick={(e) => onAddToCart(e, { ...productItem, size })}>

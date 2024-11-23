@@ -162,12 +162,12 @@ function NewProduct() {
     formdata.append("type", String(type));
     formdata.append("Token", String(token));
     toast.success("New Product is being added");
-    const res = await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
+    await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
       method: "POST",
       body: formdata,
       credentials: "include",
     });
-    const data = await res.json();
+    // const data = await res.json();
     toast.success("Product Created Successfully");
 
     dispatch({ type: "show" });

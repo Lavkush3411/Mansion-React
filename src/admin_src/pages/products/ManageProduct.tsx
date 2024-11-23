@@ -124,12 +124,12 @@ function ManageProduct() {
     formdata.append("productPrice", String(productPrice));
     formdata.append("stock", JSON.stringify(sizeList));
     formdata.append("type", String(type));
-    const res = await fetch(env.VITE_BASE_URL + "admin/" + location.state._id, {
+    await fetch(env.VITE_BASE_URL + "admin/" + location.state._id, {
       method: "PATCH",
       body: formdata,
       credentials: "include",
     });
-    const data = await res.json();
+    // const data = await res.json();
     // console.log(data);
     toast.success("Product Updated Successfully.");
     dispatch({ type: "show" });

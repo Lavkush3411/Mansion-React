@@ -6,6 +6,12 @@
 
   .bottom-section-wrapper {
     width: 100%;
+    .subtotal {
+      font-size: 1.3rem;
+      font-weight: bolder;
+      font-family: cursive, Courier, monospace;
+      padding: 10px 0;
+    }
     .button-wrapper {
       width: 100%;
       display: flex;
@@ -20,5 +26,13 @@
     flex-direction: column;
     overflow: scroll;
     gap: 10px;
+  }
+  .cod-message {
+    // color: red;
+    text-align: center;
+    font-size: 1.3rem;
+    color: gray;
+    font-family: cursive, Courier, monospace;
+    font-weight: bold;
   }
 }

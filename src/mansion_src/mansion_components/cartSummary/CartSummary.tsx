@@ -88,6 +88,7 @@ function CartSummary({
           );
         })}
       </div>
+      <div className="cod-message">We are currently accepting COD orders</div>
       <div className="bottom-section-wrapper">
         <div className="subtotal">
           <h1>Total : {subtotal}</h1>
@@ -98,7 +99,7 @@ function CartSummary({
             disabledState={checkOutButtonDisabled}
             type="submit"
           >
-            {checkOutButtonDisabled ? <Spinner /> : "Checkout"}
+            {checkOutButtonDisabled ? <Spinner /> : "Place COD Order"}
           </Button>
           <Button onClick={() => onButtonClick(true)} type="submit">
             Back

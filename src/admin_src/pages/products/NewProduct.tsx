@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import "./newproduct.scss";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import { ButtonContext, LoaderContext } from "../../../ContextProvider";
+import { ButtonContext } from "../../../ContextProvider";
 import { v4 as uuid } from "uuid";
 import resizeImage from "../../utils/resizeImage";
 import CancelIcon from "@mui/icons-material/Cancel";
 import queryClient from "../../../queryClient";
 import toast from "react-hot-toast";
+import axios from "axios";
 const env = import.meta.env;
 
 interface sizeListItem {
@@ -32,13 +33,15 @@ function NewProduct() {
   const [productPrice, setProductPrice] = useState<number | undefined>(
     undefined
   );
+  const [progress, setProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [key, setKey] = useState(0);
   const [type, setType] = useState<string>("");
   const [sizeList, setSizeList] = useState<sizeListItem[] | []>([]);
   const [src, setSrc] = useState<SrcOfAddedImages[]>([]);
   const { state, dispatch } = useContext(ButtonContext);
 
-  const { loaderDispatch } = useContext(LoaderContext);
+  // const { loaderDispatch } = useContext(LoaderContext);
 
   // function executed when images are selected
   const addSize = () => {
@@ -133,6 +136,7 @@ function NewProduct() {
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (sizeList.length === 0) {
       alert("Add Size and Quantity by clicking on Add new Size Button");
       return;
@@ -141,8 +145,8 @@ function NewProduct() {
       alert("Add Atleast one product Image");
       return;
     }
-    loaderDispatch({ type: "show-product-loader" });
-    navigate("/admin/products/" + `${type}-list`);
+    // loaderDispatch({ type: "show-product-loader" });
+    // navigate("/admin/products/" + `${type}-list`);
 
     //form data
     const formdata = new FormData();
@@ -162,17 +166,39 @@ function NewProduct() {
     formdata.append("type", String(type));
     formdata.append("Token", String(token));
     toast.success("New Product is being added");
-    await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
-      method: "POST",
-      body: formdata,
-      credentials: "include",
-    });
+    // await fetch(env.VITE_BASE_URL + "admin/new/" + type, {
+    //   method: "POST",
+    //   body: formdata,
+    //   credentials: "include",
+    // });
+    axios
+      .post(`${env.VITE_BASE_URL}admin/new/${type}`, formdata, {
+        withCredentials: true,
+        onUploadProgress: (progress) => {
+          const p = progress.total
+            ? Math.round((progress.loaded * 100) / progress.total)
+            : 0;
+          setProgress(p);
+        },
+      })
+      .then((response) => {
+        setProgress(100);
+        console.log(response.data);
+        setIsLoading(false);
+        navigate("/admin/products/" + `${type}-list`);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+        setProgress(0);
+      });
+
     // const data = await res.json();
     toast.success("Product Created Successfully");
 
     dispatch({ type: "show" });
     // console.log(data);
-    loaderDispatch({ type: "hide-product-loader" });
+    // loaderDispatch({ type: "hide-product-loader" });
     queryClient.invalidateQueries({ queryKey: ["all"] });
   };
   return (
@@ -276,7 +302,13 @@ function NewProduct() {
                 </div>
               ))}
           </div>
-          <button type="submit">Create</button>
+          <button
+            className="product-create-button"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? `Creating ${progress}% ....` : "Create"}
+          </button>
         </form>
       </article>
     </div>
